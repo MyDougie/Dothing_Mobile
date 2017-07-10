@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- 인터넷 작업 -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -24,9 +26,11 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+        <activity android:name=".Main2Activity" />
+        <activity android:name=".JoinActivity1" />
+        <activity android:name=".JoinActivity2" />
+        <activity android:name=".JoinActivity3" />
+        <activity android:name=".AddrWebviewActivity"></activity>
     </application>
 
 </manifest>

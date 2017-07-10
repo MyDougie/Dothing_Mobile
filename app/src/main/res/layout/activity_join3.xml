@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="dvorak.kosta.com.dothing_mobile.JoinActivity3">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="86dp"
+        android:layout_height="19dp"
+        android:layout_marginLeft="145dp"
+        android:layout_marginStart="145dp"
+        android:layout_marginTop="33dp"
+        android:layout_weight="0.05"
+        android:text="성별 / 주소"
+        android:textColor="@android:color/black"
+        android:textSize="17sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="232dp"
+        android:layout_height="258dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginTop="72dp"
+        android:layout_weight="0.67"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="76dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/man"
+                    android:layout_width="72dp"
+                    android:layout_height="wrap_content"
+                    android:text="man" />
+
+                <RadioButton
+                    android:id="@+id/woman"
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="woman" />
+
+            </RadioGroup>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:id="@+id/addr"
+                        android:layout_width="106dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.92"
+                        android:hint="주소"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+
+                    <Button
+                        android:id="@+id/searchAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:gravity="center_horizontal"
+                        android:text="주소찾기" />
+
+                </LinearLayout>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <EditText
+                android:id="@+id/detailAddr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="나머지 주소"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/continueBtn3"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="3.06"
+                android:text="가입하기"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

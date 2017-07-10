@@ -21,5 +21,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button joinBtn = (Button) findViewById(R.id.joinBtn);
+        joinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), JoinActivity1.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
