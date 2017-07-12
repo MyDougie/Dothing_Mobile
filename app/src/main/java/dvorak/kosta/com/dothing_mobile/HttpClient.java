@@ -36,6 +36,7 @@ public class HttpClient {
         body = readStream(conn);
         conn.disconnect();
     }
+
     private HttpURLConnection getConnection() {
         try {
             URL url = new URL(builder.getUrl());
@@ -47,6 +48,7 @@ public class HttpClient {
         }
         return null;
     }
+
     private void setHeader(HttpURLConnection connection) {
         setContentType(connection);
         setRequestMethod(connection);
@@ -54,9 +56,11 @@ public class HttpClient {
         connection.setDoOutput(true);
         connection.setDoInput(true);
     }
+
     private void setContentType(HttpURLConnection connection) {
         connection.setRequestProperty("Content-Type", WWW_FORM);
     }
+
     private void setRequestMethod(HttpURLConnection connection) {
         try {
             connection.setRequestMethod(builder.getMethod());
@@ -65,6 +69,7 @@ public class HttpClient {
         }
     }
     private void setBody(HttpURLConnection connection) {
+
         String parameter = builder.getParameters();
         if (parameter != null && parameter.length() > 0) {
             OutputStream outputStream = null;
@@ -99,8 +104,7 @@ public class HttpClient {
         try {
             reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String line = null;
-            while ((line = reader.readLine()) != null)
-            {
+            while ( (line = reader.readLine()) != null ) {
                 result += line;
             }
         } catch (IOException e) {
@@ -172,5 +176,7 @@ public class HttpClient {
             client.setBuilder(this);
             return client;
         }
+
     }
+
 }

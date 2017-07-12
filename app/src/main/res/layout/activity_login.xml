@@ -22,7 +22,7 @@
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="270dp">
 
         <LinearLayout
             android:id="@+id/email_login_form"
@@ -38,6 +38,8 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true" />
+
+
 
             <EditText
                 android:id="@+id/password"
