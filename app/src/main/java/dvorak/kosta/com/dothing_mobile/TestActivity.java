@@ -137,7 +137,7 @@ public class TestActivity extends AppCompatActivity  implements LocationListener
         @Override
         protected String doInBackground(Map<String, String>... maps) {
             // HTTP 요청 준비 작업
-            HttpClient.Builder http = new HttpClient.Builder("POST", "http://192.168.0.3:8000/controller/android/errand"); // HTTP 요청 전송
+            HttpClient.Builder http = new HttpClient.Builder("POST", "http://172.30.1.48:8000/controller/android/errand"); // HTTP 요청 전송
 
             HttpClient post = http.create();
             post.request(); // 응답 상태코드 가져오기
