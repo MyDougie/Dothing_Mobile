@@ -16,6 +16,5 @@ public class FrameActivity extends AppCompatActivity {
         tabHost.setup();
         TabHost.TabSpec ts = tabHost.newTabSpec("심부름 검색");
         ts.setContent(R.id.tab1);
-        ts.setIndicator()
     }
 }

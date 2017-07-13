@@ -3,31 +3,39 @@ package dvorak.kosta.com.dothing_mobile;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.support.v7.app.ActionBarActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import dvorak.kosta.com.dothing_mobile.dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
+
+import static dvorak.kosta.com.dothing_mobile.R.id.email;
 
 
 /**
@@ -45,21 +53,27 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
+    //private UserLoginTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private NetworkTask networkTask;
+    private Map<String,String> params;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        networkTask = new NetworkTask();
+        params = new HashMap<>();
+
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
+        mEmailView = (AutoCompleteTextView) findViewById(email);
+        //populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -74,18 +88,71 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         });
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
+                /*String email = mEmailView.getText().toString();
+                String password = mPasswordView.getText().toString();
+                params.put("email",email);
+                params.put("password",password);
+                networkTask.execute(params);*/
             }
         });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }//oncreate 끝
+
+    public class NetworkTask extends AsyncTask<Map<String,String>,String,String> {
+        /** * doInBackground 실행되기 이전에 동작한다. */
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+        /** * 본 작업을 쓰레드로 처리해준다. * @param params * @return */
+        protected String doInBackground(Map<String,String>... maps) {
+            // HTTP 요청 준비 작업
+            HttpClient.Builder http = new HttpClient.Builder("POST", "http://192.168.35.151:8080/controller/android/checkId");
+            http.addAllParameters(maps[0]);
+
+
+            // HTTP 요청 전송
+            HttpClient post = http.create();
+            post.request();
+
+            // 응답 상태코드 가져오기
+            int statusCode = post.getHttpStatusCode();
+            // 응답 본문 가져오기
+            String body = post.getBody();
+            return body;
+        }
+        /** * doInBackground 종료되면 동작한다. * @param s : doInBackground가 리턴한 값이 들어온다. */
+        protected void onPostExecute(String s) {
+
+            Log.d("HTTP_RESULT", s);
+
+            Gson gson = new Gson();
+            LoginResultDTO dto = gson.fromJson(s,LoginResultDTO.class);
+            Log.d("result",dto.getResult());
+
+            if(dto.getResult().equals("success")){
+                //main 화면으로 이동
+                Intent intent = new Intent(getApplicationContext(),TestActivity.class);
+                startActivity(intent);
+            } else{
+                //Login 실패 메시지
+                Toast toast = Toast.makeText(getApplicationContext(),"로그인 실패",Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+        }
     }
 
     private void populateAutoComplete() {
+
         getLoaderManager().initLoader(0, null, this);
     }
 
@@ -96,9 +163,9 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
+        /*if (mAuthTask != null) {
             return;
-        }
+        }*/
 
         // Reset errors.
         mEmailView.setError(null);
@@ -136,9 +203,10 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            params.put("email",email);
+            params.put("password",password);
+            networkTask.execute(params);
+
         }
     }
 
@@ -240,63 +308,6 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
 
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
-    }
-
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
     }
 }
 
