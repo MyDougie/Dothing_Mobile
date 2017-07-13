@@ -42,9 +42,8 @@ public class ListViewAdapter extends BaseAdapter {
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.activity_errand, parent, false);
+            convertView = inflater.inflate(R.layout.activity_errands, parent, false);
         }
-
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
         ImageView errandImg = (ImageView) convertView.findViewById(R.id.errandImg);
         TextView errandTitle = (TextView) convertView.findViewById(R.id.errandTitle);
@@ -89,7 +88,7 @@ public class ListViewAdapter extends BaseAdapter {
         item.setErrandPrice(errandPrice);
         item.setProductPrice(productPrice);
         item.setAddr(addr);
-
+        item.setClick(0);
         listViewItemList.add(item);
     }
 

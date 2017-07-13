@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.dvorak.kosta.com.dothing_mobile.adapter.ListViewAdapter;
+import dvorak.kosta.com.dothing_mobile.dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
 
 public class TestActivity extends AppCompatActivity  implements LocationListener, MapView.MapViewEventListener{
 
@@ -105,8 +108,18 @@ public class TestActivity extends AppCompatActivity  implements LocationListener
         adapter = new ListViewAdapter();
         ListView listView = (ListView)findViewById(R.id.errandList);
         listView.setAdapter(adapter);
-        adapter.addItem(ContextCompat.getDrawable(TestActivity.this, R.drawable.dothing_mark), "꺄","내용","끼울","꺄륵","투스");
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+                ErrandsItem item = (ErrandsItem)parent.getItemAtPosition(position);
+                int click = item.getClick();
+                if(click == 0) {
+                    item.setClick(1);
+                    Toast.makeText(getBaseContext(), position + "번 선택됨!! ",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public class NetworkTask extends AsyncTask<Map<String, String>, Integer, String> {
