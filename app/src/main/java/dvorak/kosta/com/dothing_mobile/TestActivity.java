@@ -101,7 +101,7 @@ public class TestActivity extends AppCompatActivity  implements LocationListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         mapView = new MapView(this);
-        mapView.setDaumMapApiKey("6301c8d166630b078ad13401acc1267f");
+        mapView.setDaumMapApiKey("b80840fa249b76f3ea0e08b7f18d6751");
         mapView.setMapViewEventListener(this);
         ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);

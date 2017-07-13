@@ -1,9 +1,5 @@
 package dvorak.kosta.com.dothing_mobile;
 
-/**
- * Created by Administrator on 2017-07-10.
- */
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,28 +12,22 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-
 public class HttpClient {
-
     private static final String WWW_FORM = "application/x-www-form-urlencoded";
-
     private int httpStatusCode;
     private String body;
 
     public int getHttpStatusCode() {
         return httpStatusCode;
     }
-
-    public String getBody() {
+    public String getBody()
+    {
         return body;
     }
-
     private Builder builder;
-
     private void setBuilder(Builder builder) {
         this.builder = builder;
     }
-
     public void request() {
         HttpURLConnection conn = getConnection();
         setHeader(conn);
@@ -62,7 +52,6 @@ public class HttpClient {
     private void setHeader(HttpURLConnection connection) {
         setContentType(connection);
         setRequestMethod(connection);
-
         connection.setConnectTimeout(5000);
         connection.setDoOutput(true);
         connection.setDoInput(true);
@@ -79,11 +68,10 @@ public class HttpClient {
             e.printStackTrace();
         }
     }
-
     private void setBody(HttpURLConnection connection) {
 
         String parameter = builder.getParameters();
-        if ( parameter != null && parameter.length() > 0 ) {
+        if (parameter != null && parameter.length() > 0) {
             OutputStream outputStream = null;
             try {
                 outputStream = connection.getOutputStream();
@@ -91,28 +79,25 @@ public class HttpClient {
                 outputStream.flush();
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
+            }
+            finally {
                 try {
-                    if ( outputStream != null )
+                    if (outputStream != null)
                         outputStream.close();
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
-
     }
-
     private int getStatusCode(HttpURLConnection connection) {
         try {
             return connection.getResponseCode();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
+        catch (IOException e) { e.printStackTrace(); }
         return -10;
     }
-
     private String readStream(HttpURLConnection connection) {
         String result = "";
         BufferedReader reader = null;
@@ -126,78 +111,67 @@ public class HttpClient {
             e.printStackTrace();
         } finally {
             try {
-                if(reader != null)
+                if (reader != null)
                     reader.close();
-            } catch (IOException e) {}
+            } catch (IOException e) { }
         }
-
         return result;
     }
-
     public static class Builder {
-
-        private Map<String, String> parameters;
+        private Map<String,String> parameters;
         private String method;
         private String url;
 
         public String getMethod() {
+
             return method;
         }
-
         public String getUrl() {
+
             return url;
         }
-
         public Builder(String method, String url) {
-            if(method == null) {
+            if (method == null) {
                 method = "GET";
             }
             this.method = method;
             this.url = url;
             this.parameters = new HashMap<String, String>();
         }
-
         public void addOrReplace(String key, String value) {
             this.parameters.put(key, value);
         }
-
-        public void addAllParameters(Map<String, String> param) {
-            this.parameters.putAll(param);
-        }
-
         public String getParameters() {
             return generateParameters();
         }
-
         public String getParameter(String key) {
             return this.parameters.get(key);
         }
-
         private String generateParameters() {
             StringBuffer parameters = new StringBuffer();
-
             Iterator<String> keys = getKeys();
-
             String key = "";
-            while ( keys.hasNext() ) {
+            while (keys.hasNext()) {
                 key = keys.next();
                 parameters.append(String.format("%s=%s", key, this.parameters.get(key)));
                 parameters.append("&");
             }
-
             String params = parameters.toString();
-            if ( params.length() > 0 ) {
-                params = params.substring( 0, params.length() - 1 );
+            if (params.length() > 0) {
+                params = params.substring(0, params.length() - 1);
             }
-
             return params;
+        }
+        public void addAllParameters(Map<String, String> param) {
+            this.parameters.putAll(param);
         }
 
         private Iterator<String> getKeys() {
+
             return this.parameters.keySet().iterator();
         }
-
-        public HttpClient create() {
+        public HttpClient create()
+        {
             HttpClient client = new HttpClient();
             client.setBuilder(this);
             return client;

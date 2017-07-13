@@ -16,4 +16,5 @@
     </string>
     <string name="title_activity_join1">Sign in</string>
     <string name="title_activity_join2">Sign in</string>
+    <string name="title_activity_main_view">MainViewActivity</string>
 </resources>
