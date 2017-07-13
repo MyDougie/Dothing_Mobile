@@ -8,9 +8,9 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- 인터넷 작업! -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 지도 API-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- 지도 API -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -19,9 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
@@ -30,8 +28,10 @@
         <activity android:name=".JoinActivity2" />
         <activity android:name=".JoinActivity3" />
         <activity android:name=".AddrWebviewActivity" />
-        <activity android:name=".TestActivity">
+        <activity android:name=".activity.ErrandActivity">
 
+        </activity>
+        <activity android:name=".activity.FrameActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

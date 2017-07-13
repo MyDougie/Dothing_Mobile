@@ -1,4 +1,4 @@
-package dvorak.kosta.com.dothing_mobile.dvorak.kosta.com.dothing_mobile.item;
+package dvorak.kosta.com.dothing_mobile.item;
 
 import android.graphics.drawable.Drawable;
 
@@ -13,9 +13,25 @@ public class ErrandsItem {
     private String productPrice;
     private String errandPrice;
     private String addr;
+    private String latitude;
+    private String longitude;
     private int click;
 
+    public String getLatitude() {
+        return latitude;
+    }
 
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
 
     public int getClick() {
         return click;
