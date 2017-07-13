@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -91,14 +92,11 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
-
-               // String email = mEmailView.getText().toString();
-               // String password = mPasswordView.getText().toString();
-
-               // params.put("email",email);
-               // params.put("password",password);
-               // params.put("aaa","aaa");
-               // networkTask.execute(params);
+                /*String email = mEmailView.getText().toString();
+                String password = mPasswordView.getText().toString();
+                params.put("email",email);
+                params.put("password",password);
+                networkTask.execute(params);*/
             }
         });
 
@@ -117,7 +115,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         /** * 본 작업을 쓰레드로 처리해준다. * @param params * @return */
         protected String doInBackground(Map<String,String>... maps) {
             // HTTP 요청 준비 작업
-            HttpClient.Builder http = new HttpClient.Builder("POST", "http://192.168.0.15:8080/controller/android/checkId");
+            HttpClient.Builder http = new HttpClient.Builder("POST", "http://192.168.35.151:8080/controller/android/checkId");
             http.addAllParameters(maps[0]);
 
 
@@ -142,7 +140,8 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
 
             if(dto.getResult().equals("success")){
                 //main 화면으로 이동
-
+                Intent intent = new Intent(getApplicationContext(),TestActivity.class);
+                startActivity(intent);
             } else{
                 //Login 실패 메시지
                 Toast toast = Toast.makeText(getApplicationContext(),"로그인 실패",Toast.LENGTH_SHORT);
@@ -204,8 +203,6 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
-
             params.put("email",email);
             params.put("password",password);
             networkTask.execute(params);
