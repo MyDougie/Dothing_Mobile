@@ -13,6 +13,20 @@ public class ErrandsItem {
     private String productPrice;
     private String errandPrice;
     private String addr;
+    private int click;
+
+
+
+    public int getClick() {
+        return click;
+    }
+
+    public void setClick(int click) {
+        this.click = click;
+    }
+
+
+
     public Drawable getErrandImg() {
         return errandImg;
     }
