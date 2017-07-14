@@ -60,7 +60,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private NetworkTask networkTask;
+
     private Map<String,String> params;
 
     @Override
@@ -68,7 +68,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        networkTask = new NetworkTask();
+
         params = new HashMap<>();
 
         // Set up the login form.
@@ -115,7 +115,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         /** * 본 작업을 쓰레드로 처리해준다. * @param params * @return */
         protected String doInBackground(Map<String,String>... maps) {
             // HTTP 요청 준비 작업
-            HttpClient.Builder http = new HttpClient.Builder("POST", "http://192.168.35.151:8080/controller/android/checkId");
+            HttpClient.Builder http = new HttpClient.Builder("POST", "http://192.168.35.191:8080/controller/android/checkId");
             http.addAllParameters(maps[0]);
 
 
@@ -205,6 +205,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
             // perform the user login attempt.
             params.put("email",email);
             params.put("password",password);
+            NetworkTask networkTask = new NetworkTask();
             networkTask.execute(params);
 
         }
