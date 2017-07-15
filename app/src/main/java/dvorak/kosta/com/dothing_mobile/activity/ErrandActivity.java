@@ -23,6 +23,7 @@ public class ErrandActivity extends AppCompatActivity  implements LocationListen
     MapErrandsListener mapErrandsListener;
     MapView mapView;
     ListViewAdapter adapter = new ListViewAdapter();
+    ViewGroup mapViewContainer;
 //    LocationManager locationManager;
 //    String provider;
     /*int gpsCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
@@ -40,18 +41,16 @@ public class ErrandActivity extends AppCompatActivity  implements LocationListen
           }
       }*/
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+    protected void onResume() {
+        super.onResume();
 
         mapErrandsListener = new MapErrandsListener(adapter, this);
         // 맵뷰 셋팅
         mapView = new MapView(this);
         mapView.setDaumMapApiKey("6301c8d166630b078ad13401acc1267f");
         mapView.setMapViewEventListener(mapErrandsListener);
-        ViewGroup mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
+        mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
 
         //리스트뷰 셋팅
@@ -70,10 +69,21 @@ public class ErrandActivity extends AppCompatActivity  implements LocationListen
                 }
             }
         });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_test);
 
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mapViewContainer.removeView(mapView);
+    }
 
     @Override
     public void onLocationChanged(Location location) {

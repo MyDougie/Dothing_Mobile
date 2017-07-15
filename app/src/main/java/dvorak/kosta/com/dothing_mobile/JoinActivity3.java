@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
@@ -14,17 +15,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import dvorak.kosta.com.dothing_mobile.dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
 
 public class JoinActivity3 extends AppCompatActivity {
 
     private WebView webView;
     private EditText addr;//addr
+    private EditText detailAddr;
     private Handler handler;
 
     private Dialog dialogWeb;
+
+    private String email;
+    private String password;
+    private String name;
+    private String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,21 +44,13 @@ public class JoinActivity3 extends AppCompatActivity {
         setContentView(R.layout.activity_join3);
 
         Intent intent = getIntent();
-        final String email = intent.getStringExtra("email");
-        final String password = intent.getStringExtra("password");
-        final String name = intent.getStringExtra("name");
-        final String phone = intent.getStringExtra("phone");
+        email = intent.getStringExtra("email");
+        password = intent.getStringExtra("password");
+        name = intent.getStringExtra("name");
+        phone = intent.getStringExtra("phone");
 
         addr = (EditText) findViewById(R.id.addr);
-
-        NetworkTask2 networkTask = new NetworkTask2();
-
-        Map<String, String> params = new HashMap<>();
-        params.put("title", "메모입니다.");
-        params.put("memo", "메모를 입력했습니다.");
-
-        networkTask.execute(params);
-
+        detailAddr = (EditText) findViewById(R.id.detailAddr);
 
         // WebView 초기화
         //init_webView();
@@ -67,22 +71,20 @@ public class JoinActivity3 extends AppCompatActivity {
                 RadioButton rb = (RadioButton)findViewById(rg.getCheckedRadioButtonId());
                 String gender = rb.getText().toString();
 
-                //addr = (EditText) findViewById(R.id.addr);
+                NetworkTask2 networkTask = new NetworkTask2();
 
-                //String strAddr = (addr).getText().toString();
-                //String detailAddr = ((EditText) findViewById(R.id.detailAddr)).getText().toString();
+                Map<String, String> params = new HashMap<>();
+                params.put("userId",email);
+                params.put("password",password);
+                params.put("name",name);
+                params.put("phone",phone);
+                params.put("sex",gender);
+                params.put("preAddr",addr.getText().toString());
+                params.put("detailAddr",addr.getText().toString());
 
-                //intent.putExtra("email", email);
-                //intent.putExtra("password", password);
-                //startActivity(intent);
+                networkTask.execute(params);
 
-                System.out.println("email : " + email);
-                System.out.println("password : " + password);
-                System.out.println("name : " + name);
-                System.out.println("phone : " + phone);
-                System.out.println("gender : " + gender);
-                System.out.println("addr : " + addr);
-               // System.out.println("detailAddr : " + detailAddr);
+
             }
         });
 
@@ -94,7 +96,6 @@ public class JoinActivity3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("searchAddressBtn clicked!!");
-
             }
         });
 
@@ -106,7 +107,7 @@ public class JoinActivity3 extends AppCompatActivity {
           protected String doInBackground(Map<String, String>... maps) { // 내가 전송하고 싶은 파라미터
 
             // Http 요청 준비 작업
-            HttpClient.Builder http = new HttpClient.Builder("POST", "http://192.168.0.15:8080/controller/android/signIn");
+            HttpClient.Builder http = new HttpClient.Builder("POST", "http://192.168.35.128:8080/controller/android/signIn");
 
             // Parameter 를 전송한다.
             http.addAllParameters(maps[0]);
@@ -126,7 +127,20 @@ public class JoinActivity3 extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+            Log.d("RESULT : ",s);
 
+            Gson gson = new Gson();
+            LoginResultDTO dto = gson.fromJson(s,LoginResultDTO.class);
+
+            if(dto.getResult().equals("1")){
+                Toast toast = Toast.makeText(getApplicationContext(),"회원가입이 되었습니다!",Toast.LENGTH_SHORT);
+                toast.show();
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+            } else{
+                Toast toast = Toast.makeText(getApplicationContext(),"회원가입 실패",Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
     }
 

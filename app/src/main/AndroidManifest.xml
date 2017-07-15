@@ -12,20 +12,17 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <!-- 카메라 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:icon="@drawable/icon"
+        android:label="두띵"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
@@ -34,19 +31,23 @@
         <activity android:name=".JoinActivity2" />
         <activity android:name=".JoinActivity3" />
         <activity android:name=".AddrWebviewActivity" />
-        <activity android:name=".activity.ErrandActivity">
+        <activity android:name=".activity.ErrandActivity" />
+        <activity android:name=".activity.FrameActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".activity.FrameActivity"/>
-
-        <activity android:name=".TestActivity">
-        </activity>
-
         <activity
             android:name=".MainViewActivity"
             android:label="@string/title_activity_main_view"
-            android:theme="@style/AppTheme.NoActionBar">S
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ErrandRegisterActivity"
+            android:label="@string/title_activity_errand_register"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activity.RegisterWebviewActivity"/>
     </application>
 
 </manifest>

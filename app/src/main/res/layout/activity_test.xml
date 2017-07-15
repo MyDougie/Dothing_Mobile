@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/map_view"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="300dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -24,6 +24,6 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/map_view"
         android:layout_centerHorizontal="true"
-        android:listSelector="#B2EBF4"/>
+        android:listSelector="#B2EBF4" />
 
 </RelativeLayout>
