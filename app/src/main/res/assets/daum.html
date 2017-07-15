@@ -65,8 +65,10 @@ function onReceivedActivityMessageViaJavascriptInterface(json){
                     // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
                     fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
                 }
+                console.log("들어가");
 				geocoder.addr2coord(data.address,
 									function(status, result) {
+									console.log("와따");
 										// 정상적으로 검색이 완료됐으면
 										if (status === daum.maps.services.Status.OK) {
 											// 해당 주소에 대한 좌표를 받아서
@@ -75,13 +77,15 @@ function onReceivedActivityMessageViaJavascriptInterface(json){
 													result.addr[0].lng);
 											latitude = result.addr[0].lat;
 											longitude = result.addr[0].lng;
+											console.log(latitude + " " + longitude);
 
 										}else{
+										console.log("안됌 ㅜ");
 										    latitude = "TT";
 										    longitude = "TT";
 										}
 									});
-
+									console.log("끗");
 				window.Android.processDATA(fullAddr + ":" + latitude + ":" + longitude);
             },
             width : '100%',
