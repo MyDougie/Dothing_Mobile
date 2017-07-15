@@ -3,7 +3,10 @@ package dvorak.kosta.com.dothing_mobile.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.webkit.ConsoleMessage;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -38,6 +41,13 @@ public class RegisterWebviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_webview);
 
         browser = (WebView) findViewById(R.id.webView);
+        browser.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+                Log.e("WEBVIEW", consoleMessage.message());
+                return super.onConsoleMessage(consoleMessage);
+            }
+        });
         browser.getSettings().setJavaScriptEnabled(true);
         browser.addJavascriptInterface(new MyJavaScriptInterface(), "Android");
 
@@ -49,7 +59,7 @@ public class RegisterWebviewActivity extends AppCompatActivity {
             }
         });
 
-        browser.loadUrl("http://cdn.rawgit.com/MyDougie/Dothing_Mobile/3f14f92f/app/src/main/res/assets/daum.html");
+        browser.loadUrl("http://cdn.rawgit.com/MyDougie/Dothing_Mobile/fddddacd/app/src/main/res/assets/daum.html");
 
 
 
