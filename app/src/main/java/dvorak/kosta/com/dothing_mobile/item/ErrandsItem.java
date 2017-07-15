@@ -9,13 +9,21 @@ import android.graphics.drawable.Drawable;
 public class ErrandsItem {
     private Drawable errandImg;
     private String errandTitle;
-    private String errandContent;
     private String productPrice;
     private String errandPrice;
     private String addr;
     private String latitude;
     private String longitude;
+    private String errandTime;
     private int click;
+
+    public String getErrandTime() {
+        return errandTime;
+    }
+
+    public void setErrandTime(String errandTime) {
+        this.errandTime = errandTime;
+    }
 
     public String getLatitude() {
         return latitude;
@@ -57,14 +65,6 @@ public class ErrandsItem {
 
     public void setErrandTitle(String errandTitle) {
         this.errandTitle = errandTitle;
-    }
-
-    public String getErrandContent() {
-        return errandContent;
-    }
-
-    public void setErrandContent(String errandContent) {
-        this.errandContent = errandContent;
     }
 
     public String getProductPrice() {

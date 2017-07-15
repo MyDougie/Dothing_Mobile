@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dvorak.kosta.com.dothing_mobile.activity.FrameActivity;
 import dvorak.kosta.com.dothing_mobile.dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
 
 import static dvorak.kosta.com.dothing_mobile.R.id.email;
@@ -140,7 +141,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
 
             if(dto.getResult().equals("success")){
                 //main 화면으로 이동
-                Intent intent = new Intent(getApplicationContext(),TestActivity.class);
+                Intent intent = new Intent(getApplicationContext(), FrameActivity.class);
                 startActivity(intent);
             } else{
                 //Login 실패 메시지

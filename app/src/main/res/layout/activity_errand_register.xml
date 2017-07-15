@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/border"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="심부름 제목"
+                        android:textColor="#FFBB00"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/registerTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="심부름 제목을 입력하세요."
+                        android:inputType="textPersonName" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/border"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="심부름 내용"
+                        android:textColor="#FFBB00"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/registerContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:ems="10"
+                        android:hint="심부름 내용을 자세히 작성하세요."
+                        android:inputType="textMultiLine" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="333dp"
+                    android:layout_height="238dp"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/border"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="가격 및 시간"
+                            android:textColor="#FFBB00"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/registerErrandPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="심부름가격"
+                            android:inputType="numberDecimal" />
+
+                        <EditText
+                            android:id="@+id/registerProductPrice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="물건가격"
+                            android:inputType="numberDecimal" />
+
+                        <EditText
+                            android:id="@+id/registerDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:focusableInTouchMode="false"
+                            android:hint="날짜 선택"
+                            android:inputType="textPersonName" />
+
+                        <EditText
+                            android:id="@+id/registerTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:focusableInTouchMode="false"
+                            android:hint="시간 선택"
+                            android:inputType="textPersonName" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:weightSum="1">
+
+                        <ImageView
+                            android:id="@+id/registerImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.97"
+                            android:background="@drawable/border"
+                            android:elevation="1dp" />
+
+                        <Button
+                            android:id="@+id/selectImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimary"
+                            android:text="사진 선택" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/border"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="주소 및 상세주소 입력"
+                        android:textColor="#FFBB00"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/registerAddr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:elevation="1dp"
+                        android:ems="10"
+                        android:hint="주소를 검색하세요"
+                        android:focusableInTouchMode="false"
+                        android:inputType="textPersonName" />
+
+                    <EditText
+                        android:id="@+id/registerDetailAddr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="상세주소를 입력하세요"
+                        android:inputType="textPersonName" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/border"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="상세 위치를 지도에 표시하세요"
+                        android:textColor="#FFBB00"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:id="@+id/registerMap"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+
+
+
+</LinearLayout>

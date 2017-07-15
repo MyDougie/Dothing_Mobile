@@ -45,7 +45,7 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
     @Override
     protected String doInBackground(Map<String, String>... maps) {
         // HTTP 요청 준비 작업
-        HttpClient.Builder http = new HttpClient.Builder("POST", "http://172.30.1.48:8000/controller/android/errandSearch"); // HTTP 요청 전송
+        HttpClient.Builder http = new HttpClient.Builder("POST", "http://192.168.0.3:8000/controller/android/errandSearch"); // HTTP 요청 전송
 
         http.addAllParameters(maps[0]);
         HttpClient post = http.create();
@@ -74,12 +74,12 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
                 double latitude = posObj.getDouble("latitude");
                 double longitude = posObj.getDouble("longitude");
                 String title = obj.getString("title");
-                String content = obj.getString("content");
                 String productPrice = obj.getString("productPrice");
                 String errandPrice = obj.getString("errandsPrice");
                 String addr = posObj.getString("addr");
                 String lat = posObj.getString("latitude");
                 String lng = posObj.getString("longitude");
+                String errandTime = obj.getString("endTime");
                 int errandNum = obj.getInt("errandsNum");
                 MapPOIItem marker = new MapPOIItem();
                 marker.setItemName(title);
@@ -88,8 +88,7 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
                 marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
                 marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
                 mapView.addPOIItem(marker);
-                adapter.addItem(ContextCompat.getDrawable(errandActivity, R.drawable.dothing_mark), title,
-                        content,productPrice,errandPrice,addr, lat,lng);
+                adapter.addItem(ContextCompat.getDrawable(errandActivity, R.drawable.dothing_mark), title,productPrice,errandPrice,addr, lat,lng,errandTime) ;
             }
             adapter.notifyDataSetChanged();
         }catch(Exception e){
