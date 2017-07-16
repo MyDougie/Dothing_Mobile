@@ -3,150 +3,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/item_selector">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_below="@+id/relativeLayout7"
-        android:layout_toEndOf="@+id/errandImg"
-        android:layout_toRightOf="@+id/errandImg">
+        android:layout_height="60dp"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/errandTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/imageView6"
-            android:layout_toRightOf="@+id/imageView6"
-            android:text="시간" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/clock" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/errandTitle"
+                android:layout_width="249dp"
+                android:layout_height="60dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="제목"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
 
-    <RelativeLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="29dp"
+                    android:gravity="center"
+                    android:text="보상"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/errandPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@+id/relativeLayout6"
-        android:layout_toEndOf="@+id/errandImg"
-        android:layout_toRightOf="@+id/errandImg"
-        android:id="@+id/relativeLayout7"
-        >
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/linearLayout">
 
-        <TextView
-            android:id="@+id/errandTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="제목"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_constraintBottom_creator="1"
-            tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintTop_creator="1"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="0dp">
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="29dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/home" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:id="@+id/relativeLayout6"
-        android:layout_toRightOf="@+id/errandImg"
-        android:layout_toEndOf="@+id/errandImg">
+            <TextView
+                android:id="@+id/errandAddr"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.08"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:text="TextView"
+                android:textSize="12sp" />
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/home" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/errandImg"
-        android:layout_toEndOf="@+id/errandImg"
-        android:id="@+id/relativeLayout8">
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/work"
-            android:layout_marginRight="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/errandPrice"
-            android:layout_toStartOf="@+id/errandPrice" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            app:srcCompat="@drawable/box" />
-
-        <TextView
-            android:id="@+id/productPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="37dp"
-            android:layout_marginStart="37dp"
-            android:text="0원"
-            tools:layout_constraintBottom_creator="1"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_alignParentTop="true"/>
-
-        <TextView
-            android:id="@+id/errandPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0원"
-            tools:layout_constraintBaseline_creator="1"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginRight="91dp"
-            android:layout_marginEnd="91dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true" />
-
-    </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/errandImg"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        app:srcCompat="@mipmap/ic_launcher" />
-
-    <TextView
-        android:id="@+id/errandAddr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="36dp"
-        android:layout_marginStart="36dp"
-        android:text="주소"
-        android:textSize="12sp"
-        app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/errandImg"
-        android:layout_toEndOf="@+id/errandImg" />
-
+            <TextView
+                android:id="@+id/errandTime"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.04"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

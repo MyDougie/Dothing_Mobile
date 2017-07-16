@@ -1,7 +1,6 @@
 package dvorak.kosta.com.dothing_mobile.network;
 
 import android.os.AsyncTask;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import net.daum.mf.map.api.MapPOIItem;
@@ -14,9 +13,9 @@ import org.json.JSONObject;
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.HttpClient;
-import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.activity.ErrandActivity;
 import dvorak.kosta.com.dothing_mobile.adapter.ListViewAdapter;
+import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by Administrator on 2017-07-13.
@@ -26,6 +25,7 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
     ListViewAdapter adapter;
     MapView mapView;
     ErrandActivity errandActivity;
+
     public ErrandSearchNetworkTask(ListViewAdapter adapter, MapView mapView, ErrandActivity errandActivity){
         this.adapter = adapter;
         this.mapView = mapView;
@@ -45,7 +45,7 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
     @Override
     protected String doInBackground(Map<String, String>... maps) {
         // HTTP 요청 준비 작업
-        HttpClient.Builder http = new HttpClient.Builder("POST", "http://192.168.0.3:8000/controller/android/errandSearch"); // HTTP 요청 전송
+        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "errandSearch"); // HTTP 요청 전송
 
         http.addAllParameters(maps[0]);
         HttpClient post = http.create();
@@ -74,7 +74,6 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
                 double latitude = posObj.getDouble("latitude");
                 double longitude = posObj.getDouble("longitude");
                 String title = obj.getString("title");
-                String productPrice = obj.getString("productPrice");
                 String errandPrice = obj.getString("errandsPrice");
                 String addr = posObj.getString("addr");
                 String lat = posObj.getString("latitude");
@@ -88,7 +87,7 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
                 marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
                 marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
                 mapView.addPOIItem(marker);
-                adapter.addItem(ContextCompat.getDrawable(errandActivity, R.drawable.dothing_mark), title,productPrice,errandPrice,addr, lat,lng,errandTime) ;
+                adapter.addItem(title, errandPrice,addr, lat,lng,errandTime) ;
             }
             adapter.notifyDataSetChanged();
         }catch(Exception e){

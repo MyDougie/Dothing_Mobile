@@ -35,6 +35,7 @@ import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.activity.FrameActivity;
 import dvorak.kosta.com.dothing_mobile.dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
+import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 import static dvorak.kosta.com.dothing_mobile.R.id.email;
 
@@ -116,7 +117,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         /** * 본 작업을 쓰레드로 처리해준다. * @param params * @return */
         protected String doInBackground(Map<String,String>... maps) {
             // HTTP 요청 준비 작업
-            HttpClient.Builder http = new HttpClient.Builder("POST", "http://192.168.35.191:8080/controller/android/checkId");
+            HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "checkId");
             http.addAllParameters(maps[0]);
 
 

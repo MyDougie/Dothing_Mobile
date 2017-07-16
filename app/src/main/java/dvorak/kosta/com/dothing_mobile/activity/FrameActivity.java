@@ -9,6 +9,7 @@ import android.widget.TabHost;
 import dvorak.kosta.com.dothing_mobile.R;
 
 public class FrameActivity extends ActivityGroup {
+    public static TabHost tabHost;
     Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,21 +17,32 @@ public class FrameActivity extends ActivityGroup {
         setContentView(R.layout.activity_frame);
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
-        TabHost tabHost = (TabHost)findViewById(R.id.tabHost);
+        tabHost = (TabHost)findViewById(R.id.tabHost);
         tabHost.setup(getLocalActivityManager());
-
+        toolbar.setTitle("심부름 검색");
         TabHost.TabSpec ts = tabHost.newTabSpec("심부름 검색");
         ts.setIndicator("", getResources().getDrawable(R.drawable.magnifier));
         ts.setContent(new Intent(this, ErrandActivity.class));
         tabHost.addTab(ts);
 
-        TabHost.TabSpec ts2 = tabHost.newTabSpec("심부름 등록");
-        ts2.setIndicator("", getResources().getDrawable(R.drawable.edit));
-        ts2.setContent(new Intent(this, ErrandRegisterActivity.class));
-        tabHost.addTab(ts2);
+        TabHost.TabSpec chatTs = tabHost.newTabSpec("채팅 목록");
+        chatTs.setIndicator("", getResources().getDrawable(R.drawable.chat));
+        chatTs.setContent(new Intent(this, ChatListActivity.class));
+        tabHost.addTab(chatTs);
 
-        tabHost.setCurrentTab(0);
-        toolbar.setTitle("심부름 검색");
+        TabHost.TabSpec myTs = tabHost.newTabSpec("마이페이지");
+        myTs.setIndicator("", getResources().getDrawable(R.drawable.man));
+        myTs.setContent(new Intent(this, MyPageActivity.class));
+        tabHost.addTab(myTs);
+
+        TabHost.TabSpec settingTs = tabHost.newTabSpec("환경설정");
+        settingTs.setIndicator("", getResources().getDrawable(R.drawable.settings));
+        settingTs.setContent(new Intent(this, SettingActivity.class));
+        tabHost.addTab(settingTs);
+        for (int tab = 0; tab < tabHost.getTabWidget().getChildCount(); ++tab) {
+            tabHost.getTabWidget().getChildAt(tab).getLayoutParams().height = 100;
+        }
+
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {

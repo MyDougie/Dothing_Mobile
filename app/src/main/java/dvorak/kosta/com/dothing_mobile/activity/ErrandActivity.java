@@ -1,8 +1,10 @@
 package dvorak.kosta.com.dothing_mobile.activity;
 
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,7 @@ public class ErrandActivity extends AppCompatActivity  implements LocationListen
     MapView mapView;
     ListViewAdapter adapter = new ListViewAdapter();
     ViewGroup mapViewContainer;
+    FloatingActionButton writeBtn;
 //    LocationManager locationManager;
 //    String provider;
     /*int gpsCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
@@ -53,12 +56,29 @@ public class ErrandActivity extends AppCompatActivity  implements LocationListen
         mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
 
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_test);
+        writeBtn = (FloatingActionButton)findViewById(R.id.writeBtn);
+        writeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ErrandActivity.this, ErrandRegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //리스트뷰 셋팅
         ListView listView = (ListView)findViewById(R.id.errandList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
+                view.setSelected(true);
                 ErrandsItem item = (ErrandsItem)parent.getItemAtPosition(position);
                 mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(Double.parseDouble(item.getLatitude()), Double.parseDouble(item.getLongitude())), true);
                 int click = item.getClick();
@@ -69,14 +89,6 @@ public class ErrandActivity extends AppCompatActivity  implements LocationListen
                 }
             }
         });
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
-
-
     }
 
     @Override

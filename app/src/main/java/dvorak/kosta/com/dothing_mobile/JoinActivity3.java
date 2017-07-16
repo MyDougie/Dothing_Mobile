@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
+import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 public class JoinActivity3 extends AppCompatActivity {
 
@@ -107,7 +108,7 @@ public class JoinActivity3 extends AppCompatActivity {
           protected String doInBackground(Map<String, String>... maps) { // 내가 전송하고 싶은 파라미터
 
             // Http 요청 준비 작업
-            HttpClient.Builder http = new HttpClient.Builder("POST", "http://192.168.35.128:8080/controller/android/signIn");
+            HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "signIn");
 
             // Parameter 를 전송한다.
             http.addAllParameters(maps[0]);

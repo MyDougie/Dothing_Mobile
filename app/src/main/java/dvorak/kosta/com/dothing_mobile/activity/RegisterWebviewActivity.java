@@ -59,7 +59,7 @@ public class RegisterWebviewActivity extends AppCompatActivity {
             }
         });
 
-        browser.loadUrl("http://cdn.rawgit.com/MyDougie/Dothing_Mobile/fddddacd/app/src/main/res/assets/daum.html");
+        browser.loadUrl("http://cdn.rawgit.com/MyDougie/Dothing_Mobile/7250fad7/app/src/main/res/assets/daum.html");
 
 
 

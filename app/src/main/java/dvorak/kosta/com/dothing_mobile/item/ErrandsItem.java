@@ -1,15 +1,11 @@
 package dvorak.kosta.com.dothing_mobile.item;
 
-import android.graphics.drawable.Drawable;
-
 /**
  * Created by YTK on 2017-07-12.
  */
 
 public class ErrandsItem {
-    private Drawable errandImg;
     private String errandTitle;
-    private String productPrice;
     private String errandPrice;
     private String addr;
     private String latitude;
@@ -51,14 +47,6 @@ public class ErrandsItem {
 
 
 
-    public Drawable getErrandImg() {
-        return errandImg;
-    }
-
-    public void setErrandImg(Drawable errandImg) {
-        this.errandImg = errandImg;
-    }
-
     public String getErrandTitle() {
         return errandTitle;
     }
@@ -67,13 +55,6 @@ public class ErrandsItem {
         this.errandTitle = errandTitle;
     }
 
-    public String getProductPrice() {
-        return productPrice;
-    }
-
-    public void setProductPrice(String productPrice) {
-        this.productPrice = productPrice;
-    }
 
     public String getErrandPrice() {
         return errandPrice;
