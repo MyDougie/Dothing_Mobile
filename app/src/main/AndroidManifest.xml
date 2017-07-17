@@ -24,8 +24,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
@@ -35,8 +34,10 @@
         <activity android:name=".JoinActivity3" />
         <activity android:name=".AddrWebviewActivity" />
         <activity android:name=".activity.ErrandActivity" />
-        <activity android:name=".activity.FrameActivity">
-        </activity>
+
+        <activity android:name=".activity.FrameActivity"></activity>
+
+
         <activity
             android:name=".MainViewActivity"
             android:label="@string/title_activity_main_view"
@@ -50,9 +51,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ChatListActivity"/>
-        <activity android:name=".activity.SettingActivity"/>
-        <activity android:name=".activity.MyPageActivity"/>
+
+        <activity android:name=".activity.ChatListActivity" />
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.MyPageActivity" />
+        <activity android:name=".activity.DetailViewActivity"></activity>
+
         
         <service
             android:name=".activity.FirebaseMessagingService">
@@ -67,6 +71,7 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
+
     </application>
 
 </manifest>

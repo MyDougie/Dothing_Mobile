@@ -5,6 +5,7 @@ package dvorak.kosta.com.dothing_mobile.item;
  */
 
 public class ErrandsItem {
+    private int errandNum;
     private String errandTitle;
     private String errandPrice;
     private String addr;
@@ -12,6 +13,14 @@ public class ErrandsItem {
     private String longitude;
     private String errandTime;
     private int click;
+
+    public int getErrandNum() {
+        return errandNum;
+    }
+
+    public void setErrandNum(int errandNum) {
+        this.errandNum = errandNum;
+    }
 
     public String getErrandTime() {
         return errandTime;
