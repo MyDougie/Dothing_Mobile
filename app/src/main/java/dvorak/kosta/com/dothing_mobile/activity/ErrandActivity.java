@@ -15,6 +15,7 @@ import android.widget.Toast;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
+import dvorak.kosta.com.dothing_mobile.JoinActivity3;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.adapter.ListViewAdapter;
 import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
@@ -82,10 +83,19 @@ public class ErrandActivity extends AppCompatActivity  implements LocationListen
                 ErrandsItem item = (ErrandsItem)parent.getItemAtPosition(position);
                 mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(Double.parseDouble(item.getLatitude()), Double.parseDouble(item.getLongitude())), true);
                 int click = item.getClick();
-                if(click == 0) {
-                    item.setClick(1);
+                if(click == 0) {//선택안된 것을 처음 클릭했을 때
+                    item.setClick(1);//한번선택됨
+                    /**
+                     * 다른 아이템들을 setClick(0)해주어야 함
+                     * */
+
                     Toast.makeText(getBaseContext(), position + "번 선택됨!! ",
                             Toast.LENGTH_SHORT).show();
+                }else if(click == 1){//선택된 셀을 다시 클릭
+                    item.setClick(0);
+                    Intent intent = new Intent(getApplicationContext(), DetailViewActivity.class);
+                    intent.putExtra("errandNum",item.getErrandNum());
+                    startActivity(intent);
                 }
             }
         });

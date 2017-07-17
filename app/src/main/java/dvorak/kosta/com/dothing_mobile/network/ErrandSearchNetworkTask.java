@@ -87,7 +87,8 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
                 marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
                 marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
                 mapView.addPOIItem(marker);
-                adapter.addItem(title, errandPrice,addr, lat,lng,errandTime) ;
+               // adapter.addItem(title, errandPrice,addr, lat,lng,errandTime) ;
+                adapter.addItem(errandNum, title, errandPrice,addr, lat,lng,errandTime) ;
             }
             adapter.notifyDataSetChanged();
         }catch(Exception e){

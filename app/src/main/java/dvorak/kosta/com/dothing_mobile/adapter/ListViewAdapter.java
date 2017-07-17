@@ -74,9 +74,9 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String title, String errandPrice, String addr, String latitude, String longitude, String time) {
+    public void addItem(int errandNum, String title, String errandPrice, String addr, String latitude, String longitude, String time) {
         ErrandsItem item = new ErrandsItem();
-
+        item.setErrandNum(errandNum);
         item.setErrandTitle(title);
         item.setErrandPrice(errandPrice);
         item.setAddr(addr);

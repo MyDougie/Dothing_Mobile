@@ -21,6 +21,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
 }
 
 dependencies {
@@ -36,6 +38,7 @@ dependencies {
     compile files('libs/httpclient-4.5.jar')
     compile files('libs/httpcore-4.4.1.jar')
     compile files('libs/httpmime-4.3.6.jar')
+    compile 'com.android.support:support-annotations:26.0.0-alpha1'
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -43,6 +46,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.google.code.gson:gson:2.7'
 }
+
+
 dependencies {
     compile 'com.android.support.constraint:constraint-layout:+'
 }
@@ -54,6 +59,18 @@ dependencies {
 }
 dependencies {
     compile 'com.android.support.constraint:constraint-layout:+'
+}
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+}
+dependencies {
+    compile 'com.android.support:support-v4:25.+'
+}
+dependencies {
+    compile 'com.android.support:support-v4:25.+'
+}
+dependencies {
+    compile 'com.android.support:support-v4:25.+'
 }
 dependencies {
     compile 'com.android.support.constraint:constraint-layout:+'
