@@ -35,6 +35,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+import dvorak.kosta.com.dothing_mobile.activity.ErrandActivity;
 import dvorak.kosta.com.dothing_mobile.activity.FrameActivity;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
@@ -161,6 +163,18 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
                     e.printStackTrace();
                 }
 
+<<<<<<< HEAD
+=======
+            if(dto.getResult().equals("success")){
+                //main 화면으로 이동
+                Intent intent = new Intent(getApplicationContext(), ErrandActivity.class);
+              //  Intent intent = new Intent(getApplicationContext(), FrameActivity.class);
+                startActivity(intent);
+            } else{
+                //Login 실패 메시지
+                Toast toast = Toast.makeText(getApplicationContext(),"로그인 실패",Toast.LENGTH_SHORT);
+                toast.show();
+>>>>>>> 52d24c9763c1662d3cf0d054e74cdef2cc15b66b
             }
         }
     }
