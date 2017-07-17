@@ -177,7 +177,7 @@ public class ErrandRegisterActivity extends ActivityGroup {
                     params.put("errandsPos.addr", registerAddrString + " " + registerDetailAddrString);
                     params.put("errandsPos.latitude", latitude);
                     params.put("errandsPos.longitude", longitude);
-                    new UploadDataNetworkTask(ConstantUtil.ipAddr + "insertErrand", ErrandRegisterActivity.this).execute(params);
+                    new UploadDataNetworkTask(ConstantUtil.ipAddr + "androidErrand/insertErrand", ErrandRegisterActivity.this).execute(params);
 
                 }
             }

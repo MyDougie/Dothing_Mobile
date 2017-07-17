@@ -45,7 +45,7 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
     @Override
     protected String doInBackground(Map<String, String>... maps) {
         // HTTP 요청 준비 작업
-        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "errandSearch"); // HTTP 요청 전송
+        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidErrand/errandSearch"); // HTTP 요청 전송
 
         http.addAllParameters(maps[0]);
         HttpClient post = http.create();

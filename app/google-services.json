@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "628444083051",
+    "firebase_url": "https://dothing-2cedd.firebaseio.com",
+    "project_id": "dothing-2cedd",
+    "storage_bucket": "dothing-2cedd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628444083051:android:74385372440d0c28",
+        "android_client_info": {
+          "package_name": "dvorak.kosta.com.dothing_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628444083051-tj2t5md797tp2h96t3uufbqe39qtemgh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8zRzFs6ZEsSPwK3MUsI8lXRpjmatLiBg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

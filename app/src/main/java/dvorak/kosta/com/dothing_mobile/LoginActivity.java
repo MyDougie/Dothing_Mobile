@@ -26,7 +26,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.activity.FrameActivity;
-import dvorak.kosta.com.dothing_mobile.dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
+import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 import static dvorak.kosta.com.dothing_mobile.R.id.email;
@@ -117,7 +119,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         /** * 본 작업을 쓰레드로 처리해준다. * @param params * @return */
         protected String doInBackground(Map<String,String>... maps) {
             // HTTP 요청 준비 작업
-            HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "checkId");
+            HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidMember/checkId");
             http.addAllParameters(maps[0]);
 
 
@@ -134,22 +136,32 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         /** * doInBackground 종료되면 동작한다. * @param s : doInBackground가 리턴한 값이 들어온다. */
         protected void onPostExecute(String s) {
 
-            Log.d("HTTP_RESULT", s);
+            if(s.trim().equals("")) {
+                Toast.makeText(getApplicationContext(),"로그인 실패",Toast.LENGTH_SHORT).show();
+            }else {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    MemberInfo.userId = jsonObject.getString("userId");
+                    MemberInfo.name = jsonObject.getString("name");
+                    MemberInfo.password = jsonObject.getString("password");
+                    MemberInfo.selfImgUrlPath = ConstantUtil.ipAddr + "users/" + MemberInfo.userId + "/" + jsonObject.getString("selfImg");
+                    Log.e("pathURLIMG", MemberInfo.selfImgUrlPath);
+                    MemberInfo.preAddr = jsonObject.getString("preAddr");
+                    MemberInfo.detailAddr = jsonObject.getString("detailAddr");
+                    MemberInfo.sex = jsonObject.getString("sex");
+                    MemberInfo.joinDate = jsonObject.getString("joinDate");
+                    MemberInfo.introduce = jsonObject.getString("introduce");
+                    MemberInfo.latitude = jsonObject.getString("latitude");
+                    MemberInfo.longitude = jsonObject.getString("longitude");
+                    MemberInfo.currentPoint = jsonObject.getJSONObject("point").getString("currentPoint");
+                    Intent intent = new Intent(getApplicationContext(), FrameActivity.class);
+                    startActivity(intent);
+                    finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-            Gson gson = new Gson();
-            LoginResultDTO dto = gson.fromJson(s,LoginResultDTO.class);
-            Log.d("result",dto.getResult());
-
-            if(dto.getResult().equals("success")){
-                //main 화면으로 이동
-                Intent intent = new Intent(getApplicationContext(), FrameActivity.class);
-                startActivity(intent);
-            } else{
-                //Login 실패 메시지
-                Toast toast = Toast.makeText(getApplicationContext(),"로그인 실패",Toast.LENGTH_SHORT);
-                toast.show();
             }
-
         }
     }
 
@@ -207,6 +219,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
             // perform the user login attempt.
             params.put("email",email);
             params.put("password",password);
+            params.put("token", FirebaseInstanceId.getInstance().getToken());
             NetworkTask networkTask = new NetworkTask();
             networkTask.execute(params);
 

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.TabHost;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import dvorak.kosta.com.dothing_mobile.R;
 
 public class FrameActivity extends ActivityGroup {
@@ -15,6 +17,8 @@ public class FrameActivity extends ActivityGroup {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_frame);
+        //푸시메세지 토큰 등록
+        FirebaseInstanceId.getInstance().getToken();
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         tabHost = (TabHost)findViewById(R.id.tabHost);

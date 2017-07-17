@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="dvorak.kosta.com.dothing_mobile">
+    <supports-screens  android:anyDensity="true" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -13,6 +14,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <!-- 카메라 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -34,7 +36,6 @@
         <activity android:name=".AddrWebviewActivity" />
         <activity android:name=".activity.ErrandActivity" />
         <activity android:name=".activity.FrameActivity">
-
         </activity>
         <activity
             android:name=".MainViewActivity"
@@ -52,6 +53,20 @@
         <activity android:name=".activity.ChatListActivity"/>
         <activity android:name=".activity.SettingActivity"/>
         <activity android:name=".activity.MyPageActivity"/>
+        
+        <service
+            android:name=".activity.FirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".activity.FirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
