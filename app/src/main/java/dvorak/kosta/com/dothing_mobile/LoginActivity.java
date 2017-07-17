@@ -160,7 +160,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                
+
             }
         }
     }

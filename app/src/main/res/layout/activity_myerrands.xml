@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/item_selector">
+
+    <TextView
+        android:id="@+id/errandMyTitle"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:text="제목"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/errandMyTitle"
+        app:srcCompat="@drawable/home" />
+
+    <TextView
+        android:id="@+id/errandMyaddr"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/errandMyTitle"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/errandMyTitle"
+        android:layout_below="@+id/errandMyTitle"
+        android:layout_toRightOf="@+id/imageView"
+        android:gravity="center_vertical"
+        android:text="요기주소"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="댓글 수"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:layout_above="@+id/errandMyState"
+        android:layout_toRightOf="@+id/errandMyTitle"
+        android:layout_toEndOf="@+id/errandMyTitle" />
+
+    <TextView
+        android:id="@+id/errandMyTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="총 금액"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:layout_above="@+id/textView11"
+        android:layout_toRightOf="@+id/errandMyTitle"
+        android:layout_toEndOf="@+id/errandMyTitle" />
+
+    <TextView
+        android:id="@+id/errandReplyNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1개"
+        android:textSize="12sp"
+        android:layout_above="@+id/errandMyState"
+        android:layout_alignRight="@+id/textView16"
+        android:layout_alignEnd="@+id/textView16"
+        android:layout_marginRight="11dp"
+        android:layout_marginEnd="11dp" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1231원"
+        android:textSize="12sp"
+        android:layout_above="@+id/errandReplyNumber"
+        android:layout_alignRight="@+id/errandMyState"
+        android:layout_alignEnd="@+id/errandMyState" />
+
+    <TextView
+        android:id="@+id/errandMyState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="심부름 상태"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textStyle="bold"
+        android:layout_above="@+id/errandMyaddr"
+        android:layout_toRightOf="@+id/textView11"
+        android:layout_toEndOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/errandMyDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/errandMyaddr"
+        android:layout_alignBottom="@+id/errandMyaddr"
+        android:layout_alignLeft="@+id/errandMyState"
+        android:layout_alignStart="@+id/errandMyState"
+        android:text="심부름날짜"
+        android:textSize="12sp" />
+</RelativeLayout>
