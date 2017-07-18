@@ -12,7 +12,26 @@ public class ErrandsItem {
     private String latitude;
     private String longitude;
     private String errandTime;
+    private String replyNum;
+    private String state;
     private int click;
+
+
+    public String getReplyNum() {
+        return replyNum;
+    }
+
+    public void setReplyNum(String replyNum) {
+        this.replyNum = replyNum;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 
     public int getErrandNum() {
         return errandNum;
