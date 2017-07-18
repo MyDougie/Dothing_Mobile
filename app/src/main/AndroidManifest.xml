@@ -28,7 +28,6 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".Main2Activity" />
         <activity android:name=".JoinActivity1" />
         <activity android:name=".JoinActivity2" />
         <activity android:name=".JoinActivity3" />
@@ -37,11 +36,6 @@
 
         <activity android:name=".activity.FrameActivity"></activity>
 
-
-        <activity
-            android:name=".MainViewActivity"
-            android:label="@string/title_activity_main_view"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.ErrandRegisterActivity" />
         <activity android:name=".activity.RegisterWebviewActivity" />
         <activity android:name=".activity.SplashActivity">

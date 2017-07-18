@@ -5,6 +5,6 @@ package dvorak.kosta.com.dothing_mobile.util;
  */
 
 public class ConstantUtil {
-    public final static String ipAddr = "http://13.113.174.159/DothingProject/";
+    public final static String ipAddr = "http://192.168.43.164/controller/";
 
 }
