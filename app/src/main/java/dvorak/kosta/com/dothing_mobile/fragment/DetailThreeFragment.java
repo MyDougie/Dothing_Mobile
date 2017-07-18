@@ -52,6 +52,9 @@ public class DetailThreeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_detail_three, container, false);
 
+        String errandNum = getActivity().getIntent().getStringExtra("errandNum");
+        System.out.println("detailThreeFragment's errandNum : " + errandNum);
+
         //tab3
         arrivalTime = (TextView) v.findViewById(R.id.arrival_time);
         replyContent = (EditText) v.findViewById(R.id.reply_content);
