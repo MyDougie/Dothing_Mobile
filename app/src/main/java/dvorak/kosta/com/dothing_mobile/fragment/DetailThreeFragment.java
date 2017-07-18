@@ -132,7 +132,11 @@ public class DetailThreeFragment extends Fragment {
         System.out.println("minute : " + curMinute);
         System.out.println("arrivalTime : " + arrivalTime);
 
-        arrivalTime.setText(String.format("%d-%d-%d %d:%d", curYear, curMonth+1, curDay, curHour, curMinute));
+        if(curMinute<10){
+            arrivalTime.setText(String.format("%d-%d-%d %d:0%d", curYear, curMonth + 1, curDay, curHour, curMinute));
+        }else {
+            arrivalTime.setText(String.format("%d-%d-%d %d:%d", curYear, curMonth + 1, curDay, curHour, curMinute));
+        }
         System.out.println("arrivalTime.getText : " + arrivalTime.getText());
     }
 
