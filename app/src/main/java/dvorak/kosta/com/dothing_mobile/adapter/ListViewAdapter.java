@@ -91,4 +91,9 @@ public class ListViewAdapter extends BaseAdapter {
         listViewItemList.clear();
     }
 
+    //아이템 리스트를 리턴
+    public ArrayList<ErrandsItem> getErrandList(){
+        return listViewItemList;
+    }
+
 }

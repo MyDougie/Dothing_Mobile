@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/DTMB.iml" filepath="$PROJECT_DIR$/DTMB.iml" />
       <module fileurl="file://$PROJECT_DIR$/Dothing_Mobile.iml" filepath="$PROJECT_DIR$/Dothing_Mobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Dothing_mobile_test.iml" filepath="$PROJECT_DIR$/Dothing_mobile_test.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
