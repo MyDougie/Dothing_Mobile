@@ -104,7 +104,7 @@ public class ErrandActivity extends AppCompatActivity  implements LocationListen
                 }else if(click == 1){//선택된 셀을 다시 클릭
                     item.setClick(0);
                     Intent intent = new Intent(getApplicationContext(), DetailViewActivity.class);
-                    intent.putExtra("errandNum",item.getErrandNum());
+                    intent.putExtra("errandNum",item.getErrandNum()+"");
                     startActivity(intent);
                 }
             }

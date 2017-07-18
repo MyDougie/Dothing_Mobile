@@ -41,7 +41,7 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
     @Override
     protected String doInBackground(Map<String, String>... maps) {
         // HTTP 요청 준비 작업
-        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidErrand/detailRequester"); // HTTP 요청 전송
+        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidErrand/requesterDetail"); // HTTP 요청 전송
 
         http.addAllParameters(maps[0]);
         HttpClient post = http.create();
@@ -62,33 +62,23 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
     @Override
     protected void onPostExecute(String s) {
         try {
-            JSONArray jsonArray = new JSONArray(s);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject obj = jsonArray.getJSONObject(i);
-                //                    Log.d(i+"번 심부름", obj.toString());
-                JSONObject posObj = obj.getJSONObject("errandsPos");
-                //                    Log.d(i+"번 심부름의 lat", posObj.getDouble("latitude") + "");
-                //                    Log.d(i+"번 심부름의 lng", posObj.getDouble("longitude") + "");
-                double latitude = posObj.getDouble("latitude");
-                double longitude = posObj.getDouble("longitude");
-                String requesterName = obj.getString("requesterName");
-                String errandsCount = obj.getString("errandsCount");
-                String starGrade = obj.getString("starGrade");
-                JSONArray hashTags = obj.getJSONArray("hashTags");
-
-                int errandNum = obj.getInt("errandsNum");
+            JSONObject obj = new JSONObject(s);
+            String requestId = obj.getString("requesterId");
+            int requestCount = obj.getInt("requestCount");
+            int grade = obj.getInt("grade");
+            JSONArray hashtagList = obj.getJSONArray("hashtagList");
+            String hash = "";
+            for(int i=0; i<hashtagList.length(); i++){
+                hash += hashtagList.get(i) + " ";
+            }
 
                // ((ImageView)map.get("requesterUserImg")).setImage
-                ((EditText)map.get("requesterName")).setText(requesterName);
-                ((EditText)map.get("errandsRequestCount")).setText(errandsCount);
-                ((EditText)map.get("grade")).setText(starGrade);
-                String hash = "";
-                for(int j=0; j<hashTags.length(); j++){
-                   hash += hashTags.getJSONObject(j);
-                }
+                ((EditText)map.get("requesterName")).setText(requestId);
+                ((EditText)map.get("errandsRequestCount")).setText(requestCount);
+                ((EditText)map.get("grade")).setText(grade);
                 ((EditText)map.get("hashtag")).setText(hash);
 
-            }
+
         }catch(Exception e){
             e.printStackTrace();
         }
