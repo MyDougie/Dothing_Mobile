@@ -52,6 +52,9 @@ public class DetailThreeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_detail_three, container, false);
 
+        String errandNum = getActivity().getIntent().getStringExtra("errandNum");
+        System.out.println("detailThreeFragment's errandNum : " + errandNum);
+
         //tab3
         arrivalTime = (TextView) v.findViewById(R.id.arrival_time);
         replyContent = (EditText) v.findViewById(R.id.reply_content);
@@ -129,7 +132,11 @@ public class DetailThreeFragment extends Fragment {
         System.out.println("minute : " + curMinute);
         System.out.println("arrivalTime : " + arrivalTime);
 
-        arrivalTime.setText(String.format("%d-%d-%d %d:%d", curYear, curMonth+1, curDay, curHour, curMinute));
+        if(curMinute<10){
+            arrivalTime.setText(String.format("%d-%d-%d %d:0%d", curYear, curMonth + 1, curDay, curHour, curMinute));
+        }else {
+            arrivalTime.setText(String.format("%d-%d-%d %d:%d", curYear, curMonth + 1, curDay, curHour, curMinute));
+        }
         System.out.println("arrivalTime.getText : " + arrivalTime.getText());
     }
 

@@ -31,6 +31,9 @@ public class DetailOneFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        String errandNum = getActivity().getIntent().getStringExtra("errandNum");
+        System.out.println("detailOneFragment's errandNum : " + errandNum);
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detail_one, container, false);
     }

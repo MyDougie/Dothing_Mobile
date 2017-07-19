@@ -5,17 +5,14 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
-import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -24,20 +21,15 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.activity.FrameActivity;
-import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
-import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
+import dvorak.kosta.com.dothing_mobile.network.LoginNetworkTask;
 
 import static dvorak.kosta.com.dothing_mobile.R.id.email;
 
@@ -108,63 +100,6 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
     }//oncreate 끝
 
-    public class NetworkTask extends AsyncTask<Map<String,String>,String,String> {
-        /** * doInBackground 실행되기 이전에 동작한다. */
-        @Override
-        protected void onPreExecute() {
-
-            super.onPreExecute();
-        }
-
-        /** * 본 작업을 쓰레드로 처리해준다. * @param params * @return */
-        protected String doInBackground(Map<String,String>... maps) {
-            // HTTP 요청 준비 작업
-            HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidMember/checkId");
-            http.addAllParameters(maps[0]);
-
-
-            // HTTP 요청 전송
-            HttpClient post = http.create();
-            post.request();
-
-            // 응답 상태코드 가져오기
-            int statusCode = post.getHttpStatusCode();
-            // 응답 본문 가져오기
-            String body = post.getBody();
-            return body;
-        }
-        /** * doInBackground 종료되면 동작한다. * @param s : doInBackground가 리턴한 값이 들어온다. */
-        protected void onPostExecute(String s) {
-
-            if(s.trim().equals("")) {
-                Toast.makeText(getApplicationContext(),"로그인 실패",Toast.LENGTH_SHORT).show();
-            }else {
-                try {
-                    JSONObject jsonObject = new JSONObject(s);
-                    MemberInfo.userId = jsonObject.getString("userId");
-                    MemberInfo.name = jsonObject.getString("name");
-                    MemberInfo.password = jsonObject.getString("password");
-                    MemberInfo.selfImgUrlPath = ConstantUtil.ipAddr + "users/" + MemberInfo.userId + "/" + jsonObject.getString("selfImg");
-                    Log.e("pathURLIMG", MemberInfo.selfImgUrlPath);
-                    MemberInfo.preAddr = jsonObject.getString("preAddr");
-                    MemberInfo.detailAddr = jsonObject.getString("detailAddr");
-                    MemberInfo.sex = jsonObject.getString("sex");
-                    MemberInfo.joinDate = jsonObject.getString("joinDate");
-                    MemberInfo.introduce = jsonObject.getString("introduce");
-                    MemberInfo.latitude = jsonObject.getString("latitude");
-                    MemberInfo.longitude = jsonObject.getString("longitude");
-                    MemberInfo.currentPoint = jsonObject.getJSONObject("point").getString("currentPoint");
-                    Intent intent = new Intent(getApplicationContext(), FrameActivity.class);
-                    startActivity(intent);
-                    finish();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }
-    }
-
     private void populateAutoComplete() {
 
         getLoaderManager().initLoader(0, null, this);
@@ -220,7 +155,8 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
             params.put("email",email);
             params.put("password",password);
             params.put("token", FirebaseInstanceId.getInstance().getToken());
-            NetworkTask networkTask = new NetworkTask();
+
+            LoginNetworkTask networkTask = new LoginNetworkTask(LoginActivity.this);
             networkTask.execute(params);
 
         }
