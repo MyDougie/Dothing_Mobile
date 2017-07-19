@@ -6,6 +6,7 @@ import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -15,7 +16,6 @@ import android.widget.Toast;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
-import dvorak.kosta.com.dothing_mobile.JoinActivity3;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.adapter.ListViewAdapter;
 import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
@@ -88,9 +88,7 @@ public class ErrandActivity extends AppCompatActivity  implements LocationListen
                     /**
                      * 다른 아이템들을 setClick(0)해주어야 함
                      * */
-
-                    Toast.makeText(getBaseContext(), position + "번 선택됨!! ",
-                            Toast.LENGTH_SHORT).show();
+                    Log.e("다른 자식들의 수", parent.getCount() +"");
                 }else if(click == 1){//선택된 셀을 다시 클릭
                     item.setClick(0);
                     Intent intent = new Intent(getApplicationContext(), DetailViewActivity.class);
