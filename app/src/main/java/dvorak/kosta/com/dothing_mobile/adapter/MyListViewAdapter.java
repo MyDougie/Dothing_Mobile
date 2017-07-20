@@ -59,8 +59,8 @@ public class MyListViewAdapter extends BaseAdapter {
         errandPrice.setText(errandFormatPrice +"원");
         errandAddr.setText(errandsItem.getAddr());
         errandTime.setText("~" + errandsItem.getErrandTime());
-        errandReplyNum.setText(errandsItem.getReplyNum());
-
+        errandReplyNum.setText(errandsItem.getReplyNum()+"개") ;
+        errandState.setText(errandsItem.getState());
         return convertView;
     }
 
@@ -77,16 +77,16 @@ public class MyListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String title, String errandPrice, String addr, String latitude, String longitude, String time) {
+    public void addItem(int errandsNum, String title, String errandPrice, String addr, String time, String reply, String state) {
         ErrandsItem item = new ErrandsItem();
-
+        item.setErrandNum(errandsNum);
         item.setErrandTitle(title);
         item.setErrandPrice(errandPrice);
         item.setAddr(addr);
-        item.setLatitude(latitude);
-        item.setLongitude(longitude);
         item.setErrandTime(time);
         item.setClick(0);
+        item.setReplyNum(reply);
+        item.setState(state);
         listViewItemList.add(item);
     }
     //리스트의 모든 아이템 제거

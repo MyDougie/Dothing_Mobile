@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.R;
+import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.listener.RegisterErrandListener;
 import dvorak.kosta.com.dothing_mobile.network.UploadDataNetworkTask;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
@@ -168,7 +169,7 @@ public class ErrandRegisterActivity extends ActivityGroup {
                     if(imgPath != null){
                         params.put("errandsPhotoFile",new File(imgPath));
                     }
-                    params.put("requestUser.userId", "hklk@naver.com");
+                    params.put("requestUser.userId", MemberInfo.userId);
                     params.put("endTime", errandTimeString);
                     params.put("productPrice", registerProductPriceString);
                     params.put("errandsPrice", registerErrandPriceString);
