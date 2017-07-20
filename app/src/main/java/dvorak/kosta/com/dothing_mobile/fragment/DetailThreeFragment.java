@@ -1,6 +1,7 @@
 package dvorak.kosta.com.dothing_mobile.fragment;
 
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -17,9 +18,13 @@ import android.widget.TimePicker;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.activity.DetailViewActivity;
+import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
+import dvorak.kosta.com.dothing_mobile.network.ReplyInsertNetworkTask;
 
 
 /**
@@ -30,6 +35,8 @@ public class DetailThreeFragment extends Fragment {
     int curYear, curMonth, curDay, curHour, curMinute;
     TextView arrivalTime;
     EditText replyContent;
+    String errandsNum;
+    Activity activity;
 
 
     public DetailThreeFragment(){}
@@ -52,8 +59,9 @@ public class DetailThreeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_detail_three, container, false);
 
+        activity = getActivity();
         String errandNum = getActivity().getIntent().getStringExtra("errandNum");
-        System.out.println("detailThreeFragment's errandNum : " + errandNum);
+        errandsNum = errandNum;
 
         //tab3
         arrivalTime = (TextView) v.findViewById(R.id.arrival_time);
@@ -83,6 +91,22 @@ public class DetailThreeFragment extends Fragment {
                 new TimePickerDialog(getActivity(), timeSetListener, curHour, curMinute, false).show();
             }
         });
+        Button replyInsertBtn = (Button) v.findViewById(R.id.reply_insert_btn);
+        replyInsertBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                ReplyInsertNetworkTask replyInsertNetworkTask = new ReplyInsertNetworkTask(activity);
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("memberId", MemberInfo.userId);
+                params.put("errandNum", errandsNum);
+                params.put("arrivalTime", arrivalTime.getText().toString());
+                params.put("replyContent", replyContent.getText().toString());
+
+                replyInsertNetworkTask.execute(params);
+            }
+        });
+
 
         return v;
     }
