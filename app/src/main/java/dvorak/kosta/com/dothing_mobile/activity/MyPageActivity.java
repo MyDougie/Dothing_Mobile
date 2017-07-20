@@ -29,9 +29,9 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
  */
 
 public class MyPageActivity extends AppCompatActivity{
-    LinearLayout myRequestLayout;
+    LinearLayout myRequestLayout, myResponseLayout, myLogout;
     TextView myName, myEmail, myPoint;
-    ImageView myImage, myLogout;
+    ImageView myImage;
     Handler handler;
     Bitmap bmImg;
     MyPageListener myPageListener = new MyPageListener();
@@ -45,9 +45,11 @@ public class MyPageActivity extends AppCompatActivity{
         myPoint = (TextView)findViewById(R.id.userPoint);
         myImage = (ImageView)findViewById(R.id.userImage);
         myRequestLayout = (LinearLayout)findViewById(R.id.requestBtn);
-
+        myResponseLayout = (LinearLayout)findViewById(R.id.responseBtn);
+        myLogout = (LinearLayout) findViewById(R.id.logoutBtn);
         myRequestLayout.setOnClickListener(myPageListener);
-        myLogout = (ImageView) findViewById(R.id.logout);
+        myResponseLayout.setOnClickListener(myPageListener);
+        myLogout.setOnClickListener(myPageListener);
         Log.e("정보들", MemberInfo.name + " " + MemberInfo.userId + " " + MemberInfo.selfImgUrlPath);
         myName.setText(MemberInfo.name);
         myEmail.setText(MemberInfo.userId);
@@ -57,20 +59,7 @@ public class MyPageActivity extends AppCompatActivity{
 
         Glide.with(this).load(MemberInfo.selfImgUrlPath).bitmapTransform(new CropCircleTransformation(this)).into(myImage);
 
-        myLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
-                SharedPreferences.Editor editor = auto.edit();
-                editor.remove("LoginId");
-                editor.remove("LoginPassword");
-                editor.commit();
 
-                Intent intent = new Intent(MyPageActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         //Glide.with(this).load(MemberInfo.selfImgUrlPath).bitmapTransform(new CropCircleTransformation(this)).into(myImage);
 //        task = new back();
@@ -86,6 +75,22 @@ public class MyPageActivity extends AppCompatActivity{
                     Intent intent = new Intent(MyPageActivity.this, MyRequestActivity.class);
                     startActivity(intent);
                     break;
+                case R.id.responseBtn:
+                    Intent resIntent = new Intent(MyPageActivity.this, MyResponseActivity.class);
+                    startActivity(resIntent);
+                    break;
+                case R.id.logoutBtn:
+                    SharedPreferences auto = getSharedPreferences("auto", Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = auto.edit();
+                    editor.remove("LoginId");
+                    editor.remove("LoginPassword");
+                    editor.commit();
+
+                    Intent logoutIntent = new Intent(MyPageActivity.this, MainActivity.class);
+                    startActivity(logoutIntent);
+                    finish();
+                    break;
+
             }
         }
     }

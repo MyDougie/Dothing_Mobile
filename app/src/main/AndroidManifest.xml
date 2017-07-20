@@ -64,6 +64,7 @@
         </service>
 
         <activity android:name=".activity.MyRequestActivity"></activity>
+        <activity android:name=".activity.MyResponseActivity"></activity>
     </application>
 
 </manifest>

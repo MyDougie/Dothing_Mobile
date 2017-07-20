@@ -10,6 +10,7 @@ import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.adapter.MyListViewAdapter;
+import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
@@ -18,9 +19,11 @@ import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 public class MyErrandNetworkTask  extends AsyncTask<Map<String, String>, Integer, String> {
     MyListViewAdapter adapter;
+    String errandType;
 
-    public MyErrandNetworkTask(MyListViewAdapter adapter){
+    public MyErrandNetworkTask(MyListViewAdapter adapter, String errandType){
         this.adapter = adapter;
+        this.errandType = errandType;
     }
     /**
      * doInBackground 실행되기 이전에 동작한다.
@@ -36,7 +39,7 @@ public class MyErrandNetworkTask  extends AsyncTask<Map<String, String>, Integer
     @Override
     protected String doInBackground(Map<String, String>... maps) {
         // HTTP 요청 준비 작업
-        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidErrand/myRequest"); // HTTP 요청 전송
+        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidErrand/" + errandType); // HTTP 요청 전송
 
         http.addAllParameters(maps[0]);
         HttpClient post = http.create();
@@ -72,24 +75,41 @@ public class MyErrandNetworkTask  extends AsyncTask<Map<String, String>, Integer
                 String startTime = obj.getString("startTime");
                 String finishTime = obj.getString("finishTime");
                 String arrivalTime = obj.getString("arrivalTime");
-                if(startTime.equals("null") ){
-                    state = "심부름꾼 대기중";
-                    Log.e("힝", "여기로와야대는데");
-                } else{
-                    if(finishTime.trim().equals("null")){
-                        state="요청 완료";
+                if(errandType.equals("myRequest")) { // 내 요청목록일 경우
+                    if (startTime.equals("null")) {
+                        state = "심부름꾼 대기중";
+                    } else {
+                        if (finishTime.trim().equals("null")) {
+                            state = "요청 완료";
+                        } else {
+                            if (arrivalTime.trim().equals("null")) {
+                                state = "심부름꾼 확인 대기중";
+                            } else {
+                                state = "심부름 완료";
+                            }
+                        }
+                    }
+                }else{ // 내 수행 목록일 경우
+                    String responseUserString = obj.getString("responseUser");
+                    if(responseUserString.equals("null")) {
+                        state = "채택 요청중";
                     }else{
-                        if(arrivalTime.trim().equals("null")){
-                            state = "심부름꾼 확인 대기중";
-                        }else{
-                            Log.e("힝", "왜일로감?");
-                            state = "심부름 완료";
+                        JSONObject responseUser = obj.getJSONObject("responseUser");
+                        if(responseUser.getString("userId").equals(MemberInfo.userId)){
+                            state = "심부름중";
+                        }
+                        if(!arrivalTime.equals("null")){
+                            if(finishTime.equals("null")){
+                                state = "요청자 확인 대기중";
+                            }else{
+                                state = "심부름 완료";
+                            }
                         }
                     }
                 }
-                Log.e("정보!", errandNum + ":" + title + ":" + addr + ":" + errandTime +":" + replyNum + ":" + state);
                 adapter.addItem(errandNum, title, errandPrice + productPrice + "" ,addr,errandTime, replyNum,state);
             }
+
             adapter.notifyDataSetChanged();
         }catch(Exception e){
             Log.e("E", e.getMessage());
