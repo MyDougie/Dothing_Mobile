@@ -1,6 +1,7 @@
 package dvorak.kosta.com.dothing_mobile.network;
 
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import org.json.JSONObject;
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.HttpClient;
+import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
@@ -72,11 +74,20 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
                 hash += hashtagList.get(i) + " ";
             }
 
-               // ((ImageView)map.get("requesterUserImg")).setImage
-                ((EditText)map.get("requesterName")).setText(requestId);
-                ((EditText)map.get("errandsRequestCount")).setText(requestCount);
-                ((EditText)map.get("grade")).setText(grade);
-                ((EditText)map.get("hashtag")).setText(hash);
+          //  Log.i("requestId : ", requestId );
+          //  Log.i("requestCount : ", requestCount+"" );
+            Log.i("grade :", grade+"" );
+           // Log.i("hash :", hash);
+            View v = map.get("view");
+            // ((ImageView)map.get("requesterUserImg")).setImage
+            ((EditText)v.findViewById(R.id.requester_id)).setText(requestId);
+            ((EditText)v.findViewById(R.id.errands_request_count)).setText(requestCount+"");
+            ((EditText)v.findViewById(R.id.grade)).setText(grade+"");
+            //((EditText)v.findViewById(R.id.hashtag)).setText(grade+"");
+
+
+
+
 
 
         }catch(Exception e){

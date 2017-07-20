@@ -57,11 +57,12 @@ public class ReplyInsertNetworkTask extends AsyncTask<Map<String, String>, Integ
      */
     @Override
     protected void onPostExecute(String s) {
-        if(s.trim().equals("0")) {
+        Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
+        /*if(s.trim().equals("0")) {
             Toast.makeText(activity, "댓글 등록 실패", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(activity, "댓글 등록 성공", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
     @Override

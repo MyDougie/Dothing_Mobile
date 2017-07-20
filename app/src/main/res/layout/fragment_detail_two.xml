@@ -41,13 +41,13 @@
                     android:weightSum="1">
 
                     <EditText
-                        android:id="@+id/name"
+                        android:id="@+id/requester_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
                         android:inputType="textPersonName"
-                        android:text="이름" />
+                        android:text="아이디" />
 
                     <EditText
                         android:id="@+id/errands_request_count"
