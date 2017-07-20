@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/DTMB.iml" filepath="$PROJECT_DIR$/DTMB.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/Dothing_mobile_test.iml" filepath="$PROJECT_DIR$/Dothing_mobile_test.iml" />
->>>>>>> 2d76190314da91c2fd14eece9f29c61587f885ff
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dothing_android.iml" filepath="$PROJECT_DIR$/dothing_android.iml" />
     </modules>
   </component>
 </project>
