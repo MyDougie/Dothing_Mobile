@@ -37,7 +37,7 @@ public class ReplyInsertNetworkTask extends AsyncTask<Map<String, String>, Integ
     @Override
     protected String doInBackground(Map<String, String>... maps) {
         // HTTP 요청 준비 작업
-        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidErrand/replyInsert"); // HTTP 요청 전송
+        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidErrand/insertReply"); // HTTP 요청 전송
 
         http.addAllParameters(maps[0]);
         HttpClient post = http.create();
@@ -57,12 +57,11 @@ public class ReplyInsertNetworkTask extends AsyncTask<Map<String, String>, Integ
      */
     @Override
     protected void onPostExecute(String s) {
-        Toast.makeText(activity, s, Toast.LENGTH_SHORT).show();
-        /*if(s.trim().equals("0")) {
+        if(s.trim().equals("0")) {
             Toast.makeText(activity, "댓글 등록 실패", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(activity, "댓글 등록 성공", Toast.LENGTH_SHORT).show();
-        }*/
+        }
     }
 
     @Override
