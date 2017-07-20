@@ -93,7 +93,6 @@ public class ErrandActivity extends AppCompatActivity  implements LocationListen
                      * */
 
                     ArrayList<ErrandsItem> list =  adapter.getErrandList();
-
                     for(ErrandsItem it : list){
                         if(it.getErrandNum() != item.getErrandNum()){
                             it.setClick(0);
