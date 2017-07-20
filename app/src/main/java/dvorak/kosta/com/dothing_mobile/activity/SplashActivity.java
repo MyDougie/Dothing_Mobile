@@ -52,10 +52,6 @@ public class SplashActivity extends AppCompatActivity {
                 .setDeniedMessage("권한 거부시 이용이 원할하지 않습니다 [설정]->[권한]에서 허용해주세요")
                 .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .check();
-
-
-
-
     }
 
     public void goPage(){

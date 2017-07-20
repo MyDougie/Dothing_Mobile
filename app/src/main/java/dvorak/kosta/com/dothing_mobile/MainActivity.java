@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         joinBtn.setOnClickListener(new View.OnClickListener(){
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),JoinActivity1.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
