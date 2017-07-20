@@ -3,29 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dvorak.kosta.com.dothing_mobile.fragment.DetailTwoFragment">
+    tools:context="dvorak.kosta.com.dothing_mobile.fragment.DetailTwoFragment"
+    android:padding="5dp">
 
 
     <LinearLayout
-        android:layout_width="255dp"
-        android:layout_height="292dp"
-        android:layout_marginLeft="76dp"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="50dp"
-        android:layout_weight="0.67"
-        android:orientation="vertical"
-        android:weightSum="1">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@drawable/round_background"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="159dp"
             android:layout_weight="0.28"
-            android:orientation="horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/requester_user_img"
-                android:layout_width="78dp"
-                android:layout_height="match_parent"
+                android:id="@+id/requesterImg"
+                android:layout_width="100dp"
+                android:layout_height="143dp"
                 android:src="@drawable/icon" />
 
 
@@ -37,42 +36,181 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:orientation="vertical"
                     android:weightSum="1">
 
-                    <EditText
+
+                    <TextView
+                        android:id="@+id/requester_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:text="아이디" />
+
+                  <!--  <EditText
+                        android:id="@+id/requester_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="아이디" />-->
+
+                    <!--<TextView
                         android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="이름" />
+                        android:text="홍길동"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />-->
 
-                    <EditText
-                        android:id="@+id/errands_request_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="주문횟수" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
 
-                    <EditText
-                        android:id="@+id/grade"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="매너등급" />
+                        <LinearLayout
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
 
-                    <android.support.v7.widget.AppCompatRatingBar
-                        android:id="@+id/star_grade"
-                        android:layout_width="wrap_content"
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="주문횟수"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="매너등급"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/errands_request_count"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="12번"
+                                android:textColor="@android:color/black"
+                                android:textSize="18sp" />
+
+                            <RatingBar
+                                android:id="@+id/mannerGrade"
+                                style="?android:attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:numStars="5"
+                                android:rating="2"
+                                android:stepSize="1" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:numStars="5"
-                        style="?android:attr/ratingBarStyleIndicator"
-                      />
+                        android:text="자기소개"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/introduce"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="안녕하세요 방가방가 저는 홍길동입니다 아뵤오오오오 쒜끼빠리 홍길동!" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="사용자에게 달린 해시태그"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/hashtagLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:background="@android:color/holo_blue_light"
+                            android:padding="5dp"
+                            android:text="동적으로"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:background="@android:color/holo_blue_light"
+                            android:padding="5dp"
+                            android:text="해시태그를"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:background="@android:color/holo_blue_light"
+                            android:padding="5dp"
+                            android:text="상위"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:background="@android:color/holo_blue_light"
+                            android:padding="5dp"
+                            android:text="5개"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:background="@android:color/holo_blue_light"
+                            android:padding="5dp"
+                            android:text="정도만"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
 
 
                 </LinearLayout>
@@ -82,14 +220,6 @@
 
         </LinearLayout>
 
-
-        <EditText
-            android:id="@+id/hashtag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="주문자에게 달린 해시태그" />
 
     </LinearLayout>
 

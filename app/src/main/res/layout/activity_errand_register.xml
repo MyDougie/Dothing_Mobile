@@ -14,7 +14,7 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:title="심부름 작성"
-        app:titleTextColor="@android:color/black" />
+        app:titleTextColor="@android:color/white"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

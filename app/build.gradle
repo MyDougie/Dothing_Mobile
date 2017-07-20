@@ -79,7 +79,7 @@ dependencies {
 dependencies {
     compile 'gun0912.ted:tedpermission:1.0.2'
 }
-dependencies{
+dependencies {
     compile 'com.google.firebase:firebase-core:10.2.1'
     compile 'com.google.firebase:firebase-messaging:10.2.1'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
@@ -88,9 +88,11 @@ repositories {
     jcenter()
 }
 
-/*
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+}
 dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.2'
     // If you want to use the GPU Filters
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
-}*/
+}

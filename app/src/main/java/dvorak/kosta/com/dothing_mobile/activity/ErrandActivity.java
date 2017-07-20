@@ -6,6 +6,7 @@ import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -90,10 +91,11 @@ public class ErrandActivity extends AppCompatActivity  implements LocationListen
                     /**
                      * 다른 아이템들을 setClick(0)해주어야 함
                      * */
+
                     ArrayList<ErrandsItem> list =  adapter.getErrandList();
                     for(ErrandsItem it : list){
                         if(it.getErrandNum() != item.getErrandNum()){
-                            item.setClick(0);
+                            it.setClick(0);
                         }
                     }
                     item.setClick(1);//한번선택됨
@@ -103,7 +105,7 @@ public class ErrandActivity extends AppCompatActivity  implements LocationListen
                 }else if(click == 1){//선택된 셀을 다시 클릭
                     item.setClick(0);
                     Intent intent = new Intent(getApplicationContext(), DetailViewActivity.class);
-                    intent.putExtra("errandNum",item.getErrandNum());
+                    intent.putExtra("errandNum",item.getErrandNum()+"");
                     startActivity(intent);
                 }
             }

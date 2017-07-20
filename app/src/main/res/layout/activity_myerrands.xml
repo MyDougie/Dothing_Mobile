@@ -47,20 +47,22 @@
         android:text="댓글 수"
         android:textColor="@android:color/black"
         android:textSize="12sp"
-        android:layout_above="@+id/errandMyState"
-        android:layout_toRightOf="@+id/errandMyTitle"
-        android:layout_toEndOf="@+id/errandMyTitle" />
+        android:layout_below="@+id/errandMyState"
+        android:layout_alignLeft="@+id/textView7"
+        android:layout_alignStart="@+id/textView7" />
 
     <TextView
-        android:id="@+id/errandMyTotalPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="총 금액"
         android:textColor="@android:color/black"
         android:textSize="12sp"
-        android:layout_above="@+id/textView11"
+        android:id="@+id/textView7"
+        android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/errandMyTitle"
-        android:layout_toEndOf="@+id/errandMyTitle" />
+        android:layout_toEndOf="@+id/errandMyTitle"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp" />
 
     <TextView
         android:id="@+id/errandReplyNumber"
@@ -68,41 +70,48 @@
         android:layout_height="wrap_content"
         android:text="1개"
         android:textSize="12sp"
-        android:layout_above="@+id/errandMyState"
-        android:layout_alignRight="@+id/textView16"
-        android:layout_alignEnd="@+id/textView16"
-        android:layout_marginRight="11dp"
-        android:layout_marginEnd="11dp" />
+        android:layout_alignBaseline="@+id/textView11"
+        android:layout_alignBottom="@+id/textView11"
+        android:layout_alignLeft="@+id/errandMyTotalPrice"
+        android:layout_alignStart="@+id/errandMyTotalPrice"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/errandMyTotalPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1231원"
         android:textSize="12sp"
-        android:layout_above="@+id/errandReplyNumber"
-        android:layout_alignRight="@+id/errandMyState"
-        android:layout_alignEnd="@+id/errandMyState" />
+        android:layout_alignBaseline="@+id/textView7"
+        android:layout_alignBottom="@+id/textView7"
+        android:layout_toRightOf="@+id/textView7"
+        android:layout_toEndOf="@+id/textView7"
+        android:layout_marginLeft="26dp"
+        android:layout_marginStart="26dp" />
 
     <TextView
         android:id="@+id/errandMyState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
         android:text="심부름 상태"
         android:textColor="@android:color/holo_orange_dark"
-        android:textStyle="bold"
-        android:layout_above="@+id/errandMyaddr"
-        android:layout_toRightOf="@+id/textView11"
-        android:layout_toEndOf="@+id/textView11" />
+        android:textSize="12sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/errandMyDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="심부름날짜"
+        android:textSize="10sp"
         android:layout_alignBaseline="@+id/errandMyaddr"
         android:layout_alignBottom="@+id/errandMyaddr"
-        android:layout_alignLeft="@+id/errandMyState"
-        android:layout_alignStart="@+id/errandMyState"
-        android:text="심부름날짜"
-        android:textSize="12sp" />
+        android:layout_alignRight="@+id/errandReplyNumber"
+        android:layout_alignEnd="@+id/errandReplyNumber" />
 </RelativeLayout>
