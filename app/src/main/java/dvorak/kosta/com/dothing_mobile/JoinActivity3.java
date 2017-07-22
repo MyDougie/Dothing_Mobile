@@ -92,7 +92,7 @@ public class JoinActivity3 extends AppCompatActivity {
                     params.put("selfImgFile",new File(imgPath));
 
                     new UploadDataNetworkTask(ConstantUtil.ipAddr + "android/signIn", JoinActivity3.this).execute(params);
-                    Toast.makeText(getApplicationContext(),"회원가입이 완료되었습니다.",Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent);
                     finish();

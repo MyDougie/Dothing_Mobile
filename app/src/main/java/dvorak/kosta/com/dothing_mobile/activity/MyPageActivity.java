@@ -15,14 +15,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 
 import java.text.DecimalFormat;
 
 import dvorak.kosta.com.dothing_mobile.MainActivity;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
+//import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * Created by YTK on 2017-07-15.
@@ -57,7 +57,7 @@ public class MyPageActivity extends AppCompatActivity{
         String currentPoint = formatter.format(Double.parseDouble(MemberInfo.currentPoint));
         myPoint.setText(currentPoint + "원");
 
-        Glide.with(this).load(MemberInfo.selfImgUrlPath).bitmapTransform(new CropCircleTransformation(this)).into(myImage);
+       // Glide.with(this).load(MemberInfo.selfImgUrlPath).bitmapTransform(new CropCircleTransformation(this)).into(myImage);
 
 
 

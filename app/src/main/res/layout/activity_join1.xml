@@ -36,19 +36,31 @@
             android:orientation="vertical"
             android:weightSum="1">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
             <EditText
                 android:id="@+id/email"
-                android:layout_width="match_parent"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:hint="이메일"
                 android:maxLines="1"
                 android:singleLine="true" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/authBtn"
+                android:text="이메일 인증"/>
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/idCheck"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:text="사용가능여부" />
+                android:text="인증 여부" />
 
 
             <EditText
