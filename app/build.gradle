@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.google.gms.google-services'
 android {
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+    }
     compileSdkVersion 25
     buildToolsVersion "26.0.0"
     defaultConfig {
@@ -17,6 +21,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
 }
 
 dependencies {
@@ -24,11 +30,15 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile files('libs/libDaumMapAndroid.jar')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'
     testCompile 'junit:junit:4.12'
-    compile files('libs/libDaumMapAndroid.jar')
+    compile files('libs/httpclient-4.5.jar')
+    compile files('libs/httpcore-4.4.1.jar')
+    compile files('libs/httpmime-4.3.6.jar')
+    compile 'com.android.support:support-annotations:26.0.0-alpha1'
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -36,7 +46,53 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.0.0'
     compile 'com.google.code.gson:gson:2.7'
 }
+
+
 dependencies {
     compile 'com.android.support.constraint:constraint-layout:+'
 }
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+}
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+}
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+}
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+}
+dependencies {
+    compile 'com.android.support:support-v4:25.+'
+}
+dependencies {
+    compile 'com.android.support:support-v4:25.+'
+}
+dependencies {
+    compile 'com.android.support:support-v4:25.+'
+}
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+    compile 'com.android.support:gridlayout-v7:25.3.1'
+}
+dependencies {
+    compile 'gun0912.ted:tedpermission:1.0.2'
+}
+dependencies {
+    compile 'com.google.firebase:firebase-core:10.2.1'
+    compile 'com.google.firebase:firebase-messaging:10.2.1'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+}
+repositories {
+    jcenter()
+}
 
+dependencies {
+    compile 'com.android.support.constraint:constraint-layout:+'
+}
+/*dependencies {
+    compile 'jp.wasabeef:glide-transformations:2.0.2'
+    // If you want to use the GPU Filters
+    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
+}*/

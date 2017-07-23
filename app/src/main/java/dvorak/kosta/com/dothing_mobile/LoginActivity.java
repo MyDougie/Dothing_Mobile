@@ -5,17 +5,14 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
-import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -24,16 +21,15 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
+import dvorak.kosta.com.dothing_mobile.network.LoginNetworkTask;
 
 import static dvorak.kosta.com.dothing_mobile.R.id.email;
 
@@ -60,7 +56,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private NetworkTask networkTask;
+
     private Map<String,String> params;
 
     @Override
@@ -68,7 +64,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        networkTask = new NetworkTask();
+
         params = new HashMap<>();
 
         // Set up the login form.
@@ -92,64 +88,13 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
-                /*String email = mEmailView.getText().toString();
-                String password = mPasswordView.getText().toString();
-                params.put("email",email);
-                params.put("password",password);
-                networkTask.execute(params);*/
+
             }
         });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }//oncreate 끝
-
-    public class NetworkTask extends AsyncTask<Map<String,String>,String,String> {
-        /** * doInBackground 실행되기 이전에 동작한다. */
-        @Override
-        protected void onPreExecute() {
-
-            super.onPreExecute();
-        }
-
-        /** * 본 작업을 쓰레드로 처리해준다. * @param params * @return */
-        protected String doInBackground(Map<String,String>... maps) {
-            // HTTP 요청 준비 작업
-            HttpClient.Builder http = new HttpClient.Builder("POST", "http://192.168.35.151:8080/controller/android/checkId");
-            http.addAllParameters(maps[0]);
-
-
-            // HTTP 요청 전송
-            HttpClient post = http.create();
-            post.request();
-
-            // 응답 상태코드 가져오기
-            int statusCode = post.getHttpStatusCode();
-            // 응답 본문 가져오기
-            String body = post.getBody();
-            return body;
-        }
-        /** * doInBackground 종료되면 동작한다. * @param s : doInBackground가 리턴한 값이 들어온다. */
-        protected void onPostExecute(String s) {
-
-            Log.d("HTTP_RESULT", s);
-
-            Gson gson = new Gson();
-            LoginResultDTO dto = gson.fromJson(s,LoginResultDTO.class);
-            Log.d("result",dto.getResult());
-
-            if(dto.getResult().equals("success")){
-                //main 화면으로 이동
-                Intent intent = new Intent(getApplicationContext(),TestActivity.class);
-                startActivity(intent);
-            } else{
-                //Login 실패 메시지
-                Toast toast = Toast.makeText(getApplicationContext(),"로그인 실패",Toast.LENGTH_SHORT);
-                toast.show();
-            }
-
-        }
-    }
 
     private void populateAutoComplete() {
 
@@ -205,6 +150,9 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
             // perform the user login attempt.
             params.put("email",email);
             params.put("password",password);
+            params.put("token", FirebaseInstanceId.getInstance().getToken());
+
+            LoginNetworkTask networkTask = new LoginNetworkTask(LoginActivity.this);
             networkTask.execute(params);
 
         }
