@@ -31,6 +31,7 @@ import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.adapter.ChatViewAdapter;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.network.ChatMapNetworkTask;
+import dvorak.kosta.com.dothing_mobile.network.EvalNetworkTask;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 public class ChatTestActivity extends AppCompatActivity {
@@ -43,9 +44,10 @@ public class ChatTestActivity extends AppCompatActivity {
     Socket sk;
     PrintWriter pw;
     String urlPath1, urlPath2, errandsNum;
-    String meImg, youImg, you;
+    String meImg, youImg, you, youName;
     EditText inputChat;
     ImageView sendImg;
+    boolean isRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +63,12 @@ public class ChatTestActivity extends AppCompatActivity {
         Intent intent = getIntent();
         errandsNum = intent.getExtras().getString("errandsNum");
         you = intent.getExtras().getString("you");
+        isRequest = intent.getExtras().getBoolean("isRequest");
         params.put("errandsNum", errandsNum);
         urlPath1 = intent.getExtras().getString("userImgPath");
         urlPath2 = intent.getExtras().getString("userImgPath2");
-
-        chatTool.setTitle(intent.getExtras().getString("youName") + "님과의 대화");
+        youName = intent.getExtras().getString("youName");
+        chatTool.setTitle(youName + "님과의 대화");
         setSupportActionBar(chatTool);
         if (urlPath1.equals(MemberInfo.selfImgUrlPath)) {
             meImg = urlPath1;
@@ -204,6 +207,13 @@ public class ChatTestActivity extends AppCompatActivity {
                 params.put("errandsNum", errandsNum);
                 params.put("id", you);
                 chatMapNetworkTask.execute(params);
+                break;
+            case R.id.action_eval:
+                EvalNetworkTask evalNetworkTask = new EvalNetworkTask(this, isRequest, youImg, youName, errandsNum, you);
+                Map<String, String> evalParams = new HashMap<>();
+                evalParams.put("errandsNum", errandsNum);
+                evalParams.put("isRequest", isRequest + "");
+                evalNetworkTask.execute(evalParams);
                 break;
         }
         return super.onOptionsItemSelected(item);

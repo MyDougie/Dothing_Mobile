@@ -66,6 +66,8 @@
         </activity>
         <activity android:name=".activity.LocationDialogActivity"
             android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".activity.RatingActivity"
+            android:theme="@android:style/Theme.Dialog"/>
     </application>
 
 </manifest>
