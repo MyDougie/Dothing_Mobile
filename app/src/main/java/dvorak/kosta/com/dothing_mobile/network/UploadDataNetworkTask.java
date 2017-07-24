@@ -56,7 +56,6 @@ public class UploadDataNetworkTask extends AsyncTask<Map<String, Object>, Intege
             }
         }
         httpPost.setEntity(reqEntity);
-
             HttpResponse response = httpClient.execute(httpPost);
         }catch(Exception e){
             e.printStackTrace();

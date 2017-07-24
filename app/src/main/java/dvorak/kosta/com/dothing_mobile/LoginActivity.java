@@ -88,11 +88,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
-                /*String email = mEmailView.getText().toString();
-                String password = mPasswordView.getText().toString();
-                params.put("email",email);
-                params.put("password",password);
-                networkTask.execute(params);*/
+
             }
         });
 

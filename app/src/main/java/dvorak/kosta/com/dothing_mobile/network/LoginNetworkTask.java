@@ -63,6 +63,7 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
             Toast.makeText(activity,"로그인 실패",Toast.LENGTH_SHORT).show();
         }else {
             try {
+
                 JSONObject jsonObject = new JSONObject(s);
                 MemberInfo.userId = jsonObject.getString("userId");
                 MemberInfo.name = jsonObject.getString("name");

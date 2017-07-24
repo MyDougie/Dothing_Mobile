@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -33,6 +34,7 @@ import dvorak.kosta.com.dothing_mobile.network.ReplyInsertNetworkTask;
 public class DetailThreeFragment extends Fragment {
 
     int curYear, curMonth, curDay, curHour, curMinute;
+    ImageView selfImg;
     TextView arrivalTime;
     EditText replyContent;
     String errandsNum;
@@ -63,7 +65,9 @@ public class DetailThreeFragment extends Fragment {
         String errandNum = getActivity().getIntent().getStringExtra("errandNum");
         errandsNum = errandNum;
 
+
         //tab3
+        selfImg = (ImageView) v.findViewById(R.id.user_img);
         arrivalTime = (TextView) v.findViewById(R.id.arrival_time);
         replyContent = (EditText) v.findViewById(R.id.reply_content);
 
@@ -111,16 +115,6 @@ public class DetailThreeFragment extends Fragment {
         return v;
     }
 
-    /*//마우스 이벤트 처리
-    public void mOnClick(View v){
-
-        switch (v.getId()){
-            case R.id.date_choice_btn://날짜선택 버튼을 눌럿을 때
-                new DatePickerDialog(getActivity().getApplicationContext(), dateSetListener, curYear, curMonth, curDay).show(); break;
-            case R.id.time_choice_btn://시간선택 버튼을 눌럿을 때
-                new TimePickerDialog(getActivity().getApplicationContext(), timeSetListener, curHour, curMinute, false).show(); break;
-        }
-    }*/
 
     DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener(){
         @Override

@@ -36,19 +36,14 @@ public class DetailTwoFragment extends Fragment {
 
    /*     //tab3
         ImageView requesterUserImg = (ImageView) v.findViewById(R.id.requester_user_img);
-        EditText requesterName = (EditText) v.findViewById(R.id.name);
+        EditText requestId = (EditText) v.findViewById(R.id.requester_id);
         EditText errandsRequestCount = (EditText) v.findViewById(R.id.errands_request_count);
         EditText grade = (EditText) v.findViewById(R.id.grade);
         EditText hashtag = (EditText) v.findViewById(R.id.hashtag);
         Map<String, View> map = new HashMap<>();
-        map.put("requesterUserImg",requesterUserImg);
-        map.put("requesterName",requesterName);
-        map.put("errandsRequestCount",errandsRequestCount);
-        map.put("grade",grade);
-        map.put("hashtag",hashtag);
+        map.put("view",v);
 
         String errandNum = getActivity().getIntent().getStringExtra("errandNum");
-        System.out.println("detailTwoFragment's errandNum : " + errandNum);
 
         DetailRequesterNetworkTask networkTask = new DetailRequesterNetworkTask(errandNum, map);
         Map<String, String> params = new HashMap<>();

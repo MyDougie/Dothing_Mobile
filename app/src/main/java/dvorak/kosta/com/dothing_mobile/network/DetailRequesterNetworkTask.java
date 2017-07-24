@@ -1,20 +1,30 @@
 package dvorak.kosta.com.dothing_mobile.network;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
+import java.net.URL;
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.HttpClient;
+import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
+import dvorak.kosta.com.dothing_mobile.R;
 
 /**
  * Created by Administrator on 2017-07-17.
@@ -24,6 +34,15 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
 
     private String errandNum;
     private Map<String , View> map;
+    private ImageView requesterImg;
+    private TextView requesterId;
+    private TextView requestCount;
+    private RatingBar mannerGrade;
+    private LinearLayout hashtagLayout;
+    private TextView introduce;
+    private View view;
+
+
 
     public DetailRequesterNetworkTask() {
         super();
@@ -33,6 +52,7 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
         super();
         this.errandNum = errandNum;
         this.map = map;
+
     }
 
     /**
@@ -54,6 +74,13 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        view = map.get("view");
+        this.requesterImg = (ImageView) view.findViewById(R.id.requesterImg);
+        this.requesterId = (TextView) view.findViewById(R.id.requester_id);
+        this.requestCount = (TextView) view.findViewById(R.id.errands_request_count);
+        this.mannerGrade = (RatingBar) view.findViewById(R.id.mannerGrade);
+        this.introduce = (TextView) view.findViewById(R.id.introduce);
+        this.hashtagLayout = (LinearLayout) view.findViewById(R.id.hashtagLayout);
     }
 
     /**
@@ -68,15 +95,36 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
             int grade = obj.getInt("grade");
             JSONArray hashtagList = obj.getJSONArray("hashtagList");
             String hash = "";
-            for(int i=0; i<hashtagList.length(); i++){
+            int len = (hashtagList.length() > 5) ? 5 : hashtagList.length();
+            for(int i=0; i<len; i++) {
                 hash += hashtagList.get(i) + " ";
             }
+            String introduce = obj.getString("introduce");
+            String requesterImg = obj.getString("requesterImg");
 
-               // ((ImageView)map.get("requesterUserImg")).setImage
-                ((EditText)map.get("requesterName")).setText(requestId);
-                ((EditText)map.get("errandsRequestCount")).setText(requestCount);
-                ((EditText)map.get("grade")).setText(grade);
-                ((EditText)map.get("hashtag")).setText(hash);
+            Log.i("requestId : ", requestId );
+            Log.i("requestCount : ", requestCount+"" );
+            Log.i("grade :", grade+"" );
+            Log.i("hash :", hash);
+            Log.i("introduce :", introduce);
+            Log.i("requesterImg :", requesterImg);
+
+
+
+            this.requesterId.setText(requestId);
+            this.requestCount.setText(requestCount+"");
+            this.mannerGrade.setRating(grade);
+            this.introduce.setText(introduce);
+            URL url = new URL(ConstantUtil.ipAddr + "users/" + requestId + "/" + requesterImg);
+            Bitmap bitmap = BitmapFactory.decodeStream(url.openStream());
+            this.requesterImg.setImageBitmap(bitmap);
+
+            // ((ImageView)map.get("requesterUserImg")).setImage
+           // ((EditText)v.findViewById(R.id.requester_id)).setText(requestId);
+           // ((EditText)v.findViewById(R.id.errands_request_count)).setText(requestCount+"");
+           // ((EditText)v.findViewById(R.id.grade)).setText(grade+"");
+            //((EditText)v.findViewById(R.id.hashtag)).setText(grade+"");
+
 
 
         }catch(Exception e){
