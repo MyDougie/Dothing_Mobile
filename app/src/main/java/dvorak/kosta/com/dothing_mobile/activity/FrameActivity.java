@@ -8,11 +8,18 @@ import android.widget.TabHost;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import dvorak.kosta.com.dothing_mobile.R;
+import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
+import dvorak.kosta.com.dothing_mobile.network.GPSNetworkTask;
+import dvorak.kosta.com.dothing_mobile.util.GPSInfo;
 
 public class FrameActivity extends ActivityGroup {
     public static TabHost tabHost;
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,8 +27,8 @@ public class FrameActivity extends ActivityGroup {
         //푸시메세지 토큰 등록
         FirebaseInstanceId.getInstance().getToken();
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        tabHost = (TabHost)findViewById(R.id.tabHost);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        tabHost = (TabHost) findViewById(R.id.tabHost);
         tabHost.setup(getLocalActivityManager());
         toolbar.setTitle("심부름 검색");
         TabHost.TabSpec ts = tabHost.newTabSpec("심부름 검색");
@@ -53,5 +60,13 @@ public class FrameActivity extends ActivityGroup {
                 toolbar.setTitle(tabId);
             }
         });
+
+
+        GPSInfo gpsInfo = new GPSInfo(this);
+        GPSNetworkTask gpsNetworkTask = new GPSNetworkTask("updateLocation");
+        Map<String, String> params = new HashMap<>();
+        params.put("id", MemberInfo.userId);
+        params.put("latitude", gpsInfo.getLatitude() +"");
+        params.put("longitude", gpsInfo.getLongitude() +"");
     }
 }
