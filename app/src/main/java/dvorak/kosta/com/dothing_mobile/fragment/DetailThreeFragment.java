@@ -68,8 +68,12 @@ public class DetailThreeFragment extends Fragment {
 
         //tab3
         selfImg = (ImageView) v.findViewById(R.id.user_img);
+
+
         arrivalTime = (TextView) v.findViewById(R.id.arrival_time);
         replyContent = (EditText) v.findViewById(R.id.reply_content);
+
+
 
         //현재 날짜와 시간 가져오기
         Calendar calender = new GregorianCalendar();
