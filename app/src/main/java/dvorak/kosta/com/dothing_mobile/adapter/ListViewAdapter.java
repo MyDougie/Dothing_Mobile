@@ -8,7 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
@@ -47,17 +49,32 @@ public class ListViewAdapter extends BaseAdapter {
         TextView errandPrice = (TextView) convertView.findViewById(R.id.errandPrice);
         TextView errandAddr = (TextView) convertView.findViewById(R.id.errandAddr);
         TextView errandTime = (TextView)convertView.findViewById(R.id.errandTime);
+        TextView replyNumText = (TextView)convertView.findViewById(R.id.replyNumText);
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         ErrandsItem errandsItem = listViewItemList.get(position);
 
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date currentDate = new Date();
+        Date errandDate = null;
+        try {
+            errandDate = dateFormatter.parse(errandsItem.getErrandTime());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        long hour = 60 * 60 * 1000;
+        long diff = errandDate.getTime() - currentDate.getTime();
+        int diffDay = (int)(diff / (24 * 60 * 60 * 1000));
+        long diffSubHour = diff - (diff - (int)(diff / 60 * 60 * 1000));
+        int diffHour = (int)((diff - (diffDay * 24 * hour)) / hour);
+        int diffMin =  (int)(diff - ((diffDay * 24 * hour) + (diffHour * hour)))/ (60*1000);
         DecimalFormat formatter = new DecimalFormat("#,###");
         // 아이템 내 각 위젯에 데이터 반영
         String errandFormatPrice = formatter.format(Double.parseDouble(errandsItem.getErrandPrice()));
         errandTitle.setText(errandsItem.getErrandTitle());
-        errandPrice.setText(errandFormatPrice +"원");
+        errandPrice.setText("보상 " +errandFormatPrice +"원");
         errandAddr.setText(errandsItem.getAddr());
-        errandTime.setText("~" + errandsItem.getErrandTime());
-
+        errandTime.setText(diffDay + "일 " +  diffHour +"시 " + diffMin +"분 남음");
+        replyNumText.setText(errandsItem.getReplyNum() +"명 지원중");
         return convertView;
     }
 
@@ -74,7 +91,7 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(int errandNum, String title, String errandPrice, String addr, String latitude, String longitude, String time) {
+    public void addItem(int errandNum, String title, String errandPrice, String addr, String latitude, String longitude, String time, int replyNum) {
         ErrandsItem item = new ErrandsItem();
         item.setErrandNum(errandNum);
         item.setErrandTitle(title);
@@ -84,6 +101,7 @@ public class ListViewAdapter extends BaseAdapter {
         item.setLongitude(longitude);
         item.setErrandTime(time);
         item.setClick(0);
+        item.setReplyNum(replyNum + "");
         listViewItemList.add(item);
     }
     //리스트의 모든 아이템 제거

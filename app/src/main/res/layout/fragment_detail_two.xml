@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dvorak.kosta.com.dothing_mobile.fragment.DetailTwoFragment"
-    android:padding="5dp">
+    android:background="?attr/colorButtonNormal"
+    android:padding="5dp"
+    tools:context="dvorak.kosta.com.dothing_mobile.fragment.DetailTwoFragment">
 
 
     <LinearLayout
@@ -44,12 +45,12 @@
                         android:id="@+id/requester_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="아이디"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:text="아이디" />
+                        android:textStyle="bold" />
 
-                  <!--  <EditText
+                    <!--  <EditText
                         android:id="@+id/requester_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

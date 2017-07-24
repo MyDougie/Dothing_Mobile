@@ -11,6 +11,7 @@ import java.util.Map;
 import dvorak.kosta.com.dothing_mobile.activity.ErrandActivity;
 import dvorak.kosta.com.dothing_mobile.adapter.ListViewAdapter;
 import dvorak.kosta.com.dothing_mobile.network.ErrandSearchNetworkTask;
+import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by Administrator on 2017-07-13.
@@ -63,6 +64,7 @@ public class MapErrandsListener implements MapView.MapViewEventListener {
         Map<String, String> params = new HashMap<>();
         params.put("lat", geo.latitude + "");
         params.put("lng", geo.longitude + "");
+        params.put("distance", ConstantUtil.SEARCH_DISTANCE);
         networkTask.execute(params);
     }
 
@@ -80,6 +82,7 @@ public class MapErrandsListener implements MapView.MapViewEventListener {
         // 현재의 위도와 경도로 심부름을 검색
         params.put("lat", geo.latitude+ "");
         params.put("lng", geo.longitude + "");
+        params.put("distance", ConstantUtil.SEARCH_DISTANCE);
         networkTask.execute(params);
     }
 }
