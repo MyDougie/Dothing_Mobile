@@ -135,17 +135,18 @@
         app:rowCount="4">
 
         <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="3dp"
-        android:layout_margin="5dp">
-
-        <ImageView
-            android:id="@+id/imageView9"
-            android:layout_width="match_parent"
+            android:id="@+id/myinfoupdate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/curriculum" />
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:padding="3dp">
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/curriculum" />
 
             <TextView
                 android:id="@+id/textView17"
@@ -154,7 +155,7 @@
                 android:gravity="center"
                 android:text="회원정보/수정"
                 android:textStyle="bold" />
-    </LinearLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -90,6 +90,10 @@ public class MyPageActivity extends AppCompatActivity{
                     startActivity(logoutIntent);
                     finish();
                     break;
+                case R.id.myinfoupdate:
+                    Intent pwIntent = new Intent(MyPageActivity.this, PwConfirmActivity.class);
+                    startActivity(pwIntent);
+                    break;
 
             }
         }
