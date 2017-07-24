@@ -24,8 +24,7 @@
             <ImageView
                 android:id="@+id/requesterImg"
                 android:layout_width="100dp"
-                android:layout_height="143dp"
-                android:src="@drawable/icon" />
+                android:layout_height="143dp" />
 
 
             <LinearLayout

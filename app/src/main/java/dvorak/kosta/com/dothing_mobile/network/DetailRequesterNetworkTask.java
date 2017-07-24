@@ -1,30 +1,24 @@
 package dvorak.kosta.com.dothing_mobile.network;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import net.daum.mf.map.api.MapPOIItem;
-import net.daum.mf.map.api.MapPoint;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.net.URL;
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.HttpClient;
-import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
-import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 import dvorak.kosta.com.dothing_mobile.R;
+import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * Created by Administrator on 2017-07-17.
@@ -115,9 +109,10 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
             this.requestCount.setText(requestCount+"");
             this.mannerGrade.setRating(grade);
             this.introduce.setText(introduce);
-            URL url = new URL(ConstantUtil.ipAddr + "users/" + requestId + "/" + requesterImg);
-            Bitmap bitmap = BitmapFactory.decodeStream(url.openStream());
-            this.requesterImg.setImageBitmap(bitmap);
+            Glide.with(view.getContext()).load(ConstantUtil.ipAddr + "users/" + requestId + "/" + requesterImg).bitmapTransform(new CropCircleTransformation(view.getContext())).into(this.requesterImg);
+//            URL url = new URL(ConstantUtil.ipAddr + "users/" + requestId + "/" + requesterImg);
+//            Bitmap bitmap = BitmapFactory.decodeStream(url.openStream());
+            Log.e("이미지경로", ConstantUtil.ipAddr + "users/" + requestId + "/" + requesterImg);
 
             // ((ImageView)map.get("requesterUserImg")).setImage
            // ((EditText)v.findViewById(R.id.requester_id)).setText(requestId);
