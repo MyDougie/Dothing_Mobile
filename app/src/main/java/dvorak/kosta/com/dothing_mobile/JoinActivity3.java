@@ -1,34 +1,37 @@
 package dvorak.kosta.com.dothing_mobile;
 
 import android.app.Dialog;
+import android.content.CursorLoader;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.webkit.JavascriptInterface;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
+import net.daum.mf.map.api.MapView;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
+import dvorak.kosta.com.dothing_mobile.activity.RegisterWebviewActivity;
+import dvorak.kosta.com.dothing_mobile.network.UploadDataNetworkTask;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 public class JoinActivity3 extends AppCompatActivity {
 
     private WebView webView;
-    private EditText addr;//addr
+    private EditText addr,name;//addr
     private EditText detailAddr;
     private Handler handler;
 
@@ -36,8 +39,13 @@ public class JoinActivity3 extends AppCompatActivity {
 
     private String email;
     private String password;
-    private String name;
-    private String phone;
+    ImageView registerImage;
+    String imgPath="";
+    String latitude, longitude;
+    MapView mapView;
+    private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,135 +55,122 @@ public class JoinActivity3 extends AppCompatActivity {
         Intent intent = getIntent();
         email = intent.getStringExtra("email");
         password = intent.getStringExtra("password");
-        name = intent.getStringExtra("name");
-        phone = intent.getStringExtra("phone");
 
+
+        //findViewById
         addr = (EditText) findViewById(R.id.addr);
         detailAddr = (EditText) findViewById(R.id.detailAddr);
-
-        // WebView 초기화
-        //init_webView();
-
-        // 핸들러를 통한 JavaScript 이벤트 반응
-        //handler = new Handler();
-
+        name = (EditText) findViewById(R.id.name);
+        Button myImage = (Button)findViewById(R.id.myImage);
+        registerImage = (ImageView)findViewById(R.id.myProfile);
 
 
         Button joinBtn = (Button)findViewById(R.id.continueBtn3);
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(getApplicationContext(), JoinActivity2.class);
-
                 RadioGroup rg = (RadioGroup)findViewById(R.id.radioGroup);
                 //getCheckedRadioButtonId() 의 리턴값은 선택된 RadioButton 의 id 값.
                 RadioButton rb = (RadioButton)findViewById(rg.getCheckedRadioButtonId());
                 String gender = rb.getText().toString();
+                String addrStr = addr.getText().toString();
+                String detailAddrStr = detailAddr.getText().toString();
+                String nameStr = name.getText().toString();
 
-                NetworkTask2 networkTask = new NetworkTask2();
+                if(validCheck(addrStr,detailAddrStr,nameStr,imgPath)){
 
-                Map<String, String> params = new HashMap<>();
-                params.put("userId",email);
-                params.put("password",password);
-                params.put("name",name);
-                params.put("phone",phone);
-                params.put("sex",gender);
-                params.put("preAddr",addr.getText().toString());
-                params.put("detailAddr",addr.getText().toString());
 
-                networkTask.execute(params);
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("userId",email);
+                    params.put("password",password);
+                    params.put("name",nameStr);
+                    params.put("sex",gender);
+                    params.put("preAddr",addrStr);
+                    params.put("detailAddr",detailAddrStr);
+                    params.put("latitude",latitude);
+                    params.put("longitude",longitude);
+                    params.put("selfImgFile",new File(imgPath));
 
+                    new UploadDataNetworkTask(ConstantUtil.ipAddr + "android/signIn", JoinActivity3.this).execute(params);
+
+                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
 
             }
         });
 
-        dialogWeb = new Dialog(this);
-
-        Button searchAddressBtn = (Button)findViewById(R.id.searchAddress);
-        searchAddressBtn.setOnClickListener(new View.OnClickListener() {
-
+        myImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("searchAddressBtn clicked!!");
+                doTakeAlbumAction();
+            }
+        });
+
+        addr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(JoinActivity3.this, RegisterWebviewActivity.class);
+                startActivityForResult(i, SEARCH_ADDRESS_ACTIVITY);
             }
         });
 
 
     }
+    public void doTakeAlbumAction() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+        intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, 1);
+    }
+    public String getRealImagePath(Uri uriPath) {
+        String[] proj = { MediaStore.Images.Media.DATA };
 
-    public class NetworkTask2 extends AsyncTask<Map<String, String>, Integer, String> {
-          @Override
-          protected String doInBackground(Map<String, String>... maps) { // 내가 전송하고 싶은 파라미터
+        CursorLoader cursorLoader = new CursorLoader(this, uriPath, proj, null, null, null);
+        Cursor cursor = cursorLoader.loadInBackground();
 
-            // Http 요청 준비 작업
-            HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "signIn");
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
 
-            // Parameter 를 전송한다.
-            http.addAllParameters(maps[0]);
-
-            //Http 요청 전송
-            HttpClient post = http.create();
-            post.request();
-
-            // 응답 상태코드 가져오기
-            int statusCode = post.getHttpStatusCode();
-
-            // 응답 본문 가져오기
-            String body = post.getBody();
-
-            return body;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            Log.d("RESULT : ",s);
-
-            Gson gson = new Gson();
-            LoginResultDTO dto = gson.fromJson(s,LoginResultDTO.class);
-
-            if(dto.getResult().equals("1")){
-                Toast toast = Toast.makeText(getApplicationContext(),"회원가입이 되었습니다!",Toast.LENGTH_SHORT);
-                toast.show();
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent);
-            } else{
-                Toast toast = Toast.makeText(getApplicationContext(),"회원가입 실패",Toast.LENGTH_SHORT);
-                toast.show();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (resultCode != RESULT_OK) return;
+        if (requestCode == 1) {
+            registerImage.setImageURI((intent.getData()));
+            imgPath = getRealImagePath(intent.getData());
+        } else if (requestCode == SEARCH_ADDRESS_ACTIVITY) {
+            String data = intent.getExtras().getString("data");
+            if (data != null) {
+                // data = 주소:위도:경도
+                addr.setText(data.split(":")[0]);
+                latitude = data.split(":")[1];
+                longitude = data.split(":")[2];
             }
         }
     }
 
-
-
-    private class AndroidBridge {
-        @JavascriptInterface
-        public void setAddress(final String arg1, final String arg2, final String arg3) {
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    addr.setText(String.format("(%s) %s %s", arg1, arg2, arg3));
-                    // WebView를 초기화 하지않으면 재사용할 수 없음
-                    init_webView();
-                }
-            });
+    public boolean validCheck(String addrStr, String detailAddrStr, String nameStr, String imgPath){
+        if(nameStr.length() < 1){
+            Toast.makeText(getApplicationContext(),"이름을 입력해주세요",Toast.LENGTH_SHORT).show();
+            name.requestFocus();
+            return false;
+        } else if(addrStr.length() < 1){
+            Toast.makeText(getApplicationContext(),"주소를 입력해주세요",Toast.LENGTH_SHORT).show();
+            addr.requestFocus();
+            return false;
+        } else if(detailAddrStr.length() < 1){
+            Toast.makeText(getApplicationContext(),"상세주소를 입력해주세요",Toast.LENGTH_SHORT).show();
+            detailAddr.requestFocus();
+            return false;
+        } else if(imgPath.length() < 1){
+            Toast.makeText(getApplicationContext(),"프로필 사진을 등록해주세요",Toast.LENGTH_SHORT).show();
+            return false;
         }
+        return true;
     }
-
-    public void init_webView() {
-        dialogWeb.setContentView(R.layout.activity_addr_webview);
-
-        WebView wb = (WebView) dialogWeb.findViewById(R.id.addrWebView);
-        wb.getSettings().setJavaScriptEnabled(true);
-        wb.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        wb.setWebChromeClient(new WebChromeClient());
-        wb.loadUrl("doothing.com/signIn.jsp");
-        wb.addJavascriptInterface(new AndroidBridge(), "TestApp");
-        dialogWeb.setCancelable(true);
-        dialogWeb.setTitle("주소검색");
-
-    }
-
-
-
 }
 

@@ -31,7 +31,7 @@ public class SignUpNetworkTask extends AsyncTask<Map<String, String>, Integer, S
     protected String doInBackground(Map<String, String>... maps) { // 내가 전송하고 싶은 파라미터
 
         // Http 요청 준비 작업
-        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "signIn");
+        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "android/signIn");
 
         // Parameter 를 전송한다.
         http.addAllParameters(maps[0]);

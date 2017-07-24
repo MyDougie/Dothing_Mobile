@@ -34,10 +34,7 @@
         <activity android:name=".JoinActivity3" />
         <activity android:name=".AddrWebviewActivity" />
         <activity android:name=".activity.ErrandActivity" />
-
         <activity android:name=".activity.FrameActivity" />
-
-
         <activity android:name=".activity.ErrandRegisterActivity" />
         <activity android:name=".activity.RegisterWebviewActivity" />
         <activity android:name=".activity.SplashActivity">
@@ -63,8 +60,14 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".activity.MyRequestActivity"></activity>
-        <activity android:name=".activity.MyResponseActivity"></activity>
+        <activity android:name=".activity.MyRequestActivity" />
+        <activity android:name=".activity.MyResponseActivity" />
+        <activity android:name=".activity.ChatTestActivity">
+        </activity>
+        <activity android:name=".activity.LocationDialogActivity"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".activity.RatingActivity"
+            android:theme="@android:style/Theme.Dialog"/>
     </application>
 
 </manifest>

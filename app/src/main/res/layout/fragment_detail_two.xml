@@ -24,8 +24,7 @@
             <ImageView
                 android:id="@+id/requesterImg"
                 android:layout_width="100dp"
-                android:layout_height="143dp"
-                android:src="@drawable/icon" />
+                android:layout_height="143dp" />
 
 
             <LinearLayout
@@ -155,60 +154,6 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:background="@android:color/holo_blue_light"
-                            android:padding="5dp"
-                            android:text="동적으로"
-                            android:textColor="@android:color/white"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:background="@android:color/holo_blue_light"
-                            android:padding="5dp"
-                            android:text="해시태그를"
-                            android:textColor="@android:color/white"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:background="@android:color/holo_blue_light"
-                            android:padding="5dp"
-                            android:text="상위"
-                            android:textColor="@android:color/white"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:background="@android:color/holo_blue_light"
-                            android:padding="5dp"
-                            android:text="5개"
-                            android:textColor="@android:color/white"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:background="@android:color/holo_blue_light"
-                            android:padding="5dp"
-                            android:text="정도만"
-                            android:textColor="@android:color/white"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
 
                     </LinearLayout>
 

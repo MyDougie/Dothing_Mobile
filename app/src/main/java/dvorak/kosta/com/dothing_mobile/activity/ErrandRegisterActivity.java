@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,7 @@ public class ErrandRegisterActivity extends ActivityGroup {
     String registerProductPriceString;
     String errandTimeString;
     String registerAddrString, registerDetailAddrString;
-    String latitude, longitude;
+    public String latitude, longitude;
     FloatingActionButton okBtn;
     MapView mapView;
     ViewGroup mapViewContainer;
@@ -178,6 +179,7 @@ public class ErrandRegisterActivity extends ActivityGroup {
                     params.put("errandsPos.addr", registerAddrString + " " + registerDetailAddrString);
                     params.put("errandsPos.latitude", latitude);
                     params.put("errandsPos.longitude", longitude);
+                    Log.e("여기서 왜?", latitude +":"+longitude);
                     new UploadDataNetworkTask(ConstantUtil.ipAddr + "androidErrand/insertErrand", ErrandRegisterActivity.this).execute(params);
 
                 }
@@ -322,6 +324,7 @@ public class ErrandRegisterActivity extends ActivityGroup {
 
 
     }
+
 }
 
 
