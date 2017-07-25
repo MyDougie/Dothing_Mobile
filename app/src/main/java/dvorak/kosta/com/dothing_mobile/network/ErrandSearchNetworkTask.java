@@ -21,6 +21,7 @@ import dvorak.kosta.com.dothing_mobile.adapter.ListViewAdapter;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 import static android.content.Context.MODE_PRIVATE;
+import static dvorak.kosta.com.dothing_mobile.activity.ErrandActivity.tutorial;
 
 /**
  * Created by Administrator on 2017-07-13.
@@ -98,13 +99,15 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
             }
             adapter.notifyDataSetChanged();
 
-            if(ErrandActivity.tutorial == 1) {
+            if(tutorial == 1) {
                 errandActivity.startActivity(new Intent(errandActivity, TutorialActivity.class));
                 SharedPreferences pref = errandActivity.getSharedPreferences("tutorial", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putInt("tutorial", 0);
                 editor.commit();
-                ErrandActivity.tutorial--;
+                Log.e("불러와라", pref.getInt("tutorial", -999) +"");
+
+                tutorial--;
             }
         }catch(Exception e){
             Log.e("E", e.getMessage());
