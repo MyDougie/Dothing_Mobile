@@ -16,8 +16,8 @@ import java.util.Map;
 import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.adapter.ReplyListViewAdapter;
+import dvorak.kosta.com.dothing_mobile.fragment.DetailOneFragment;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * Created by Administrator on 2017-07-24.
@@ -35,7 +35,7 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
     private TextView productPrice;
     private TextView address;
     private TextView errandContent;
-
+    private TextView errandTime;
     public DetailErrandNetworkTask() {
         super();
     }
@@ -71,6 +71,7 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
         this.errandsPrice = (TextView) view.findViewById(R.id.detailErrandPrice);
         this.productPrice = (TextView) view.findViewById(R.id.detailProductPrice);
         this.address = (TextView) view.findViewById(R.id.detailErrandAddr);
+        this.errandTime = (TextView)view.findViewById(R.id.detailErrandTime);
         this.errandContent = (TextView) view.findViewById(R.id.detailErrandContent);
     }
 
@@ -88,7 +89,7 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
             String address = obj.getString("address");
             String errandContent = obj.getString("errandContent");
             String errandImg = obj.getString("errandImg");
-
+            String errandTime = obj.getString("errandTime");
             errandContent = errandContent.replaceAll("<p>","");
             errandContent = errandContent.replaceAll("</p>","\n");
 
@@ -102,7 +103,9 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
             this.productPrice.setText(productPrice+"");
             this.address.setText(address);
             this.errandContent.setText(errandContent);
-            Glide.with(view.getContext()).load(ConstantUtil.ipAddr + "errands/" + errandNum + "/" + errandImg).bitmapTransform(new CropCircleTransformation(view.getContext())).into(this.errandImg);
+            this.errandTime.setText(errandTime +"까지");
+            DetailOneFragment.errandTime=errandTime;
+            Glide.with(view.getContext()).load(ConstantUtil.ipAddr + "errands/" + errandNum + "/" + errandImg).into(this.errandImg);
 
             ///
 

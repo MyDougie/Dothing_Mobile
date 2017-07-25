@@ -45,7 +45,12 @@
         </activity>
         <activity android:name=".activity.ChatListActivity" />
         <activity android:name=".activity.MyPageActivity" />
-        <activity android:name=".activity.DetailViewActivity" />
+        <activity android:name=".activity.DetailViewActivity">
+            <intent-filter>
+                <action android:name="DETAIL_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <service android:name=".activity.FirebaseMessagingService">
             <intent-filter>
@@ -60,7 +65,12 @@
 
         <activity android:name=".activity.MyRequestActivity" />
         <activity android:name=".activity.MyResponseActivity" />
-        <activity android:name=".activity.ChatTestActivity"></activity>
+        <activity android:name=".activity.ChatTestActivity">
+            <intent-filter>
+                <action android:name="CHAT_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.LocationDialogActivity"
             android:theme="@android:style/Theme.Dialog" />
@@ -68,7 +78,9 @@
             android:name=".activity.RatingActivity"
             android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".activity.ErrandsListActivity" />
-        <activity android:name=".activity.TutorialActivity" android:theme="@style/Theme.AppCompat.Translucent"/>
+        <activity
+            android:name=".activity.TutorialActivity"
+            android:theme="@style/Theme.AppCompat.Translucent" />
     </application>
 
 </manifest>

@@ -63,7 +63,7 @@ public class ErrandActivity extends AppCompatActivity{
 
         SharedPreferences pref = getSharedPreferences("tutorial", MODE_PRIVATE);
         tutorial = pref.getInt("tutorial", 1);
-        
+
 
         writeBtn = (FloatingActionButton)findViewById(R.id.writeBtn);
         writeBtn.setOnClickListener(new View.OnClickListener() {
