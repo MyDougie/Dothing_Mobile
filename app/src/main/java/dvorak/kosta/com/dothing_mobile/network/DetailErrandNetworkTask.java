@@ -123,12 +123,14 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
                 JSONObject replyUser = replyObj.getJSONObject("user");
                 String imgPath = replyUser.getString("selfImg");
                 String name = replyUser.getString("name");
+                String userId = replyUser.getString("userId");
 
                 int avgGpa = (int)avgGpaList.get(i);
 
                 content = content.replaceAll("<p>","");
                 content = content.replaceAll("</p>","\n");
 
+                Log.i("userId : ", userId);
                 Log.i("name : ", name);
                 Log.i("content : ", content);
                 Log.i("arrivalTime : ", arrivalTime);
@@ -136,7 +138,7 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
                 Log.i("imgPath : ", imgPath);
                 Log.i("avgGpa : ", avgGpa+"");
 
-                adapter.addItem(name, content, arrivalTime, replyDate, imgPath, avgGpa);
+                adapter.addItem(userId, name, content, arrivalTime, replyDate, imgPath, avgGpa);
             }
 
 

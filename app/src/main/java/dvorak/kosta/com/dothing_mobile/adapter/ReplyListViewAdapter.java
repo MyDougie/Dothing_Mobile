@@ -63,8 +63,10 @@ public class ReplyListViewAdapter extends BaseAdapter {
         ReplyItem replyItem = ReplyListViewItemList.get(position);
 
 
+        String userId = replyItem.getUser().getId();
+        String imgPath = replyItem.getUser().getUserImgPath();
         // 아이템 내 각 위젯에 데이터 반영
-        //Glide.with(view.getContext()).load(ConstantUtil.ipAddr + "users/" + requestId + "/" + requesterImg).bitmapTransform(new CropCircleTransformation(view.getContext())).into(this.requesterImg);
+        Glide.with(convertView.getContext()).load(ConstantUtil.ipAddr + "users/" + userId + "/" + imgPath).bitmapTransform(new CropCircleTransformation(convertView.getContext())).into(responserImg);
         replyUserName.setText(replyItem.getUser().getName());
         replyContent.setText(replyItem.getReplyContent());
         arrivalTime.setText("예상도착시간 : " + replyItem.getArrivalTime());
@@ -86,11 +88,12 @@ public class ReplyListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String name, String content, String arrivalTime, String replyDate, String imgPath, int avgGpa) {
+    public void addItem(String userId, String name, String content, String arrivalTime, String replyDate, String imgPath, int avgGpa) {
         ReplyItem item = new ReplyItem();
 
         Log.i("xxxx" , ++count+"");
         Member member = new Member();
+        member.setId(userId);
         member.setName(name);
         member.setUserImgPath(imgPath);
         item.setUser(member);
