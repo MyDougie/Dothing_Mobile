@@ -133,6 +133,7 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
             this.mannerGrade.setRating(Math.round(grade));
             this.introduce.setText(introduce);
             Glide.with(view.getContext()).load(ConstantUtil.ipAddr + "users/" + requestId + "/" + requesterImg).bitmapTransform(new CropCircleTransformation(view.getContext())).into(this.requesterImg);
+            this.requesterImg.setScaleType(ImageView.ScaleType.FIT_XY); // 이미지를 뷰 크기에 맞게 조절
 
         }catch(Exception e){
             e.printStackTrace();

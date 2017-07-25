@@ -30,7 +30,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 public class ReplyListViewAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<ReplyItem> ReplyListViewItemList = new ArrayList<ReplyItem>() ;
-    int count = 0;
+
     // ListViewAdapter의 생성자
     public ReplyListViewAdapter() {
 
@@ -67,6 +67,7 @@ public class ReplyListViewAdapter extends BaseAdapter {
         String imgPath = replyItem.getUser().getUserImgPath();
         // 아이템 내 각 위젯에 데이터 반영
         Glide.with(convertView.getContext()).load(ConstantUtil.ipAddr + "users/" + userId + "/" + imgPath).bitmapTransform(new CropCircleTransformation(convertView.getContext())).into(responserImg);
+        responserImg.setScaleType(ImageView.ScaleType.FIT_XY); // 이미지를 뷰 크기에 맞게 조절
         replyUserName.setText(replyItem.getUser().getName());
         replyContent.setText(replyItem.getReplyContent());
         arrivalTime.setText("예상도착시간 : " + replyItem.getArrivalTime());
@@ -91,7 +92,6 @@ public class ReplyListViewAdapter extends BaseAdapter {
     public void addItem(String userId, String name, String content, String arrivalTime, String replyDate, String imgPath, int avgGpa) {
         ReplyItem item = new ReplyItem();
 
-        Log.i("xxxx" , ++count+"");
         Member member = new Member();
         member.setId(userId);
         member.setName(name);
