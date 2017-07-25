@@ -1,5 +1,8 @@
 package dvorak.kosta.com.dothing_mobile.network;
 
+import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -13,10 +16,13 @@ import com.bumptech.glide.Glide;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.R;
+import dvorak.kosta.com.dothing_mobile.activity.DetailViewActivity;
+import dvorak.kosta.com.dothing_mobile.fragment.DetailTwoFragment;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -35,6 +41,7 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
     private LinearLayout hashtagLayout;
     private TextView introduce;
     private View view;
+    private Activity activity;
 
 
 
@@ -42,10 +49,11 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
         super();
     }
 
-    public DetailRequesterNetworkTask(String errandNum, Map<String, View> map) {
+    public DetailRequesterNetworkTask(String errandNum, Map<String, View> map, Activity activity) {
         super();
         this.errandNum = errandNum;
         this.map = map;
+        this.activity = activity;
 
     }
 
@@ -87,40 +95,44 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
             String requestId = obj.getString("requesterId");
             int requestCount = obj.getInt("requestCount");
             int grade = obj.getInt("grade");
-            JSONArray hashtagList = obj.getJSONArray("hashtagList");
-            String hash = "";
-            int len = (hashtagList.length() > 5) ? 5 : hashtagList.length();
-            for(int i=0; i<len; i++) {
-                hash += hashtagList.get(i) + " ";
-            }
             String introduce = obj.getString("introduce");
+            if(introduce.equals("null")){
+                introduce = "   인사말이 없습니다.";
+            }
             String requesterImg = obj.getString("requesterImg");
 
-            Log.i("requestId : ", requestId );
-            Log.i("requestCount : ", requestCount+"" );
-            Log.i("grade :", grade+"" );
-            Log.i("hash :", hash);
-            Log.i("introduce :", introduce);
-            Log.i("requesterImg :", requesterImg);
 
+            //hashtag 동적으로 추가 시작
+            JSONArray hashtagList = obj.getJSONArray("hashtagList");
+            int len = (hashtagList.length() > 5) ? 5 : hashtagList.length();
+            for(int i=0; i<len; i++) {
+                Log.i("hashxxx : " , hashtagList.get(i).toString());
+                TextView hashtag = new TextView(activity);
 
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                lp.topMargin = 20;
+                lp.leftMargin = 40;
+                hashtag.setLayoutParams(lp);
+
+                hashtag.setBackgroundColor(Color.parseColor("#ff33b5e5"));
+                hashtag.setPadding(10, 10, 10, 10);
+                hashtag.setPaintFlags(Paint.FAKE_BOLD_TEXT_FLAG);
+                hashtag.setTextColor(Color.WHITE);
+                hashtag.setTextSize(14);
+                hashtag.setText(hashtagList.get(i).toString());
+
+                hashtagLayout.addView(hashtag);
+
+            }
+            //hashtag 동적으로 추가 끝
 
             this.requesterId.setText(requestId);
             this.requestCount.setText(requestCount+"");
-            this.mannerGrade.setRating(grade);
+            this.mannerGrade.setRating(Math.round(grade));
             this.introduce.setText(introduce);
             Glide.with(view.getContext()).load(ConstantUtil.ipAddr + "users/" + requestId + "/" + requesterImg).bitmapTransform(new CropCircleTransformation(view.getContext())).into(this.requesterImg);
-//            URL url = new URL(ConstantUtil.ipAddr + "users/" + requestId + "/" + requesterImg);
-//            Bitmap bitmap = BitmapFactory.decodeStream(url.openStream());
-            Log.e("이미지경로", ConstantUtil.ipAddr + "users/" + requestId + "/" + requesterImg);
-
-            // ((ImageView)map.get("requesterUserImg")).setImage
-           // ((EditText)v.findViewById(R.id.requester_id)).setText(requestId);
-           // ((EditText)v.findViewById(R.id.errands_request_count)).setText(requestCount+"");
-           // ((EditText)v.findViewById(R.id.grade)).setText(grade+"");
-            //((EditText)v.findViewById(R.id.hashtag)).setText(grade+"");
-
-
 
         }catch(Exception e){
             e.printStackTrace();
