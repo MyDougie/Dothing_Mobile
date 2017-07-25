@@ -41,6 +41,9 @@ public class DetailOneFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_detail_one, container, false);
 
+        ListView listView = (ListView)v.findViewById(R.id.replyList);
+        listView.setAdapter(adapter);
+
         String errandNum = getActivity().getIntent().getStringExtra("errandNum");
         System.out.println("detailOneFragment's errandNum : " + errandNum);
 
@@ -52,8 +55,7 @@ public class DetailOneFragment extends Fragment {
         params.put("errandNum", errandNum);
         networkTask.execute(params);
 
-        ListView listView = (ListView)v.findViewById(R.id.replyList);
-        listView.setAdapter(adapter);
+
 
         // Inflate the layout for this fragment
         return v;

@@ -96,6 +96,9 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
             int requestCount = obj.getInt("requestCount");
             int grade = obj.getInt("grade");
             String introduce = obj.getString("introduce");
+            if(introduce.equals("null")){
+                introduce = "   인사말이 없습니다.";
+            }
             String requesterImg = obj.getString("requesterImg");
 
 

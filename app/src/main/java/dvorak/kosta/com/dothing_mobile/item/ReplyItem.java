@@ -10,6 +10,7 @@ public class ReplyItem {
     private String replyContent;
     private String arrivalTime;
     private String replyDate;
+    private int responserAvgRating;
     private Member user;
 
 
@@ -54,4 +55,8 @@ public class ReplyItem {
     public void setUser(Member user) {
         this.user = user;
     }
+    public int getResponserAvgRating() {
+        return responserAvgRating;
+    }
+    public void setResponserAvgRating(int responserAvgRating) { this.responserAvgRating = responserAvgRating; }
 }

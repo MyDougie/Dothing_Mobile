@@ -15,13 +15,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-//import com.bumptech.glide.Glide;
-
 import java.text.DecimalFormat;
 
-import dvorak.kosta.com.dothing_mobile.MainActivity;
+import dvorak.kosta.com.dothing_mobile.LoginActivity;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
+
+//import com.bumptech.glide.Glide;
 //import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
@@ -67,6 +67,12 @@ public class MyPageActivity extends AppCompatActivity{
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setSupportActionBar(null);
+    }
+
     public class MyPageListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
@@ -86,7 +92,7 @@ public class MyPageActivity extends AppCompatActivity{
                     editor.remove("LoginPassword");
                     editor.commit();
 
-                    Intent logoutIntent = new Intent(MyPageActivity.this, MainActivity.class);
+                    Intent logoutIntent = new Intent(MyPageActivity.this, LoginActivity.class);
                     startActivity(logoutIntent);
                     finish();
                     break;

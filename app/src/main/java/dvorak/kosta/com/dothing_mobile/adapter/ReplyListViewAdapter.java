@@ -2,6 +2,7 @@ package dvorak.kosta.com.dothing_mobile.adapter;
 
 import android.content.Context;
 import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,17 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
+import dvorak.kosta.com.dothing_mobile.item.Member;
 import dvorak.kosta.com.dothing_mobile.item.ReplyItem;
+import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * Created by Administrator on 2017-07-24.
@@ -24,7 +30,7 @@ import dvorak.kosta.com.dothing_mobile.item.ReplyItem;
 public class ReplyListViewAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<ReplyItem> ReplyListViewItemList = new ArrayList<ReplyItem>() ;
-
+    int count = 0;
     // ListViewAdapter의 생성자
     public ReplyListViewAdapter() {
 
@@ -43,10 +49,10 @@ public class ReplyListViewAdapter extends BaseAdapter {
         final Context context = parent.getContext();
 
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
-        if (convertView == null) {
+        //if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.reply_item, parent, false);
-        }
+       // }
         ImageView responserImg = (ImageView) convertView.findViewById(R.id.responserImg);
         TextView replyUserName = (TextView) convertView.findViewById(R.id.replyUserName);
         TextView replyContent = (TextView) convertView.findViewById(R.id.replyContent);
@@ -56,13 +62,13 @@ public class ReplyListViewAdapter extends BaseAdapter {
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         ReplyItem replyItem = ReplyListViewItemList.get(position);
 
-        //DecimalFormat formatter = new DecimalFormat("#,###");
+
         // 아이템 내 각 위젯에 데이터 반영
-       // String errandFormatPrice = formatter.format(Double.parseDouble(errandsItem.getErrandPrice()));
-      //   replyUserName.setText(replyItem.getUser());
-      //  replyContent.setText(errandFormatPrice +"원");
-        arrivalTime.setText(replyItem.getArrivalTime());
-    //    errandTime.setText("~" + errandsItem.getErrandTime());
+        //Glide.with(view.getContext()).load(ConstantUtil.ipAddr + "users/" + requestId + "/" + requesterImg).bitmapTransform(new CropCircleTransformation(view.getContext())).into(this.requesterImg);
+        replyUserName.setText(replyItem.getUser().getName());
+        replyContent.setText(replyItem.getReplyContent());
+        arrivalTime.setText("예상도착시간 : " + replyItem.getArrivalTime());
+        replyRatingBar.setRating(replyItem.getResponserAvgRating());
 
         return convertView;
     }
@@ -80,16 +86,20 @@ public class ReplyListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(int errandNum, String title, String errandPrice, String addr, String latitude, String longitude, String time) {
+    public void addItem(String name, String content, String arrivalTime, String replyDate, String imgPath, int avgGpa) {
         ReplyItem item = new ReplyItem();
-      /*  item.setErrandNum(errandNum);
-        item.setErrandTitle(title);
-        item.setErrandPrice(errandPrice);
-        item.setAddr(addr);
-        item.setLatitude(latitude);
-        item.setLongitude(longitude);
-        item.setErrandTime(time);
-        item.setClick(0);*/
+
+        Log.i("xxxx" , ++count+"");
+        Member member = new Member();
+        member.setName(name);
+        member.setUserImgPath(imgPath);
+        item.setUser(member);
+
+        item.setReplyContent(content);
+        item.setArrivalTime(arrivalTime);
+        item.setReplyDate(replyDate);
+        item.setResponserAvgRating(avgGpa);
+
         ReplyListViewItemList.add(item);
     }
     //리스트의 모든 아이템 제거

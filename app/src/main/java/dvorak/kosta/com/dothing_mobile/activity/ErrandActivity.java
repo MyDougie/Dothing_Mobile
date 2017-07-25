@@ -1,9 +1,13 @@
 package dvorak.kosta.com.dothing_mobile.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,6 +23,7 @@ import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.adapter.ListViewAdapter;
 import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
 import dvorak.kosta.com.dothing_mobile.listener.MapErrandsListener;
+import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 public class ErrandActivity extends AppCompatActivity{
 
@@ -28,7 +33,7 @@ public class ErrandActivity extends AppCompatActivity{
 
     ViewGroup mapViewContainer;
     FloatingActionButton writeBtn;
-
+    int selection = 0;
     @Override
     protected void onResume() {
         super.onResume();
@@ -41,7 +46,7 @@ public class ErrandActivity extends AppCompatActivity{
         mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
 
-
+        setSupportActionBar(FrameActivity.toolbar);
     }
 
     @Override
@@ -53,6 +58,8 @@ public class ErrandActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+
+
         writeBtn = (FloatingActionButton)findViewById(R.id.writeBtn);
         writeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +103,55 @@ public class ErrandActivity extends AppCompatActivity{
             }
         });
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_errand, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.action_distance:
+                final String items[] = { "3km", "5km", "10km", "30km" };
+                AlertDialog.Builder ab = new AlertDialog.Builder(ErrandActivity.this);
+                ab.setTitle("검색 반경 설정");
+               final int preSelection = selection;
+                final String preDistance = ConstantUtil.SEARCH_DISTANCE;
+                switch(ConstantUtil.SEARCH_DISTANCE){
+                    case "3" : selection=0; break;
+                    case "5" : selection=1; break;
+                    case "10" : selection=2; break;
+                    case "30" : selection=3; break;
+                }
+                ab.setSingleChoiceItems(items, selection,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                switch(whichButton){
+                                    case 0: ConstantUtil.SEARCH_DISTANCE = "3"; break;
+                                    case 1: ConstantUtil.SEARCH_DISTANCE = "5";break;
+                                    case 2: ConstantUtil.SEARCH_DISTANCE = "10";break;
+                                    case 3: ConstantUtil.SEARCH_DISTANCE = "30";break;
+                                }
+                                selection = whichButton;
+                            }
+                        }).setPositiveButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                dialog.dismiss();
+                            }
+                        }).setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                selection = preSelection;
+                                ConstantUtil.SEARCH_DISTANCE = preDistance;
+                                dialog.dismiss();
+                            }
+                        });
+                ab.show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

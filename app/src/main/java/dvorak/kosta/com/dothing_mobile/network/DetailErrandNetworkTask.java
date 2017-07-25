@@ -21,6 +21,7 @@ import java.util.Map;
 import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.adapter.ReplyListViewAdapter;
+import dvorak.kosta.com.dothing_mobile.item.ReplyItem;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -36,7 +37,10 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
     private Map<String , View> map;
     private View view;
     private ImageView errandImg;
-
+    private TextView errandsPrice;
+    private TextView productPrice;
+    private TextView address;
+    private TextView errandContent;
 
     public DetailErrandNetworkTask() {
         super();
@@ -70,6 +74,10 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
         super.onPreExecute();
         view = map.get("view");
         this.errandImg = (ImageView) view.findViewById(R.id.detailErrandImage);
+        this.errandsPrice = (TextView) view.findViewById(R.id.detailErrandPrice);
+        this.productPrice = (TextView) view.findViewById(R.id.detailProductPrice);
+        this.address = (TextView) view.findViewById(R.id.detailErrandAddr);
+        this.errandContent = (TextView) view.findViewById(R.id.detailErrandContent);
     }
 
     /**
@@ -78,6 +86,7 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
     @Override
     protected void onPostExecute(String s) {
         try {
+            adapter.removeItem();
 
             JSONObject obj = new JSONObject(s);
             int productPrice = obj.getInt("productPrice");
@@ -86,37 +95,51 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
             String errandContent = obj.getString("errandContent");
             String errandImg = obj.getString("errandImg");
 
+            errandContent = errandContent.replaceAll("<p>","");
+            errandContent = errandContent.replaceAll("</p>","\n");
+
             Log.i("productPrice : ", productPrice+"");
             Log.i("errandsPrice : ", errandsPrice+"");
             Log.i("address : ", address);
             Log.i("errandContent : ", errandContent+"");
             Log.i("errandImg : ", errandImg+"");
 
-         /*   //reply
-            JSONArray replyList = obj.getJSONArray("replyList");
-            for(int i=0; i<replyList.length(); i++) {
-                Log.i("replyxxx : " , replyList.getJSONObject(i).toString());
-                TextView reply = new TextView(activity);
-
-                reply.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                reply.setBackgroundColor(Color.parseColor("#00FFFFFF"));
-                reply.setPadding(5, 5, 5, 5);
-                reply.setPaintFlags(Paint.FAKE_BOLD_TEXT_FLAG);
-                reply.setTextColor(Color.WHITE);
-                reply.setTextSize(14);
-                reply.setText(hashtagList.get(i).toString());
-
-                hashtagLayout.addView(hashtag);
-
-            }
-            //hashtag 동적으로 추가 끝
-*/
-
-            ((TextView)view.findViewById(R.id.detailErrandPrice)).setText(errandsPrice);
-            ((TextView)view.findViewById(R.id.detailProductPrice)).setText(productPrice);
-            ((TextView)view.findViewById(R.id.detailErrandAddr)).setText(address);
-            ((TextView)view.findViewById(R.id.detailErrandContent)).setText(errandContent);
+            this.errandsPrice.setText(errandsPrice+"");
+            this.productPrice.setText(productPrice+"");
+            this.address.setText(address);
+            this.errandContent.setText(errandContent);
             Glide.with(view.getContext()).load(ConstantUtil.ipAddr + "errands/" + errandNum + "/" + errandImg).bitmapTransform(new CropCircleTransformation(view.getContext())).into(this.errandImg);
+
+            ///
+
+            JSONArray replyList = obj.getJSONArray("replyList");
+            JSONArray avgGpaList = obj.getJSONArray("avgGpaList");
+            for(int i=0; i<replyList.length(); i++){
+                JSONObject replyObj=  replyList.getJSONObject(i);
+                String content = replyObj.getString("replyContent");
+                String arrivalTime = replyObj.getString("arrivalTime");
+                String replyDate = replyObj.getString("replyDate");
+
+                JSONObject replyUser = replyObj.getJSONObject("user");
+                String imgPath = replyUser.getString("selfImg");
+                String name = replyUser.getString("name");
+
+                int avgGpa = (int)avgGpaList.get(i);
+
+                content = content.replaceAll("<p>","");
+                content = content.replaceAll("</p>","\n");
+
+                Log.i("name : ", name);
+                Log.i("content : ", content);
+                Log.i("arrivalTime : ", arrivalTime);
+                Log.i("replyDate : ", replyDate);
+                Log.i("imgPath : ", imgPath);
+                Log.i("avgGpa : ", avgGpa+"");
+
+                adapter.addItem(name, content, arrivalTime, replyDate, imgPath, avgGpa);
+            }
+
+
 
         }catch(Exception e){
             e.printStackTrace();
