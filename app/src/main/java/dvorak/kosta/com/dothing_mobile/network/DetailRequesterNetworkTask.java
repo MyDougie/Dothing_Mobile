@@ -16,12 +16,10 @@ import com.bumptech.glide.Glide;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.List;
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.R;
-import dvorak.kosta.com.dothing_mobile.activity.DetailViewActivity;
 import dvorak.kosta.com.dothing_mobile.fragment.DetailTwoFragment;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -93,6 +91,7 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
         try {
             JSONObject obj = new JSONObject(s);
             String requestId = obj.getString("requesterId");
+            DetailTwoFragment.requestId = requestId;
             int requestCount = obj.getInt("requestCount");
             int grade = obj.getInt("grade");
             String introduce = obj.getString("introduce");

@@ -1,35 +1,16 @@
 package dvorak.kosta.com.dothing_mobile.fragment;
 
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.RatingBar;
-import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-
-import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.R;
-import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 import dvorak.kosta.com.dothing_mobile.network.DetailRequesterNetworkTask;
 
 /**
@@ -38,7 +19,7 @@ import dvorak.kosta.com.dothing_mobile.network.DetailRequesterNetworkTask;
 public class DetailTwoFragment extends Fragment {
 
     View v;
-
+    public static String requestId;
     public DetailTwoFragment() {
         // Required empty public constructor
     }

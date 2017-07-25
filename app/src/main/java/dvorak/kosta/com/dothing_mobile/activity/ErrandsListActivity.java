@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -18,6 +19,7 @@ import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.adapter.ListViewAdapter;
+import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
 import dvorak.kosta.com.dothing_mobile.network.ErrandListSearchNetworkTask;
 
 import static dvorak.kosta.com.dothing_mobile.R.id.listBackBtn;
@@ -62,6 +64,20 @@ public class ErrandsListActivity extends AppCompatActivity implements View.OnCli
         magnifier.setOnClickListener(this);
         sortImage.setOnClickListener(this);
         listBack.setOnClickListener(this);
+        writeBtn.setOnClickListener(this);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+                view.setSelected(true);
+                ErrandsItem item = (ErrandsItem)parent.getItemAtPosition(position);
+
+
+                    Intent intent = new Intent(getApplicationContext(), DetailViewActivity.class);
+                    intent.putExtra("errandNum",item.getErrandNum()+"");
+                    startActivity(intent);
+
+            }
+        });
     }
 
     @Override

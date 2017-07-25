@@ -30,6 +30,7 @@ import dvorak.kosta.com.dothing_mobile.network.DetailErrandNetworkTask;
  * A simple {@link Fragment} subclass.
  */
 public class DetailOneFragment extends Fragment {
+    public static String errandTime;
     View v;
     ReplyListViewAdapter adapter = new ReplyListViewAdapter();
 

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,8 +62,8 @@ public class ErrandActivity extends AppCompatActivity{
         setContentView(R.layout.activity_test);
 
         SharedPreferences pref = getSharedPreferences("tutorial", MODE_PRIVATE);
-        tutorial = pref.getInt("state", 1);
-        Log.e("튜토리얼", ""+tutorial);
+        tutorial = pref.getInt("tutorial", 1);
+
 
         writeBtn = (FloatingActionButton)findViewById(R.id.writeBtn);
         writeBtn.setOnClickListener(new View.OnClickListener() {

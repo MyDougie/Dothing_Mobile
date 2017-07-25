@@ -1,7 +1,6 @@
 package dvorak.kosta.com.dothing_mobile.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +12,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import dvorak.kosta.com.dothing_mobile.R;
-import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
 import dvorak.kosta.com.dothing_mobile.item.Member;
 import dvorak.kosta.com.dothing_mobile.item.ReplyItem;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
@@ -67,6 +64,7 @@ public class ReplyListViewAdapter extends BaseAdapter {
         String imgPath = replyItem.getUser().getUserImgPath();
         // 아이템 내 각 위젯에 데이터 반영
         Glide.with(convertView.getContext()).load(ConstantUtil.ipAddr + "users/" + userId + "/" + imgPath).bitmapTransform(new CropCircleTransformation(convertView.getContext())).into(responserImg);
+        Log.e("리플정보", userId + " : " + imgPath);
         responserImg.setScaleType(ImageView.ScaleType.FIT_XY); // 이미지를 뷰 크기에 맞게 조절
         replyUserName.setText(replyItem.getUser().getName());
         replyContent.setText(replyItem.getReplyContent());

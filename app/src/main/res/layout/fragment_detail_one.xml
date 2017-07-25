@@ -61,6 +61,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
                             android:text="주소" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="요구시간" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -84,6 +89,13 @@
 
                         <TextView
                             android:id="@+id/detailErrandAddr"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/detailErrandTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
@@ -134,9 +146,8 @@
 
             <ImageView
                 android:id="@+id/detailErrandImage"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/icon"
                 android:layout_weight="1.03" />
 
         </LinearLayout>
