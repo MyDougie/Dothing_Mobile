@@ -4,6 +4,7 @@ package dvorak.kosta.com.dothing_mobile.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -41,7 +42,7 @@ public class DetailOneFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_detail_one, container, false);
 
-        ListView listView = (ListView)v.findViewById(R.id.replyList);
+        final ListView listView = (ListView)v.findViewById(R.id.replyList);
         listView.setAdapter(adapter);
 
         String errandNum = getActivity().getIntent().getStringExtra("errandNum");
@@ -54,10 +55,24 @@ public class DetailOneFragment extends Fragment {
         Map<String, String> params = new HashMap<>();
         params.put("errandNum", errandNum);
         networkTask.execute(params);
+        listView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        listView.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        listView.getParent().requestDisallowInterceptTouchEvent(true);
+                        break;
+                }
+                listView.onTouchEvent(event);
+                return true;
 
-
-
-        // Inflate the layout for this fragment
+                // Inflate the layout for this fragment
+            }
+        });
         return v;
     }
 

@@ -1,13 +1,8 @@
 package dvorak.kosta.com.dothing_mobile.network;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
-
-import net.daum.mf.map.api.MapPOIItem;
-import net.daum.mf.map.api.MapPoint;
-import net.daum.mf.map.api.MapView;
+import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,26 +10,18 @@ import org.json.JSONObject;
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.HttpClient;
-import dvorak.kosta.com.dothing_mobile.activity.ErrandActivity;
-import dvorak.kosta.com.dothing_mobile.activity.TutorialActivity;
+import dvorak.kosta.com.dothing_mobile.activity.ErrandsListActivity;
 import dvorak.kosta.com.dothing_mobile.adapter.ListViewAdapter;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Administrator on 2017-07-13.
  */
 
-public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Integer, String> {
+public class ErrandListSearchNetworkTask extends AsyncTask<Map<String, String>, Integer, String> {
     ListViewAdapter adapter;
-    MapView mapView;
-    ErrandActivity errandActivity;
-
-    public ErrandSearchNetworkTask(ListViewAdapter adapter, MapView mapView, ErrandActivity errandActivity){
+    public ErrandListSearchNetworkTask(ListViewAdapter adapter){
         this.adapter = adapter;
-        this.mapView = mapView;
-        this.errandActivity = errandActivity;
     }
     /**
      * doInBackground 실행되기 이전에 동작한다.
@@ -50,7 +37,7 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
     @Override
     protected String doInBackground(Map<String, String>... maps) {
         // HTTP 요청 준비 작업
-        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidErrand/errandSearch"); // HTTP 요청 전송
+        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidErrand/errandListSearch"); // HTTP 요청 전송
 
         http.addAllParameters(maps[0]);
         HttpClient post = http.create();
@@ -67,8 +54,8 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
     protected void onPostExecute(String s) {
         Log.d("HTTP_RESULT", s);
         try {
+
             adapter.removeItem();
-            mapView.removeAllPOIItems();
             JSONArray jsonArray = new JSONArray(s);
             for(int i=0; i < jsonArray.length(); i++){
                 JSONObject obj = jsonArray.getJSONObject(i);
@@ -86,26 +73,12 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
                 String lng = posObj.getString("longitude");
                 String errandTime = obj.getString("endTime");
                 int errandNum = obj.getInt("errandsNum");
-                MapPOIItem marker = new MapPOIItem();
-                marker.setItemName(title);
-                marker.setTag(errandNum);
-                marker.setMapPoint(MapPoint.mapPointWithGeoCoord(latitude, longitude));
-                marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
-                marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-                mapView.addPOIItem(marker);
+
                // adapter.addItem(title, errandPrice,addr, lat,lng,errandTime) ;
                 adapter.addItem(errandNum, title, errandPrice,addr, lat,lng,errandTime, replyArray.length()) ;
             }
+            ErrandsListActivity.progressBar.setVisibility(View.GONE);
             adapter.notifyDataSetChanged();
-
-            if(ErrandActivity.tutorial == 1) {
-                errandActivity.startActivity(new Intent(errandActivity, TutorialActivity.class));
-                SharedPreferences pref = errandActivity.getSharedPreferences("tutorial", MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putInt("tutorial", 0);
-                editor.commit();
-                ErrandActivity.tutorial--;
-            }
         }catch(Exception e){
             Log.e("E", e.getMessage());
         }

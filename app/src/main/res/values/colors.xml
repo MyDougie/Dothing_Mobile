@@ -5,4 +5,5 @@
     <color name="colorAccent">#ff4081</color>
     <color name="selected">#B2EBF4</color>
     <color name="focused">#ffffff</color>
+    <color name="banTransparent">#CC000000</color>
 </resources>

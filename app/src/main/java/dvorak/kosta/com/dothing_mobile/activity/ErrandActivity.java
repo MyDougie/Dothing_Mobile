@@ -2,17 +2,18 @@ package dvorak.kosta.com.dothing_mobile.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
@@ -34,6 +35,7 @@ public class ErrandActivity extends AppCompatActivity{
     ViewGroup mapViewContainer;
     FloatingActionButton writeBtn;
     int selection = 0;
+    public static int tutorial=0;
     @Override
     protected void onResume() {
         super.onResume();
@@ -47,6 +49,7 @@ public class ErrandActivity extends AppCompatActivity{
         mapViewContainer.addView(mapView);
 
         setSupportActionBar(FrameActivity.toolbar);
+
     }
 
     @Override
@@ -59,6 +62,9 @@ public class ErrandActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
+        SharedPreferences pref = getSharedPreferences("tutorial", MODE_PRIVATE);
+        tutorial = pref.getInt("state", 1);
+        Log.e("튜토리얼", ""+tutorial);
 
         writeBtn = (FloatingActionButton)findViewById(R.id.writeBtn);
         writeBtn.setOnClickListener(new View.OnClickListener() {
@@ -92,8 +98,6 @@ public class ErrandActivity extends AppCompatActivity{
                     }
                     item.setClick(1);//한번선택됨
 
-                    Toast.makeText(getBaseContext(), position + "번 선택됨!! ",
-                            Toast.LENGTH_SHORT).show();
                 }else if(click == 1){//선택된 셀을 다시 클릭
                     item.setClick(0);
                     Intent intent = new Intent(getApplicationContext(), DetailViewActivity.class);
@@ -149,6 +153,9 @@ public class ErrandActivity extends AppCompatActivity{
                             }
                         });
                 ab.show();
+                break;
+            case R.id.action_errandList:
+                startActivity(new Intent(this, ErrandsListActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);

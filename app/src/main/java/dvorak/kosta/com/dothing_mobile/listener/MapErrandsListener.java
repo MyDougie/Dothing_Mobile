@@ -1,7 +1,9 @@
 package dvorak.kosta.com.dothing_mobile.listener;
 
+import android.graphics.Color;
 import android.util.Log;
 
+import net.daum.mf.map.api.MapCircle;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
@@ -58,7 +60,7 @@ public class MapErrandsListener implements MapView.MapViewEventListener {
     //맵이 드래그됬을 때 심부름을 받아옴
     @Override
     public void onMapViewDragEnded(MapView mapView, MapPoint mapPoint) {
-        Log.e("맵", "드래그 인식");
+        mapView.removeAllCircles();
         ErrandSearchNetworkTask networkTask = new ErrandSearchNetworkTask(adapter, mapView, errandActivity);
         MapPoint.GeoCoordinate geo = mapPoint.getMapPointGeoCoord();
         Map<String, String> params = new HashMap<>();
@@ -66,6 +68,13 @@ public class MapErrandsListener implements MapView.MapViewEventListener {
         params.put("lng", geo.longitude + "");
         params.put("distance", ConstantUtil.SEARCH_DISTANCE);
         networkTask.execute(params);
+        MapCircle circle1 = new MapCircle(
+                MapPoint.mapPointWithGeoCoord(geo.latitude, geo.longitude), // center
+                Integer.parseInt(ConstantUtil.SEARCH_DISTANCE) * 1000, // radius
+                Color.argb(128, 255, 0, 0), // strokeColor
+                Color.argb(200, 212, 244, 250) // fillColor
+        );
+        mapView.addCircle(circle1);
     }
 
     @Override
@@ -84,5 +93,12 @@ public class MapErrandsListener implements MapView.MapViewEventListener {
         params.put("lng", geo.longitude + "");
         params.put("distance", ConstantUtil.SEARCH_DISTANCE);
         networkTask.execute(params);
+        MapCircle circle1 = new MapCircle(
+                MapPoint.mapPointWithGeoCoord(geo.latitude, geo.longitude), // center
+                Integer.parseInt(ConstantUtil.SEARCH_DISTANCE) * 1000, // radius
+                Color.argb(128, 255, 0, 0), // strokeColor
+                Color.argb(200, 212, 244, 250) // fillColor
+        );
+        mapView.addCircle(circle1);
     }
 }

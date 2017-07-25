@@ -22,10 +22,8 @@ import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
 public class ListViewAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<ErrandsItem> listViewItemList = new ArrayList<ErrandsItem>() ;
-
     // ListViewAdapter의 생성자
     public ListViewAdapter() {
-
     }
 
     // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
@@ -45,6 +43,7 @@ public class ListViewAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.activity_errands, parent, false);
         }
+
         TextView errandTitle = (TextView) convertView.findViewById(R.id.errandTitle);
         TextView errandPrice = (TextView) convertView.findViewById(R.id.errandPrice);
         TextView errandAddr = (TextView) convertView.findViewById(R.id.errandAddr);
