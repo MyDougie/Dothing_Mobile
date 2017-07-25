@@ -72,7 +72,7 @@ public class MapErrandsListener implements MapView.MapViewEventListener {
                 MapPoint.mapPointWithGeoCoord(geo.latitude, geo.longitude), // center
                 Integer.parseInt(ConstantUtil.SEARCH_DISTANCE) * 1000, // radius
                 Color.argb(128, 255, 0, 0), // strokeColor
-                Color.argb(212, 244, 250, 0) // fillColor
+                Color.argb(200, 212, 244, 250) // fillColor
         );
         mapView.addCircle(circle1);
     }
@@ -97,7 +97,7 @@ public class MapErrandsListener implements MapView.MapViewEventListener {
                 MapPoint.mapPointWithGeoCoord(geo.latitude, geo.longitude), // center
                 Integer.parseInt(ConstantUtil.SEARCH_DISTANCE) * 1000, // radius
                 Color.argb(128, 255, 0, 0), // strokeColor
-                Color.argb(128, 0, 255, 0) // fillColor
+                Color.argb(200, 212, 244, 250) // fillColor
         );
         mapView.addCircle(circle1);
     }

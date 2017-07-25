@@ -1,14 +1,9 @@
 package dvorak.kosta.com.dothing_mobile.network;
 
-import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,7 +16,6 @@ import java.util.Map;
 import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.adapter.ReplyListViewAdapter;
-import dvorak.kosta.com.dothing_mobile.item.ReplyItem;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -138,7 +132,8 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
 
                 adapter.addItem(name, content, arrivalTime, replyDate, imgPath, avgGpa);
             }
-
+            adapter.notifyDataSetChanged();
+            Log.e("현재 사이즈: ", "" +adapter.getCount());
 
 
         }catch(Exception e){
