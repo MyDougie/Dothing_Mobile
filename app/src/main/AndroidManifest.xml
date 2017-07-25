@@ -30,7 +30,6 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".JoinActivity1" />
-        <activity android:name=".JoinActivity2" />
         <activity android:name=".JoinActivity3" />
         <activity android:name=".AddrWebviewActivity" />
         <activity android:name=".activity.ErrandActivity" />
@@ -45,7 +44,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.ChatListActivity" />
-        <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.MyPageActivity" />
         <activity android:name=".activity.DetailViewActivity" />
 
@@ -62,12 +60,15 @@
 
         <activity android:name=".activity.MyRequestActivity" />
         <activity android:name=".activity.MyResponseActivity" />
-        <activity android:name=".activity.ChatTestActivity">
-        </activity>
-        <activity android:name=".activity.LocationDialogActivity"
-            android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".activity.RatingActivity"
-            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".activity.ChatTestActivity"></activity>
+        <activity
+            android:name=".activity.LocationDialogActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".activity.RatingActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".activity.ErrandsListActivity" />
+        <activity android:name=".activity.TutorialActivity" android:theme="@style/Theme.AppCompat.Translucent"/>
     </application>
 
 </manifest>

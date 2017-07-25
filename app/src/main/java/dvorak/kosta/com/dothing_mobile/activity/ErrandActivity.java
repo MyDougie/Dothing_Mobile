@@ -2,6 +2,7 @@ package dvorak.kosta.com.dothing_mobile.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -33,6 +34,7 @@ public class ErrandActivity extends AppCompatActivity{
     ViewGroup mapViewContainer;
     FloatingActionButton writeBtn;
     int selection = 0;
+    public static int tutorial=0;
     @Override
     protected void onResume() {
         super.onResume();
@@ -46,6 +48,7 @@ public class ErrandActivity extends AppCompatActivity{
         mapViewContainer.addView(mapView);
 
         setSupportActionBar(FrameActivity.toolbar);
+
     }
 
     @Override
@@ -57,6 +60,9 @@ public class ErrandActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+
+        SharedPreferences pref = getSharedPreferences("tutorial", MODE_PRIVATE);
+        tutorial = pref.getInt("state", 1);
 
 
         writeBtn = (FloatingActionButton)findViewById(R.id.writeBtn);
@@ -148,6 +154,9 @@ public class ErrandActivity extends AppCompatActivity{
                             }
                         });
                 ab.show();
+                break;
+            case R.id.action_errandList:
+                startActivity(new Intent(this, ErrandsListActivity.class));
                 break;
         }
         return super.onOptionsItemSelected(item);
