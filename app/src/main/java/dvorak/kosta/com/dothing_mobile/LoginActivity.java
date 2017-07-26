@@ -148,9 +148,10 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            params.put("email",email);
+            params.put("userId",email);
             params.put("password",password);
             params.put("token", FirebaseInstanceId.getInstance().getToken());
+            params.put("isApi","false");
 
             LoginNetworkTask networkTask = new LoginNetworkTask(LoginActivity.this);
             networkTask.execute(params);
