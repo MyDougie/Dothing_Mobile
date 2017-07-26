@@ -87,7 +87,7 @@ public class ReplyListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String userId, String name, String content, String arrivalTime, String replyDate, String imgPath, int avgGpa) {
+    public void addItem(int replyNum, String userId, String name, String content, String arrivalTime, String replyDate, String imgPath, int avgGpa) {
         ReplyItem item = new ReplyItem();
 
         Member member = new Member();
@@ -96,6 +96,7 @@ public class ReplyListViewAdapter extends BaseAdapter {
         member.setUserImgPath(imgPath);
         item.setUser(member);
 
+        item.setReplyNum(replyNum);
         item.setReplyContent(content);
         item.setArrivalTime(arrivalTime);
         item.setReplyDate(replyDate);

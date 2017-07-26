@@ -172,6 +172,7 @@
                 android:id="@+id/replyList"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
+                android:choiceMode="singleChoice"
                 android:listSelector="@android:color/transparent"/>
         </LinearLayout>
         </LinearLayout>

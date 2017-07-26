@@ -113,6 +113,7 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
             JSONArray avgGpaList = obj.getJSONArray("avgGpaList");
             for(int i=0; i<replyList.length(); i++){
                 JSONObject replyObj=  replyList.getJSONObject(i);
+                int replyNum = replyObj.getInt("replyNum");
                 String content = replyObj.getString("replyContent");
                 String arrivalTime = replyObj.getString("arrivalTime");
                 String replyDate = replyObj.getString("replyDate");
@@ -127,6 +128,7 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
                 content = content.replaceAll("<p>","");
                 content = content.replaceAll("</p>","\n");
 
+                Log.i("replyNum!! : ", replyNum+"");
                 Log.i("userId : ", userId);
                 Log.i("name : ", name);
                 Log.i("content : ", content);
@@ -135,7 +137,7 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
                 Log.i("imgPath : ", imgPath);
                 Log.i("avgGpa : ", avgGpa+"");
 
-                adapter.addItem(userId, name, content, arrivalTime, replyDate, imgPath, avgGpa);
+                adapter.addItem(replyNum, userId, name, content, arrivalTime, replyDate, imgPath, avgGpa);
             }
             adapter.notifyDataSetChanged();
             Log.e("현재 사이즈: ", "" +adapter.getCount());

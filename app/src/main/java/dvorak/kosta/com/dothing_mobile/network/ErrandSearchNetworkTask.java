@@ -87,6 +87,13 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
                 String lng = posObj.getString("longitude");
                 String errandTime = obj.getString("endTime");
                 int errandNum = obj.getInt("errandsNum");
+/*
+
+                JSONObject requestUser = obj.getJSONObject("requestUser");
+                String requesteUserId = requestUser.getString("requesteUserId");
+                Log.i("requestUserIdyyyyy", requesteUserId);
+*/
+
                 MapPOIItem marker = new MapPOIItem();
                 marker.setItemName(title);
                 marker.setTag(errandNum);

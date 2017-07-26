@@ -101,6 +101,7 @@ public class ErrandActivity extends AppCompatActivity{
                     item.setClick(0);
                     Intent intent = new Intent(getApplicationContext(), DetailViewActivity.class);
                     intent.putExtra("errandNum",item.getErrandNum()+"");
+                    intent.putExtra("requestUserId", item.getRequesterId());
                     startActivity(intent);
                 }
             }
