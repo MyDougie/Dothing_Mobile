@@ -143,13 +143,11 @@
             android:padding="3dp">
 
             <ImageView
-                android:id="@+id/imageView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/curriculum" />
 
             <TextView
-                android:id="@+id/textView17"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

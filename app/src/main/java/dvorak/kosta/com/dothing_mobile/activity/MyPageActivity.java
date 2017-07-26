@@ -29,7 +29,7 @@ import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
  */
 
 public class MyPageActivity extends AppCompatActivity{
-    LinearLayout myRequestLayout, myResponseLayout, myLogout;
+    LinearLayout myRequestLayout, myResponseLayout, myLogout, myInfoPW;
     TextView myName, myEmail, myPoint;
     ImageView myImage;
     Handler handler;
@@ -44,12 +44,17 @@ public class MyPageActivity extends AppCompatActivity{
         myEmail = (TextView)findViewById(R.id.userEmail);
         myPoint = (TextView)findViewById(R.id.userPoint);
         myImage = (ImageView)findViewById(R.id.userImage);
+
         myRequestLayout = (LinearLayout)findViewById(R.id.requestBtn);
         myResponseLayout = (LinearLayout)findViewById(R.id.responseBtn);
         myLogout = (LinearLayout) findViewById(R.id.logoutBtn);
+        myInfoPW = (LinearLayout) findViewById(R.id.myinfoupdate);
+
         myRequestLayout.setOnClickListener(myPageListener);
         myResponseLayout.setOnClickListener(myPageListener);
         myLogout.setOnClickListener(myPageListener);
+        myInfoPW.setOnClickListener(myPageListener);
+
         Log.e("정보들", MemberInfo.name + " " + MemberInfo.userId + " " + MemberInfo.selfImgUrlPath);
         myName.setText(MemberInfo.name);
         myEmail.setText(MemberInfo.userId);

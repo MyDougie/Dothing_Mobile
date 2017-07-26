@@ -64,6 +64,7 @@
         <activity android:name=".activity.MyResponseActivity" />
         <activity android:name=".activity.ChatTestActivity">
         </activity>
+        <activity android:name=".activity.PwConfirmActivity"/>
         <activity android:name=".activity.LocationDialogActivity"
             android:theme="@android:style/Theme.Dialog"/>
     </application>

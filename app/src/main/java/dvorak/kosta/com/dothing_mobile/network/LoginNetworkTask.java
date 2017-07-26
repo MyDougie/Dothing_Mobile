@@ -48,6 +48,7 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
 
         // HTTP 요청 전송
         HttpClient post = http.create();
+
         post.request();
 
         // 응답 상태코드 가져오기
