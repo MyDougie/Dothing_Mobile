@@ -84,7 +84,7 @@ public class ChatTestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 long time = System.currentTimeMillis();
-                SimpleDateFormat dayTime = new SimpleDateFormat("MM/dd hh시 mm분");
+                SimpleDateFormat dayTime = new SimpleDateFormat("MM/dd HH시 mm분");
 
                 String str = dayTime.format(new Date(time));
                 String message = MemberInfo.userId + ":" + inputChat.getText() + ":" + str + ":" + you + ":" + meImg.substring(meImg.lastIndexOf("/") + 1, meImg.length()); // 보내는사람(나) : 채팅내용 : 시간 : 상대방

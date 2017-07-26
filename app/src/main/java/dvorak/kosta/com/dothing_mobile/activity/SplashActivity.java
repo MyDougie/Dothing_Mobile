@@ -71,7 +71,9 @@ public class SplashActivity extends AppCompatActivity {
                     map.put("password",password);
                     map.put("token", FirebaseInstanceId.getInstance().getToken());
 
-                    LoginNetworkTask networkTask = new LoginNetworkTask(SplashActivity.this);
+                    String click = getIntent().getExtras().getString("click");
+                    String errandsNum = getIntent().getExtras().getString("errandsNum");
+                    LoginNetworkTask networkTask = new LoginNetworkTask(SplashActivity.this, click, errandsNum);
                     networkTask.execute(map);
                 } else {
                     Intent intent = new Intent(SplashActivity.this, LoginActivity.class);

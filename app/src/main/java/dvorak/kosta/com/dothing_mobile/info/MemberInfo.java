@@ -16,12 +16,13 @@ public class MemberInfo {
     public static String detailAddr;
     public static int auth;
     public static String selfImgUrlPath;
-    public static String ssnImgUrlPath;
+    public static String ssnImg;
     public static String joinDate;
     public static String introduce;
     public static String latitude;
     public static String longitude;
     public static String currentPoint;
+    public static int averageGPA;
     public static List<Integer> responseAccuracy = new ArrayList<>();
     public static List<Integer> responseSpeed = new ArrayList<>();
     public static List<Integer> responseKindness = new ArrayList<>();

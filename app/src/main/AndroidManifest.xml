@@ -48,6 +48,7 @@
         <activity android:name=".activity.DetailViewActivity">
             <intent-filter>
                 <action android:name="DETAIL_ACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -81,6 +82,8 @@
         <activity
             android:name=".activity.TutorialActivity"
             android:theme="@style/Theme.AppCompat.Translucent" />
+        <activity android:name=".activity.SafetyActivity"
+            android:theme="@android:style/Theme.Dialog" ></activity>
     </application>
 
 </manifest>

@@ -7,11 +7,14 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.HttpClient;
+import dvorak.kosta.com.dothing_mobile.activity.ChatTestActivity;
+import dvorak.kosta.com.dothing_mobile.activity.DetailViewActivity;
 import dvorak.kosta.com.dothing_mobile.activity.FrameActivity;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
@@ -24,9 +27,11 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
     Activity activity;
     SharedPreferences auto;
     SharedPreferences.Editor autoLogin;
-
-    public LoginNetworkTask(Activity activity){
+    String click, errandsNum;
+    public LoginNetworkTask(Activity activity, String click, String errandsNum){
         this.activity = activity;
+        this.errandsNum = errandsNum;
+        this.click = click;
     }
 
     /** * doInBackground 실행되기 이전에 동작한다. */
@@ -73,17 +78,49 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
                 MemberInfo.preAddr = jsonObject.getString("preAddr");
                 MemberInfo.detailAddr = jsonObject.getString("detailAddr");
                 MemberInfo.sex = jsonObject.getString("sex");
+                MemberInfo.ssnImg = jsonObject.getString("ssnImg");
                 MemberInfo.joinDate = jsonObject.getString("joinDate");
                 MemberInfo.introduce = jsonObject.getString("introduce");
                 MemberInfo.latitude = jsonObject.getString("latitude");
                 MemberInfo.longitude = jsonObject.getString("longitude");
                 MemberInfo.currentPoint = jsonObject.getJSONObject("point").getString("currentPoint");
-
+                MemberInfo.auth = jsonObject.getInt("auth");
+                JSONArray jsonArray = jsonObject.getJSONArray("gpaList");
+                int totalRes = 0, totalReq = 0;
+                int totalResSum = 0, totalReqSum = 0;
+                for(int i=0; i<jsonArray.length(); i++){
+                    JSONObject gpa = jsonArray.getJSONObject(i);
+                    int responseAccuracy = gpa.getInt("responseAccuracy");
+                    int responseSpeed = gpa.getInt("responseSpeed");
+                    int responseKindness = gpa.getInt("responseKindness");
+                    int requestManners = gpa.getInt("requestManners");
+                    if(responseAccuracy != 0){
+                        totalResSum = (responseAccuracy + responseKindness + responseSpeed) / 3;
+                        totalRes++;
+                    }else {
+                        totalReqSum = requestManners;
+                        totalReq++;
+                    }
+                }
+                int avg = 0;
+                if(totalReq != 0) avg += totalReqSum / totalReq;
+                if(totalRes != 0) avg += totalResSum / totalRes;
+                if(totalRes == 0 || totalReq == 0) MemberInfo.averageGPA = avg;
+                else if(totalRes != 0 && totalReq != 0) MemberInfo.averageGPA = avg/2;
+                else if(totalRes == 0 && totalReq ==0) MemberInfo.averageGPA = 0;
                 autoLogin.putString("LoginId",jsonObject.getString("userId"));
 
                 autoLogin.commit();
-
-                Intent intent = new Intent(activity,FrameActivity.class);
+                Intent intent = null;
+                if(click == null) {
+                    intent = new Intent(activity, FrameActivity.class);
+                }else if(click.equals("DETAIL_ACTIVITY")){
+                    intent = new Intent(activity, DetailViewActivity.class);
+                    intent.putExtra("errandsNum", errandsNum);
+                }else if(click.equals("CHAT_ACTIVITY")){
+                    intent = new Intent(activity, ChatTestActivity.class);
+                    intent.putExtra("errandsNum", errandsNum);
+                }
                 activity.startActivity(intent);
                 activity.finish();
             } catch (Exception e) {

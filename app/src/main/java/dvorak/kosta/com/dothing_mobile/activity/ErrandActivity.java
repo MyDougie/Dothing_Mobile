@@ -30,7 +30,6 @@ public class ErrandActivity extends AppCompatActivity{
     MapErrandsListener mapErrandsListener;
     MapView mapView;
     ListViewAdapter adapter = new ListViewAdapter();
-
     ViewGroup mapViewContainer;
     FloatingActionButton writeBtn;
     int selection = 0;
