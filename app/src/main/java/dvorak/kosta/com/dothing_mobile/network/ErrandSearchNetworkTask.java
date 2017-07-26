@@ -87,12 +87,12 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
                 String lng = posObj.getString("longitude");
                 String errandTime = obj.getString("endTime");
                 int errandNum = obj.getInt("errandsNum");
-/*
+
 
                 JSONObject requestUser = obj.getJSONObject("requestUser");
-                String requesteUserId = requestUser.getString("requesteUserId");
+                String requesteUserId = requestUser.getString("userId");
                 Log.i("requestUserIdyyyyy", requesteUserId);
-*/
+
 
                 MapPOIItem marker = new MapPOIItem();
                 marker.setItemName(title);
@@ -102,7 +102,7 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
                 marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
                 mapView.addPOIItem(marker);
                // adapter.addItem(title, errandPrice,addr, lat,lng,errandTime) ;
-                adapter.addItem(errandNum, title, errandPrice,addr, lat,lng,errandTime, replyArray.length()) ;
+                adapter.addItem(requesteUserId, errandNum, title, errandPrice,addr, lat,lng,errandTime, replyArray.length()) ;
             }
             adapter.notifyDataSetChanged();
 

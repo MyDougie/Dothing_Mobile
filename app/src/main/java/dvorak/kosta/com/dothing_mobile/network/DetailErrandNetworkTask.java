@@ -60,6 +60,7 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
         post.request(); // 응답 상태코드 가져오기
         int statusCode = post.getHttpStatusCode(); // 응답 본문 가져오기
         String body = post.getBody();
+
         return body;
     }
 
