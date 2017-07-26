@@ -22,11 +22,15 @@ import dvorak.kosta.com.dothing_mobile.network.LoginNetworkTask;
 
 public class SplashActivity extends AppCompatActivity {
     int checkstate = 0;
+    String click, errandsNum;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+        if(getIntent().getExtras() != null) {
+            click = getIntent().getExtras().getString("click");
+            errandsNum = getIntent().getExtras().getString("errandsNum");
+        }
         PermissionListener permissionListener = new PermissionListener(){
             @Override
             public void onPermissionGranted() {
@@ -71,8 +75,6 @@ public class SplashActivity extends AppCompatActivity {
                     map.put("password",password);
                     map.put("token", FirebaseInstanceId.getInstance().getToken());
 
-                    String click = getIntent().getExtras().getString("click");
-                    String errandsNum = getIntent().getExtras().getString("errandsNum");
                     LoginNetworkTask networkTask = new LoginNetworkTask(SplashActivity.this, click, errandsNum);
                     networkTask.execute(map);
                 } else {

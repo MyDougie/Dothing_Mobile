@@ -155,7 +155,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
             params.put("password",password);
             params.put("token", FirebaseInstanceId.getInstance().getToken());
 
-            LoginNetworkTask networkTask = new LoginNetworkTask(LoginActivity.this);
+            LoginNetworkTask networkTask = new LoginNetworkTask(LoginActivity.this, null, null);
             networkTask.execute(params);
 
         }

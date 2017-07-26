@@ -116,7 +116,7 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
                     intent = new Intent(activity, FrameActivity.class);
                 }else if(click.equals("DETAIL_ACTIVITY")){
                     intent = new Intent(activity, DetailViewActivity.class);
-                    intent.putExtra("errandsNum", errandsNum);
+                    intent.putExtra("errandNum", errandsNum);
                 }else if(click.equals("CHAT_ACTIVITY")){
                     intent = new Intent(activity, ChatTestActivity.class);
                     intent.putExtra("errandsNum", errandsNum);

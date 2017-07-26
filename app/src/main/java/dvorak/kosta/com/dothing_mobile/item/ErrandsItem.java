@@ -15,6 +15,17 @@ public class ErrandsItem {
     private String replyNum;
     private String state;
     private int click;
+    private String requesterId;
+
+    public String getRequesterId() {
+        return requesterId;
+    }
+
+    public void setRequesterId(String requesterId) {
+        this.requesterId = requesterId;
+    }
+
+
 
 
     public String getReplyNum() {
