@@ -26,11 +26,21 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     public void onMessageReceived(RemoteMessage remoteMessage) {
         Log.e("오니?", "오니데: " + remoteMessage.getData());
         //추가한것
-        sendNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("body"));
+        sendNotification(remoteMessage.getData().get("title"), remoteMessage.getData().get("body"), remoteMessage.getData().get("click_action"), remoteMessage.getData().get("errandNum"));
     }
 
-    private void sendNotification(String title, String body) {
-        Intent intent = new Intent(this, SplashActivity.class);
+    private void sendNotification(String title, String body, String click, String errandsNum) {
+        Intent intent = null;
+        if(click.equals("DETAIL_ACTIVITY")){
+            intent = new Intent(this, DetailViewActivity.class);
+            intent.putExtra("errandNum", errandsNum);
+        }else if(click.equals("CHAT_ACTIVITY")){
+            intent = new Intent(this, ChatTestActivity.class);
+            intent.putExtra("errandsNum", errandsNum);
+        }else {
+            intent = new Intent(this, SplashActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

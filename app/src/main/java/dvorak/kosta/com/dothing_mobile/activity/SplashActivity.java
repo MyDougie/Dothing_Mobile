@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.MainActivity;
+import dvorak.kosta.com.dothing_mobile.LoginActivity;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.network.LoginNetworkTask;
 
@@ -75,7 +75,7 @@ public class SplashActivity extends AppCompatActivity {
                     LoginNetworkTask networkTask = new LoginNetworkTask(SplashActivity.this);
                     networkTask.execute(map);
                 } else {
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);

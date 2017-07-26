@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -56,7 +57,6 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-
     private Map<String,String> params;
 
     @Override
@@ -101,7 +101,10 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         getLoaderManager().initLoader(0, null, this);
     }
 
-
+    public void attemptSign(View view){
+        Intent intent = new Intent(getApplicationContext(),JoinActivity1.class);
+        startActivity(intent);
+    }
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the

@@ -1,5 +1,6 @@
 package dvorak.kosta.com.dothing_mobile.listener;
 
+import android.content.Context;
 import android.util.Log;
 import android.widget.EditText;
 
@@ -15,6 +16,7 @@ import dvorak.kosta.com.dothing_mobile.activity.ErrandRegisterActivity;
  */
 
 public class RegisterErrandListener implements MapView.MapViewEventListener {
+    Context context;
     EditText registerAddr;
     ErrandRegisterActivity errandRegisterActivity;
     String latitude,longitude;
@@ -65,6 +67,9 @@ public class RegisterErrandListener implements MapView.MapViewEventListener {
         marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
         marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
         mapView.addPOIItem(marker);
+        MapPoint.GeoCoordinate geo = mapPoint.getMapPointGeoCoord();
+        errandRegisterActivity.latitude = geo.latitude + "";
+        errandRegisterActivity.longitude = geo.longitude + "";
         MapReverseGeoCoder reverseGeoCoder = new MapReverseGeoCoder("6301c8d166630b078ad13401acc1267f", mapPoint, new MapReverseGeoCoder.ReverseGeoCodingResultListener() {
             @Override
             public void onReverseGeoCoderFoundAddress(MapReverseGeoCoder mapReverseGeoCoder, String s) {

@@ -5,6 +5,10 @@ package dvorak.kosta.com.dothing_mobile.util;
  */
 
 public class ConstantUtil {
-    public final static String ipAddr = "http://192.168.35.88:8088/controller/";
+
+  //  public final static String ipAddr = "http://192.168.0.3:8000/controller/";
+        public final static String ipAddr = "http://13.113.174.159/DothingProject/";
+    public static String SEARCH_DISTANCE = "3";
+
 
 }

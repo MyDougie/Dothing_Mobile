@@ -1,5 +1,7 @@
 package dvorak.kosta.com.dothing_mobile.network;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -14,8 +16,12 @@ import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.activity.ErrandActivity;
+import dvorak.kosta.com.dothing_mobile.activity.TutorialActivity;
 import dvorak.kosta.com.dothing_mobile.adapter.ListViewAdapter;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
+
+import static android.content.Context.MODE_PRIVATE;
+import static dvorak.kosta.com.dothing_mobile.activity.ErrandActivity.tutorial;
 
 /**
  * Created by Administrator on 2017-07-13.
@@ -71,6 +77,7 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
                 JSONObject posObj = obj.getJSONObject("errandsPos");
 //                    Log.d(i+"번 심부름의 lat", posObj.getDouble("latitude") + "");
 //                    Log.d(i+"번 심부름의 lng", posObj.getDouble("longitude") + "");
+                JSONArray replyArray = obj.getJSONArray("errandsReply");
                 double latitude = posObj.getDouble("latitude");
                 double longitude = posObj.getDouble("longitude");
                 String title = obj.getString("title");
@@ -80,6 +87,13 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
                 String lng = posObj.getString("longitude");
                 String errandTime = obj.getString("endTime");
                 int errandNum = obj.getInt("errandsNum");
+
+
+                JSONObject requestUser = obj.getJSONObject("requestUser");
+                String requesteUserId = requestUser.getString("userId");
+                Log.i("requestUserIdyyyyy", requesteUserId);
+
+
                 MapPOIItem marker = new MapPOIItem();
                 marker.setItemName(title);
                 marker.setTag(errandNum);
@@ -88,9 +102,20 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
                 marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
                 mapView.addPOIItem(marker);
                // adapter.addItem(title, errandPrice,addr, lat,lng,errandTime) ;
-                adapter.addItem(errandNum, title, errandPrice,addr, lat,lng,errandTime) ;
+                adapter.addItem(requesteUserId, errandNum, title, errandPrice,addr, lat,lng,errandTime, replyArray.length()) ;
             }
             adapter.notifyDataSetChanged();
+
+            if(tutorial == 1) {
+                errandActivity.startActivity(new Intent(errandActivity, TutorialActivity.class));
+                SharedPreferences pref = errandActivity.getSharedPreferences("tutorial", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putInt("tutorial", 0);
+                editor.commit();
+                Log.e("불러와라", pref.getInt("tutorial", -999) +"");
+
+                tutorial--;
+            }
         }catch(Exception e){
             Log.e("E", e.getMessage());
         }

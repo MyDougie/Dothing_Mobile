@@ -61,6 +61,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
                             android:text="주소" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="요구시간" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -73,7 +78,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:text="1000원"
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -81,7 +85,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:text="1500원"
                             android:textColor="@android:color/black" />
 
                         <TextView
@@ -89,7 +92,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:text="주소는 여기다가 써넣으시오"
+                            android:textColor="@android:color/black" />
+
+                        <TextView
+                            android:id="@+id/detailErrandTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
                             android:textColor="@android:color/black" />
                     </LinearLayout>
                 </LinearLayout>
@@ -114,9 +123,7 @@
             <TextView
                 android:id="@+id/detailErrandContent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="쏼롸쏼라 어쩌구저쩌구
-호롤롤롤롤 날아올라마 핳ㅎ헿헿헿" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
         <LinearLayout
@@ -139,9 +146,8 @@
 
             <ImageView
                 android:id="@+id/detailErrandImage"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/icon"
                 android:layout_weight="1.03" />
 
         </LinearLayout>
@@ -165,7 +171,9 @@
             <ListView
                 android:id="@+id/replyList"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="300dp"
+                android:choiceMode="singleChoice"
+                android:listSelector="@android:color/transparent"/>
         </LinearLayout>
         </LinearLayout>
     </ScrollView>
