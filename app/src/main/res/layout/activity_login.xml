@@ -73,6 +73,17 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/facebookBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/com_facebook_button_background_color"
+                android:text="페이스북 로그인"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18sp" />
+
         </LinearLayout>
     </ScrollView>
 

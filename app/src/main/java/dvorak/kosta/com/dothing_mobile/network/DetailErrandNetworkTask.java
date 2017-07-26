@@ -108,8 +108,6 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
             DetailOneFragment.errandTime=errandTime;
             Glide.with(view.getContext()).load(ConstantUtil.ipAddr + "errands/" + errandNum + "/" + errandImg).into(this.errandImg);
 
-            ///
-
             JSONArray replyList = obj.getJSONArray("replyList");
             JSONArray avgGpaList = obj.getJSONArray("avgGpaList");
             for(int i=0; i<replyList.length(); i++){

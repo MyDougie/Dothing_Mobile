@@ -3,23 +3,13 @@ package dvorak.kosta.com.dothing_mobile.network;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.Adapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.HttpClient;
-import dvorak.kosta.com.dothing_mobile.R;
-import dvorak.kosta.com.dothing_mobile.adapter.ReplyListViewAdapter;
-import dvorak.kosta.com.dothing_mobile.fragment.DetailOneFragment;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
