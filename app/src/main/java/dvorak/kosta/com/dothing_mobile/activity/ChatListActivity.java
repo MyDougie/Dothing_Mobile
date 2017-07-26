@@ -47,9 +47,15 @@ public class ChatListActivity extends AppCompatActivity {
                 chatIntent.putExtra("youName", item.getChatName());
                 chatIntent.putExtra("userImgPath", item.getUserImgPath());
                 chatIntent.putExtra("userImgPath2", item.getUserImgPathTwo());
+                chatIntent.putExtra("isRequest", item.isRequest());
                 startActivity(chatIntent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         Map<String, String> params = new HashMap<>();
         params.put("userId", MemberInfo.userId);
         NetworkTask networkTask = new NetworkTask();
@@ -89,12 +95,14 @@ public class ChatListActivity extends AppCompatActivity {
                 for(int i=0; i < jsonArray.length(); i++){
                     String name = "";
                     String youId="";
+                    boolean isRequest = false;
                     JSONObject object = jsonArray.getJSONObject(i);
                     JSONObject user = object.getJSONObject("requestUser");
                     JSONObject user2 = object.getJSONObject("responseUser");
                     if(user.getString("userId").equals(MemberInfo.userId)){
                         name = user2.getString("name");
                         youId = user2.getString("userId");
+                        isRequest = true;
                     }else{
                         name = user.getString("name");
                         youId = user.getString("userId");
@@ -102,7 +110,7 @@ public class ChatListActivity extends AppCompatActivity {
 
                     adapter.addItem(object.getString("title"), name, object.getString("errandsNum"),
                             ConstantUtil.ipAddr + "users/" + user.getString("userId") + "/" + user.getString("selfImg"),
-                            ConstantUtil.ipAddr + "users/" + user2.getString("userId") + "/" + user2.getString("selfImg"), youId) ;
+                            ConstantUtil.ipAddr + "users/" + user2.getString("userId") + "/" + user2.getString("selfImg"), youId, isRequest) ;
                 }
                 adapter.notifyDataSetChanged();
             }catch(Exception e){

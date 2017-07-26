@@ -70,7 +70,7 @@ public class ChatListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String title, String name, String errandsNum, String userImgPath, String userImgPathTwo, String you) {
+    public void addItem(String title, String name, String errandsNum, String userImgPath, String userImgPathTwo, String you, boolean isRequest) {
         ChatListItem chatListItem = new ChatListItem();
         chatListItem.setChatName(name);
         chatListItem.setChatTitle(title);
@@ -78,6 +78,7 @@ public class ChatListViewAdapter extends BaseAdapter {
         chatListItem.setUserImgPath(userImgPath);
         chatListItem.setUserImgPathTwo(userImgPathTwo);
         chatListItem.setYou(you);
+        chatListItem.setRequest(isRequest);
         listViewItemList.add(chatListItem);
     }
     //리스트의 모든 아이템 제거

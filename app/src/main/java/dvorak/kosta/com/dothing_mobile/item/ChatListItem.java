@@ -11,6 +11,15 @@ public class ChatListItem {
     private String erradsNum;
     private String userImgPath;
     private String userImgPathTwo;
+    private boolean isRequest;
+
+    public boolean isRequest() {
+        return isRequest;
+    }
+
+    public void setRequest(boolean request) {
+        isRequest = request;
+    }
 
     public String getYou() {
         return you;
