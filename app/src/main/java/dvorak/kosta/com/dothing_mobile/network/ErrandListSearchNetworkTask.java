@@ -78,8 +78,11 @@ public class ErrandListSearchNetworkTask extends AsyncTask<Map<String, String>, 
                 String requesteUserId = requestUser.getString("userId");
                 Log.i("requestUserIdxxxxx", requesteUserId);
 
+
+
                // adapter.addItem(title, errandPrice,addr, lat,lng,errandTime) ;
-                adapter.addItem(errandNum, title, errandPrice,addr, lat,lng,errandTime, replyArray.length(), requesteUserId) ;
+                adapter.addItem(requesteUserId, errandNum, title, errandPrice,addr, lat,lng,errandTime, replyArray.length()) ;
+
             }
             ErrandsListActivity.progressBar.setVisibility(View.GONE);
             adapter.notifyDataSetChanged();
