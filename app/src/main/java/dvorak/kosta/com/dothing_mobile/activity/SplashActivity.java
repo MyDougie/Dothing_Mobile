@@ -73,9 +73,10 @@ public class SplashActivity extends AppCompatActivity {
                 if(id != null && password !=null){
 
                     Map<String,String> map = new HashMap<String, String>();
-                    map.put("email",id);
+                    map.put("userId",id);
                     map.put("password",password);
                     map.put("token", FirebaseInstanceId.getInstance().getToken());
+                    map.put("isApi","false");
 
                     LoginNetworkTask networkTask = new LoginNetworkTask(SplashActivity.this, click, errandsNum, requestUserId);
                     networkTask.execute(map);

@@ -93,7 +93,7 @@ public class JoinActivity3 extends AppCompatActivity {
 
                     new UploadDataNetworkTask(ConstantUtil.ipAddr + "androidMember/signIn", JoinActivity3.this).execute(params);
 
-                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }

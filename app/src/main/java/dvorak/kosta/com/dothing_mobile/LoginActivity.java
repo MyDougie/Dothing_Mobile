@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -23,16 +24,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.network.LoginNetworkTask;
-
-import static dvorak.kosta.com.dothing_mobile.R.id.email;
 
 
 /**
@@ -57,19 +68,93 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
     private Map<String,String> params;
+
+    private CallbackManager callbackManager;
+    private Button facebookBtn;
+    String email,name,gender,id,selfImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
 
+        callbackManager = CallbackManager.Factory.create();
+        facebookBtn = (Button)findViewById(R.id.facebookBtn);
 
         params = new HashMap<>();
 
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(email);
+        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         //populateAutoComplete();
+
+        facebookBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email","user_friends","public_profile","user_birthday"));
+                LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(final LoginResult loginResult) {
+                        Log.e("facebookSuccess","onSuccess");
+
+                        GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                Log.e("result : ",object.toString());
+                                Profile profile = Profile.getCurrentProfile();
+                                selfImg = profile.getProfilePictureUri(100,100).toString();
+                                Log.e("bbbbb",selfImg);
+
+                                try{
+                                    email = object.getString("email");
+                                    name = object.getString("name");
+                                    gender = object.getString("gender");
+                                    id = object.getString("id");
+
+                                    Log.e("TAG","페이스북 이메일 => "+email);
+                                    Log.e("TAG","페이스북 이메일 => "+name);
+                                    Log.e("TAG","페이스북 이메일 => "+gender);
+                                    Log.e("TAG","페이스북 이메일 => "+id);
+
+                                    Map<String,String> map = new HashMap<>();
+                                    map.put("userId",email);
+                                    map.put("gender",gender);
+                                    map.put("password",id);
+                                    map.put("name",name);
+                                    map.put("selfImg",selfImg);
+                                    map.put("isApi","true");
+                                    map.put("token", FirebaseInstanceId.getInstance().getToken());
+
+                                    LoginNetworkTask networkTask = new LoginNetworkTask(LoginActivity.this, null, null, null);
+                                    networkTask.execute(map);
+
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        Bundle parameters = new Bundle();
+                        parameters.putString("fields","id,name,email,gender");
+                        request.setParameters(parameters);
+                        request.executeAsync();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.e("onCancel","onCancel");
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                        Log.e("onError","onError"+error.getLocalizedMessage());
+                    }
+                });
+
+            }
+        }); //facebookBtn 끝
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -96,15 +181,18 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
     }//oncreate 끝
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode,resultCode,data);
+    }
+
     private void populateAutoComplete() {
 
         getLoaderManager().initLoader(0, null, this);
     }
 
-    public void attemptSign(View view){
-        Intent intent = new Intent(getApplicationContext(),JoinActivity1.class);
-        startActivity(intent);
-    }
+
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -151,9 +239,10 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            params.put("email",email);
+            params.put("userId",email);
             params.put("password",password);
             params.put("token", FirebaseInstanceId.getInstance().getToken());
+            params.put("isApi","false");
 
             LoginNetworkTask networkTask = new LoginNetworkTask(LoginActivity.this, null, null, null);
             networkTask.execute(params);

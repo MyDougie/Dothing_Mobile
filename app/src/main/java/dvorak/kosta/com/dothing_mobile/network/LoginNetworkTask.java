@@ -15,6 +15,7 @@ import java.util.Map;
 import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.activity.ChatTestActivity;
 import dvorak.kosta.com.dothing_mobile.activity.DetailViewActivity;
+import dvorak.kosta.com.dothing_mobile.LoginApiActivity;
 import dvorak.kosta.com.dothing_mobile.activity.FrameActivity;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
@@ -28,7 +29,9 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
     SharedPreferences auto;
     SharedPreferences.Editor autoLogin;
     String click, errandsNum, requestUserId;
+    String name, email, gender, selfImg, isApi, password;
     public LoginNetworkTask(Activity activity, String click, String errandsNum, String requestUserId){
+
         this.activity = activity;
         this.errandsNum = errandsNum;
         this.click = click;
@@ -44,13 +47,24 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
 
     /** * 본 작업을 쓰레드로 처리해준다. * @param params * @return */
     protected String doInBackground(Map<String,String>... maps) {
+        password = maps[0].get("password");
+        email = maps[0].get("userId");
+        name = maps[0].get("name");
+        gender = maps[0].get("gender");
+        selfImg = maps[0].get("selfImg");
+        isApi = maps[0].get("isApi");
+
+        String url="";
+
+        if("true".equals(isApi)){
+            url="androidMember/apiCheckId";
+        } else{
+            url= "androidMember/checkId";
+        }
+
         // HTTP 요청 준비 작업
-        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidMember/checkId");
+        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + url);
         http.addAllParameters(maps[0]);
-        String password = maps[0].get("password");
-        auto = activity.getSharedPreferences("auto",Activity.MODE_PRIVATE);
-        autoLogin = auto.edit();
-        autoLogin.putString("LoginPassword",password);
 
         // HTTP 요청 전송
         HttpClient post = http.create();
@@ -66,14 +80,25 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
     protected void onPostExecute(String s) {
 
         if(s.trim().equals("")) {
-            Toast.makeText(activity,"로그인 실패",Toast.LENGTH_SHORT).show();
+            if(!"true".equals(isApi))
+                Toast.makeText(activity,"로그인 실패",Toast.LENGTH_SHORT).show();
+            if("true".equals(isApi)) {
+                Toast.makeText(activity,"추가 정보를 입력해주세요!",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(activity, LoginApiActivity.class);
+                intent.putExtra("userId", email);
+                intent.putExtra("gender", gender);
+                intent.putExtra("id", password);
+                intent.putExtra("name", name);
+                intent.putExtra("selfImg", selfImg);
+                activity.startActivity(intent);
+                activity.finish();
+            }
         }else {
             try {
 
                 JSONObject jsonObject = new JSONObject(s);
                 MemberInfo.userId = jsonObject.getString("userId");
                 MemberInfo.name = jsonObject.getString("name");
-                MemberInfo.password = jsonObject.getString("password");
                 MemberInfo.selfImgUrlPath = ConstantUtil.ipAddr + "users/" + MemberInfo.userId + "/" + jsonObject.getString("selfImg");
                 Log.e("pathURLIMG", MemberInfo.selfImgUrlPath);
                 MemberInfo.preAddr = jsonObject.getString("preAddr");
@@ -85,6 +110,7 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
                 MemberInfo.latitude = jsonObject.getString("latitude");
                 MemberInfo.longitude = jsonObject.getString("longitude");
                 MemberInfo.currentPoint = jsonObject.getJSONObject("point").getString("currentPoint");
+
                 MemberInfo.auth = jsonObject.getInt("auth");
                 JSONArray jsonArray = jsonObject.getJSONArray("gpaList");
                 int totalRes = 0, totalReq = 0;
@@ -109,6 +135,11 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
                 if(totalRes == 0 || totalReq == 0) MemberInfo.averageGPA = avg;
                 else if(totalRes != 0 && totalReq != 0) MemberInfo.averageGPA = avg/2;
                 else if(totalRes == 0 && totalReq ==0) MemberInfo.averageGPA = 0;
+
+
+                auto = activity.getSharedPreferences("auto", Activity.MODE_PRIVATE);
+                autoLogin = auto.edit();
+                autoLogin.putString("LoginPassword", password);
                 autoLogin.putString("LoginId",jsonObject.getString("userId"));
 
                 autoLogin.commit();

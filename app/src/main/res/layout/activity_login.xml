@@ -36,7 +36,8 @@
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="1">
 
             <AutoCompleteTextView
                 android:id="@+id/email"
@@ -65,13 +66,34 @@
             <Button
                 android:id="@+id/email_sign_in_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="15dp"
                 android:background="@color/colorPrimaryDark"
                 android:text="@string/action_sign_in"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
+            <com.facebook.login.widget.LoginButton
+                xmlns:facebook="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/facebookBtn"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:paddingTop="10dp"
+                android:layout_height="50dp"
+                android:paddingBottom="10dp"
+                facebook:com_facebook_login_text="Facebook으로 계속하기" />
+
+            <!--<Button
+                android:id="@+id/facebookBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/com_facebook_button_background_color"
+                android:text="페이스북 로그인"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18sp" />-->
 
         </LinearLayout>
     </ScrollView>
