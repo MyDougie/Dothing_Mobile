@@ -21,7 +21,6 @@ import com.bumptech.glide.Glide;
 
 import java.text.DecimalFormat;
 
-import dvorak.kosta.com.dothing_mobile.LoginActivity;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;

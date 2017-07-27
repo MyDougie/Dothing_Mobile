@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
+import dvorak.kosta.com.dothing_mobile.network.HttpClient;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.adapter.ChatViewAdapter;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
@@ -98,7 +98,7 @@ public class ChatTestActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    sk = new Socket("192.168.0.3", 8888);
+                    sk = new Socket("13.113.174.159", 8888);
                     pw = new PrintWriter(new OutputStreamWriter(sk.getOutputStream(), "UTF-8"), true);
                     br = new BufferedReader(
                             new InputStreamReader(sk.getInputStream(), "UTF-8"));

@@ -26,11 +26,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".JoinActivity1" />
-        <activity android:name=".JoinActivity3" />
-        <activity android:name=".AddrWebviewActivity" />
+        <activity android:name=".activity.JoinActivity1" />
+        <activity android:name=".activity.JoinActivity3" />
+        <activity android:name=".activity.AddrWebviewActivity" />
         <activity android:name=".activity.ErrandActivity" />
         <activity android:name=".activity.FrameActivity" />
         <activity android:name=".activity.ErrandRegisterActivity" />
@@ -71,7 +71,7 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".LoginApiActivity"
+            android:name=".activity.LoginApiActivity"
             android:label="@string/title_activity_login_api"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
 

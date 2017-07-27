@@ -1,4 +1,4 @@
-package dvorak.kosta.com.dothing_mobile;
+package dvorak.kosta.com.dothing_mobile.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.facebook.CallbackManager;
@@ -43,6 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.network.LoginNetworkTask;
 
 
@@ -70,6 +72,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
     private View mLoginFormView;
 
     private Map<String,String> params;
+    public static ProgressBar progressBar;
 
     private CallbackManager callbackManager;
     private Button facebookBtn;
@@ -83,7 +86,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
 
         callbackManager = CallbackManager.Factory.create();
         facebookBtn = (Button)findViewById(R.id.facebookBtn);
-
+        progressBar = (ProgressBar)findViewById(R.id.loginProgress);
         params = new HashMap<>();
 
         // Set up the login form.
@@ -243,7 +246,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
             params.put("password",password);
             params.put("token", FirebaseInstanceId.getInstance().getToken());
             params.put("isApi","false");
-
+Log.i("로그인" , "파람: " + params);
             LoginNetworkTask networkTask = new LoginNetworkTask(LoginActivity.this, null, null, null);
             networkTask.execute(params);
 

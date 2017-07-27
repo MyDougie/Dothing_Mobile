@@ -5,7 +5,6 @@ import android.util.Log;
 
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**

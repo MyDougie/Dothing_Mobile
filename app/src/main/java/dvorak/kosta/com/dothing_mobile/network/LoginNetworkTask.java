@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -12,10 +13,10 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
+import dvorak.kosta.com.dothing_mobile.activity.LoginActivity;
 import dvorak.kosta.com.dothing_mobile.activity.ChatTestActivity;
 import dvorak.kosta.com.dothing_mobile.activity.DetailViewActivity;
-import dvorak.kosta.com.dothing_mobile.LoginApiActivity;
+import dvorak.kosta.com.dothing_mobile.activity.LoginApiActivity;
 import dvorak.kosta.com.dothing_mobile.activity.FrameActivity;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
@@ -94,8 +95,10 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
                 activity.finish();
             }
         }else {
-            try {
 
+            try {
+                if(LoginActivity.progressBar != null)
+                    LoginActivity.progressBar.setVisibility(View.VISIBLE);
                 JSONObject jsonObject = new JSONObject(s);
                 MemberInfo.userId = jsonObject.getString("userId");
                 MemberInfo.name = jsonObject.getString("name");
@@ -155,12 +158,13 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
                     intent = new Intent(activity, ChatTestActivity.class);
                     intent.putExtra("errandsNum", errandsNum);
                 }
+                if(LoginActivity.progressBar != null)
+                LoginActivity.progressBar.setVisibility(View.GONE);
                 activity.startActivity(intent);
                 activity.finish();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
 }

@@ -10,8 +10,7 @@ import com.google.gson.Gson;
 
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
-import dvorak.kosta.com.dothing_mobile.LoginActivity;
+import dvorak.kosta.com.dothing_mobile.activity.LoginActivity;
 import dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
