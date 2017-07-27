@@ -3,23 +3,13 @@ package dvorak.kosta.com.dothing_mobile.network;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.Adapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.HttpClient;
-import dvorak.kosta.com.dothing_mobile.R;
-import dvorak.kosta.com.dothing_mobile.adapter.ReplyListViewAdapter;
-import dvorak.kosta.com.dothing_mobile.fragment.DetailOneFragment;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
@@ -35,7 +25,7 @@ public class StartErrandNetworkTask extends AsyncTask<Map<String, String>, Integ
             super();
         }
 
-        public StartErrandNetworkTask(Activity activityr) {
+        public StartErrandNetworkTask(Activity activity) {
             super();
             this.activity = activity;
         }
@@ -62,6 +52,7 @@ public class StartErrandNetworkTask extends AsyncTask<Map<String, String>, Integ
 
         }
 
+
         /**
          * doInBackground 종료되면 동작한다. * @param s : doInBackground가 리턴한 값이 들어온다.
          */
@@ -73,10 +64,18 @@ public class StartErrandNetworkTask extends AsyncTask<Map<String, String>, Integ
                 JSONObject obj = new JSONObject(s);
                 String result = obj.getString("result");
                 Log.i("result : ", result+"");
+
                 if(result.equals("포인트가 부족합니다! 충전해주세요.")){
-                    Toast.makeText(activity, result, Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(activity, "포인트가 부족합니다! 충전해주세요.", Toast.LENGTH_SHORT).show();
+
+
+
+
                 }else if(result.equals("성공적으로 매칭되었습니다!!")){
-                    Toast.makeText(activity, result, Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(activity, "성공적으로 매칭되었습니다!", Toast.LENGTH_SHORT).show();
+
                 }
 
 

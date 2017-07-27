@@ -10,11 +10,19 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.R;
+import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
+import dvorak.kosta.com.dothing_mobile.network.UploadDataNetworkTask;
+import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 public class SafetyActivity extends Activity {
-    Button safeBtn;
+    Button safeBtn, safeSubmitBtn;
     ImageView safeImg;
     String imgPath;
 
@@ -22,13 +30,30 @@ public class SafetyActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_safety);
-
+safeSubmitBtn = (Button)findViewById(R.id.safeSubmitBtn);
         safeBtn = (Button) findViewById(R.id.safeBtn);
         safeImg = (ImageView) findViewById(R.id.safeImg);
         safeBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 doTakeAlbumAction();
+            }
+        });
+        safeSubmitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(imgPath == null){
+                    Toast.makeText(SafetyActivity.this, "이미지를 선택해주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Map<String, Object> params = new HashMap<>();
+                params.put("ssnImgFile", new File(imgPath));
+                params.put("userId", MemberInfo.userId);
+                UploadDataNetworkTask uploadDataNetworkTask = new UploadDataNetworkTask(ConstantUtil.ipAddr + "androidMember/submitSafety", SafetyActivity.this);
+                uploadDataNetworkTask.execute(params);
+                Toast.makeText(SafetyActivity.this, "등록 완료되었습니다.", Toast.LENGTH_SHORT);
+                MemberInfo.ssnImg = "OK";
+                finish();
             }
         });
     }

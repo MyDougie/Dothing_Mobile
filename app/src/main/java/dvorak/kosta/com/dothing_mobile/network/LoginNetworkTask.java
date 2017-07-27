@@ -27,11 +27,12 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
     Activity activity;
     SharedPreferences auto;
     SharedPreferences.Editor autoLogin;
-    String click, errandsNum;
-    public LoginNetworkTask(Activity activity, String click, String errandsNum){
+    String click, errandsNum, requestUserId;
+    public LoginNetworkTask(Activity activity, String click, String errandsNum, String requestUserId){
         this.activity = activity;
         this.errandsNum = errandsNum;
         this.click = click;
+        this.requestUserId =requestUserId;
     }
 
     /** * doInBackground 실행되기 이전에 동작한다. */
@@ -112,11 +113,13 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
 
                 autoLogin.commit();
                 Intent intent = null;
+                Log.i("인자들", click + " : " + errandsNum + " : " + requestUserId);
                 if(click == null) {
                     intent = new Intent(activity, FrameActivity.class);
                 }else if(click.equals("DETAIL_ACTIVITY")){
                     intent = new Intent(activity, DetailViewActivity.class);
                     intent.putExtra("errandNum", errandsNum);
+                    intent.putExtra("requestUserId", requestUserId);
                 }else if(click.equals("CHAT_ACTIVITY")){
                     intent = new Intent(activity, ChatTestActivity.class);
                     intent.putExtra("errandsNum", errandsNum);

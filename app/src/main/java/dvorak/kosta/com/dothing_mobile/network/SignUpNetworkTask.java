@@ -12,7 +12,7 @@ import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.MainActivity;
-import dvorak.kosta.com.dothing_mobile.dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
+import dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**

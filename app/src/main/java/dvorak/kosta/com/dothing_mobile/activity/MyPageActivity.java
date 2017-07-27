@@ -112,7 +112,8 @@ public class MyPageActivity extends AppCompatActivity{
                         Toast.makeText(MyPageActivity.this, "이미 안전심부름꾼입니다 :)",Toast.LENGTH_SHORT).show();
                         break;
                     }
-                    if(MemberInfo.ssnImg != null){
+                    Log.i("SSNIMG", MemberInfo.ssnImg);
+                    if(!MemberInfo.ssnImg.equals("null")){
                         Toast.makeText(MyPageActivity.this, "안전심부름꾼 심사 대기중입니다 :)",Toast.LENGTH_SHORT).show();
                         break;
                     }

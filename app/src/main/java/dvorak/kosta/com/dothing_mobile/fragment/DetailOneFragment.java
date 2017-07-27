@@ -1,6 +1,8 @@
 package dvorak.kosta.com.dothing_mobile.fragment;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,8 +31,8 @@ import dvorak.kosta.com.dothing_mobile.network.StartErrandNetworkTask;
  * A simple {@link Fragment} subclass.
  */
 public class DetailOneFragment extends Fragment{
-
     public static String errandTime;
+    Activity activity;
     View v;
     ReplyListViewAdapter adapter = new ReplyListViewAdapter();
 
@@ -48,6 +50,14 @@ public class DetailOneFragment extends Fragment{
 
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof  Activity){
+            activity = (Activity)context;
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -55,7 +65,6 @@ public class DetailOneFragment extends Fragment{
 
         final String errandNum = getActivity().getIntent().getStringExtra("errandNum");
         String requestUserId = getActivity().getIntent().getStringExtra("requestUserId");
-        Log.i("requestUserIdzzzzz", requestUserId);
 
         final ListView listView = (ListView)v.findViewById(R.id.replyList);
 
@@ -79,6 +88,7 @@ public class DetailOneFragment extends Fragment{
                 // Inflate the layout for this fragment
             }
         });
+
 
         //심부름을 등록한 유저 ID 와 접속한 유저 ID 같아야함.
     if(requestUserId.equals(MemberInfo.userId)) {
@@ -123,7 +133,8 @@ public class DetailOneFragment extends Fragment{
                                     Map<String, View> map = new HashMap<>();
                                     map.put("view", v);
 
-                                    StartErrandNetworkTask networkTask = new StartErrandNetworkTask(getActivity());
+
+                                    StartErrandNetworkTask networkTask = new StartErrandNetworkTask(activity);
                                     Map<String, String> params = new HashMap<>();
                                     params.put("requestUserId", MemberInfo.userId);
                                     params.put("strErrandNum", errandNum);
@@ -150,6 +161,7 @@ public class DetailOneFragment extends Fragment{
 
         DetailErrandNetworkTask networkTask = new DetailErrandNetworkTask(errandNum, map, adapter);
         Map<String, String> params = new HashMap<>();
+        Log.i("이랜즈넘", errandNum);
         params.put("errandNum", errandNum);
         networkTask.execute(params);
 

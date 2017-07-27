@@ -30,7 +30,7 @@ public class AuthNetworkTask  extends AsyncTask<Map<String,String>,Integer,Strin
 
     @Override
     protected String doInBackground(Map<String, String>... maps) {
-        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "android/sendEmail");
+        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidMember/sendEmail");
         http.addAllParameters(maps[0]);
 
         // HTTP 요청 전송

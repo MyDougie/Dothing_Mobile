@@ -33,6 +33,7 @@ public class MyRequestActivity extends AppCompatActivity {
                 ErrandsItem item = (ErrandsItem)parent.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), DetailViewActivity.class);
                 intent.putExtra("errandNum",item.getErrandNum()+"");
+                intent.putExtra("requestUserId", item.getRequesterId());
                 startActivity(intent);
             }
         });

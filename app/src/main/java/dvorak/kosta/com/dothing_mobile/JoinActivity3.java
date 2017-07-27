@@ -91,7 +91,7 @@ public class JoinActivity3 extends AppCompatActivity {
                     params.put("longitude",longitude);
                     params.put("selfImgFile",new File(imgPath));
 
-                    new UploadDataNetworkTask(ConstantUtil.ipAddr + "android/signIn", JoinActivity3.this).execute(params);
+                    new UploadDataNetworkTask(ConstantUtil.ipAddr + "androidMember/signIn", JoinActivity3.this).execute(params);
 
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent);

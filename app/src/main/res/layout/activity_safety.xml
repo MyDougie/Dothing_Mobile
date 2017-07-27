@@ -10,29 +10,28 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="13dp"
         android:text="안전 심부름꾼 등록"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:id="@+id/textView18" />
+        android:id="@+id/textView18"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:id="@+id/safeImg"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/border"
         android:layout_below="@+id/textView18"
-        android:layout_alignRight="@+id/textView18"
-        android:layout_alignEnd="@+id/textView18" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/safeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/safeImg"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
@@ -70,8 +69,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="등록"
-        android:layout_below="@+id/textView26"
-        android:layout_alignLeft="@+id/safeBtn"
-        android:layout_alignStart="@+id/safeBtn"
-        android:layout_marginTop="13dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

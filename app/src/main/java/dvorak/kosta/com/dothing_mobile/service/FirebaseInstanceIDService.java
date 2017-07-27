@@ -1,4 +1,4 @@
-package dvorak.kosta.com.dothing_mobile.activity;
+package dvorak.kosta.com.dothing_mobile.service;
 
 /**
  * Created by YTK on 2017-07-16.
