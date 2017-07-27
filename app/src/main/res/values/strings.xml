@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Dothing_Mobile</string>
     <string name="title_activity_login">Sign in</string>
-    <string name="facebook_app_id">1560013357395339</string>
-
+    <string name="facebook_app_id">1514650745271078</string>
+    <string name="fb_login_protocol_scheme">fb1514650745271078</string>
     <string name="errandTitle">심부름 검색</string>
     <!-- Strings related to login -->
     <string name="prompt_email">이메일</string>

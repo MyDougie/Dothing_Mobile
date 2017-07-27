@@ -105,7 +105,7 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 Log.e("result : ",object.toString());
                                 Profile profile = Profile.getCurrentProfile();
-                                selfImg = profile.getProfilePictureUri(100,100).toString();
+                                selfImg = profile.getProfilePictureUri(128,128).toString();
                                 Log.e("bbbbb",selfImg);
 
                                 try{
@@ -348,6 +348,11 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
 
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
+    }
+
+    public void attemptSign(View v){
+        Intent intent = new Intent(v.getContext(), JoinActivity1.class);
+        startActivity(intent);
     }
 }
 
