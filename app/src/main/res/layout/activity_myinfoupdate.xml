@@ -68,8 +68,7 @@
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="28dp"
-                        android:layout_marginBottom="20dp"
-                        android:hint="비밀번호" />
+                        android:layout_marginBottom="20dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -127,7 +126,7 @@
                 android:inputType="textPersonName" />
 
             <Button
-                android:id="@+id/continueBtn3"
+                android:id="@+id/updateBtn"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

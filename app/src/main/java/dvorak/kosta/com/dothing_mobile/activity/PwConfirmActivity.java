@@ -13,6 +13,7 @@ import java.util.Map;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.network.MyInfoUpdateNetworkTask;
+import dvorak.kosta.com.dothing_mobile.network.PwConfirmNetworkTask;
 
 /**
  * Created by crw12 on 2017-07-24.
@@ -47,18 +48,9 @@ public class PwConfirmActivity extends AppCompatActivity {
 
         params.put("id", MemberInfo.userId);
         params.put("pw", password.getText().toString());
-        params.put("test", "test");
 
-        MyInfoUpdateNetworkTask networkTask = new MyInfoUpdateNetworkTask(PwConfirmActivity.this);
+        PwConfirmNetworkTask networkTask = new PwConfirmNetworkTask(PwConfirmActivity.this);
         networkTask.execute(params);
-
-
-        if(password.getText().equals(MemberInfo.password)){
-            Toast.makeText(getApplicationContext(),"비밀번호가맞아", Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(getApplicationContext(),MemberInfo.userId, Toast.LENGTH_LONG).show();
-        }
-
 
     }
 
