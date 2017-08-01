@@ -71,5 +71,6 @@ public class FrameActivity extends ActivityGroup {
         params.put("id", MemberInfo.userId);
         params.put("latitude", gpsInfo.getLatitude() +"");
         params.put("longitude", gpsInfo.getLongitude() +"");
+        gpsNetworkTask.execute(params);
     }
 }

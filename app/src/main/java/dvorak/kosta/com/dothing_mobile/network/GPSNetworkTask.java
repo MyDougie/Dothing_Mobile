@@ -1,7 +1,6 @@
 package dvorak.kosta.com.dothing_mobile.network;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.util.Map;
 
@@ -9,6 +8,7 @@ import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by YTK on 2017-07-23.
+ * @brief : User의 GPS 정보를 Update 하는 NetWorkTask Class
  */
 
 public class GPSNetworkTask extends AsyncTask<Map<String, String>, Integer, String> {
@@ -17,16 +17,19 @@ public class GPSNetworkTask extends AsyncTask<Map<String, String>, Integer, Stri
     public GPSNetworkTask(String urlPath){
         this.urlPath = urlPath;
     }
+
     /**
-     * doInBackground 실행되기 이전에 동작한다.
-     */
+     * @brief : background을 실행하기 전 준비 단계 메소드
+     * */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
     }
 
     /**
-     * 본 작업을 쓰레드로 처리해준다. * @param params * @return
+     * @brief : 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param : Map<String,String> maps 웹으로 보내는 params
+     * @return : String
      */
     @Override
     protected String doInBackground(Map<String, String>... maps) {
@@ -39,19 +42,5 @@ public class GPSNetworkTask extends AsyncTask<Map<String, String>, Integer, Stri
         int statusCode = post.getHttpStatusCode(); // 응답 본문 가져오기
         String body = post.getBody();
         return body;
-    }
-
-    /**
-     * doInBackground 종료되면 동작한다. * @param s : doInBackground가 리턴한 값이 들어온다.
-     */
-    @Override
-    protected void onPostExecute(String s) {
-        Log.d("HTTP_RESULT", s);
-        try {
-
-        }catch(Exception e){
-            Log.e("E", e.getMessage());
-        }
-
     }
 }

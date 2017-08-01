@@ -1,7 +1,6 @@
 package dvorak.kosta.com.dothing_mobile.network;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,9 +19,8 @@ import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by Administrator on 2017-07-24.
+ * @brief : 선택된 심부름의 상세정보 가져오는 NetWorkTask Class
  */
-
-
 public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Integer, String> {
 
     private ReplyListViewAdapter adapter;
@@ -47,7 +45,9 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
     }
 
     /**
-     * 본 작업을 쓰레드로 처리해준다. * @param params * @return
+     * @brief : 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param : Map<String,String> maps 웹으로 보내는 params
+     * @return : String
      */
     @Override
     protected String doInBackground(Map<String, String>... maps) {
@@ -63,6 +63,9 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
         return body;
     }
 
+    /**
+     * @brief : background을 실행하기 전 준비 단계 메소드
+     * */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -76,8 +79,10 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
     }
 
     /**
-     * doInBackground 종료되면 동작한다. * @param s : doInBackground가 리턴한 값이 들어온다.
-     */
+     * @brief : UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
+     * s로 필요한 데이터 정보들을 받아와서 심부름의 상세정보를 보여준다.
+     * @param : String s doInBackground()에서 return한 parameter
+     * */
     @Override
     protected void onPostExecute(String s) {
         try {
@@ -93,11 +98,6 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
             errandContent = errandContent.replaceAll("<p>","");
             errandContent = errandContent.replaceAll("</p>","\n");
 
-            Log.i("productPrice : ", productPrice+"");
-            Log.i("errandsPrice : ", errandsPrice+"");
-            Log.i("address : ", address);
-            Log.i("errandContent : ", errandContent+"");
-            Log.i("errandImg : ", errandImg+"");
 
             this.errandsPrice.setText(errandsPrice+"");
             this.productPrice.setText(productPrice+"");
@@ -126,29 +126,15 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
                 content = content.replaceAll("<p>","");
                 content = content.replaceAll("</p>","\n");
 
-                Log.i("replyNum!! : ", replyNum+"");
-                Log.i("userId : ", userId);
-                Log.i("name : ", name);
-                Log.i("content : ", content);
-                Log.i("arrivalTime : ", arrivalTime);
-                Log.i("replyDate : ", replyDate);
-                Log.i("imgPath : ", imgPath);
-                Log.i("avgGpa : ", avgGpa+"");
 
                 adapter.addItem(replyNum, userId, name, content, arrivalTime, replyDate, imgPath, avgGpa);
             }
             adapter.notifyDataSetChanged();
-            Log.e("현재 사이즈: ", "" +adapter.getCount());
 
 
         }catch(Exception e){
             e.printStackTrace();
         }
 
-    }
-
-    @Override
-    protected void onCancelled() {
-        super.onCancelled();
     }
 }
