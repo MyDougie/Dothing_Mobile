@@ -16,9 +16,8 @@ import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
 
 /**
- * Created by YTK on 2017-07-12.
+ * @breif : 뷰와 심부름아이템을 연결시켜주는 역할을 하는 클래스
  */
-
 public class ListViewAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<ErrandsItem> listViewItemList = new ArrayList<ErrandsItem>() ;
@@ -26,13 +25,22 @@ public class ListViewAdapter extends BaseAdapter {
     public ListViewAdapter() {
     }
 
-    // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
+    /**
+     * @brief : Adapter에 사용되는 데이터의 개수를 리턴해주는 함수
+     * @return int: 심부름의 갯수
+     */
     @Override
     public int getCount() {
         return listViewItemList.size() ;
     }
 
-    // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현
+    /**
+     * @brief : position에 위치한 심부름을 화면에 출력하는데 사용될 View를 리턴.
+     * @param : int position -  행의 index를 의미
+     * @param : View convertView -  행 전체를 나타내는 뷰를 의미
+     * @param : ViewGroup parent -  어댑터를 가지고 있는 부모뷰를 의미
+     * @return View: 심부름목록을 화면에 출력하는데 사용될 View
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final int pos = position;
@@ -77,19 +85,30 @@ public class ListViewAdapter extends BaseAdapter {
         return convertView;
     }
 
-    // 지정한 위치(position)에 있는 데이터와 관계된 아이템(row)의 ID를 리턴. : 필수 구현
+    /**
+     * @brief : 선택된 행의 item의 id를 리턴하는 메소드
+     * @param : int position -  행의 index를 의미
+     * @return long: 선택된 row의 id를 리턴
+     */
     @Override
     public long getItemId(int position) {
         return position ;
     }
 
-    // 지정한 위치(position)에 있는 데이터 리턴 : 필수 구현
+    /**
+     * @brief : 선택된 행의 item을 리턴
+     * @param : int position -  행의 index를 의미
+     * @return Object: 선택된 row의 item을 리턴
+     */
     @Override
     public Object getItem(int position) {
         return listViewItemList.get(position) ;
     }
 
-
+    /**
+     * @brief : list에 item을 추가하기 위한 메소드.
+     * @param : ErrandsItem 속성들
+     */
     public void addItem(String requesteUserId, int errandNum, String title, String errandPrice, String addr, String latitude, String longitude, String time, int replyNum) {
 
         ErrandsItem item = new ErrandsItem();
@@ -105,12 +124,17 @@ public class ListViewAdapter extends BaseAdapter {
         item.setReplyNum(replyNum + "");
         listViewItemList.add(item);
     }
-    //리스트의 모든 아이템 제거
+    /**
+     * @brief : list의 모든 아이템을 제거하는 메소드.
+     */
     public void removeItem(){
         listViewItemList.clear();
     }
 
-    //아이템 리스트를 리턴
+    /**
+     * @brief : list의 모든 아이템을 제거하는 메소드.
+     * @return ArrayList<ErrandsItem> : ErrandsItem 리스트를 리턴
+     */
     public ArrayList<ErrandsItem> getErrandList(){
         return listViewItemList;
     }

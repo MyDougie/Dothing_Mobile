@@ -14,7 +14,7 @@ import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.network.DetailRequesterNetworkTask;
 
 /**
- * A simple {@link Fragment} subclass.
+ * @breif : DetailViewActivity의 전체 UI중에 두번째 탭부분을 담당하는 클래스
  */
 public class DetailTwoFragment extends Fragment {
 
@@ -24,6 +24,10 @@ public class DetailTwoFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * @brief : Bundle객체를 통해 데이터들을 전송하는 메소드.
+     * @return Fragment : Fragment객체를 리턴.
+     */
     public static DetailTwoFragment newInstance(){
         Bundle args = new Bundle();
 
@@ -33,23 +37,19 @@ public class DetailTwoFragment extends Fragment {
     }
 
 
+    /**
+     * @brief : XML 레이아웃을 inflate하여 Fragment를 위한 View를 생성하고, Fragment 레이아웃의 root에 해당되는 View를 Activity에게 리턴하는 메소드.
+     * @param : LayoutInflater inflater inflater - xml 레이아웃을 inflate할 객체
+     * @return View: Fragment 레이아웃의 root에 해당되는 View를 Activity에게 리턴.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
 
         v = inflater.inflate(R.layout.fragment_detail_two, container, false);
 
         String errandNum = getActivity().getIntent().getStringExtra("errandNum");
 
-      //tab3
-        /*
-        ImageView requesterUserImg = (ImageView) v.findViewById(R.id.requesterImg);
-        TextView requestId = (TextView) v.findViewById(R.id.requester_id);
-        TextView errandsRequestCount = (TextView) v.findViewById(R.id.errands_request_count);
-        RatingBar grade = (RatingBar) v.findViewById(R.id.mannerGrade);
-        */
         Map<String, View> map = new HashMap<>();
         map.put("view",v);
 
@@ -58,11 +58,7 @@ public class DetailTwoFragment extends Fragment {
         params.put("errandNum", errandNum);
         networkTask.execute(params);
 
-        // Inflate the layout for this fragment
-
         return v;
     }
-
-    //////////
 
 }
