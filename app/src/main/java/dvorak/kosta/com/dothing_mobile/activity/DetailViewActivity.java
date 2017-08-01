@@ -29,6 +29,16 @@ public class DetailViewActivity extends AppCompatActivity {
     LinearLayout ll;
     private static int TAB_COUNT = 3;
 
+    /**
+     *
+     * <pre>
+     *
+     *
+     * </pre>
+     * @Method Name : onCreate
+     * @return
+     * @throws
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
