@@ -1,4 +1,4 @@
-package dvorak.kosta.com.dothing_mobile;
+package dvorak.kosta.com.dothing_mobile.activity;
 
 import android.app.Dialog;
 import android.content.CursorLoader;
@@ -24,7 +24,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.activity.RegisterWebviewActivity;
+import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.network.UploadDataNetworkTask;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
@@ -91,9 +91,9 @@ public class JoinActivity3 extends AppCompatActivity {
                     params.put("longitude",longitude);
                     params.put("selfImgFile",new File(imgPath));
 
-                    new UploadDataNetworkTask(ConstantUtil.ipAddr + "android/signIn", JoinActivity3.this).execute(params);
+                    new UploadDataNetworkTask(ConstantUtil.ipAddr + "androidMember/signIn", JoinActivity3.this).execute(params);
 
-                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }

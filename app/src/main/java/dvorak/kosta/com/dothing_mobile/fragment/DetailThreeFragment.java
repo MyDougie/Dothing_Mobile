@@ -105,7 +105,7 @@ public class DetailThreeFragment extends Fragment {
                     Date upTime = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(arrivalTime.getText() + "");
                     Date errandTime = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(DetailOneFragment.errandTime);
 
-                    if (upTime.getTime() < errandTime.getTime()) {
+                    if (upTime.getTime() > errandTime.getTime()) {
                         Toast.makeText(getActivity(), "요청자의 요청 시간보다 시간이 느립니다.", Toast.LENGTH_SHORT).show();
                         return;
                     }

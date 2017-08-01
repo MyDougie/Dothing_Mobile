@@ -1,4 +1,4 @@
-package dvorak.kosta.com.dothing_mobile;
+package dvorak.kosta.com.dothing_mobile.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,7 +18,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import dvorak.kosta.com.dothing_mobile.dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
+import dvorak.kosta.com.dothing_mobile.R;
+import dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
 import dvorak.kosta.com.dothing_mobile.network.AuthNetworkTask;
 
 public class JoinActivity1 extends AppCompatActivity {

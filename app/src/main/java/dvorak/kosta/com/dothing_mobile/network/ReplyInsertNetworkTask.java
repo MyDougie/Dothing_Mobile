@@ -2,16 +2,10 @@ package dvorak.kosta.com.dothing_mobile.network;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**

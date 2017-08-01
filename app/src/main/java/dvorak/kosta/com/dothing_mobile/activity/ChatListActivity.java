@@ -16,7 +16,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
+import dvorak.kosta.com.dothing_mobile.network.HttpClient;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.adapter.ChatListViewAdapter;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;

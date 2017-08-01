@@ -74,6 +74,7 @@ public class ErrandsListActivity extends AppCompatActivity implements View.OnCli
 
                     Intent intent = new Intent(getApplicationContext(), DetailViewActivity.class);
                     intent.putExtra("errandNum",item.getErrandNum()+"");
+                    intent.putExtra("requestUserId", item.getRequesterId());
                     startActivity(intent);
 
             }

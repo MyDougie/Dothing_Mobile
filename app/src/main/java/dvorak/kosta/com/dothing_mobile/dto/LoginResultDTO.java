@@ -1,4 +1,4 @@
-package dvorak.kosta.com.dothing_mobile.dvorak.kosta.com.dothing_mobile.dto;
+package dvorak.kosta.com.dothing_mobile.dto;
 
 /**
  * Created by Administrator on 2017-07-10.

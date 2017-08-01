@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.adapter.MyListViewAdapter;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
@@ -75,6 +74,8 @@ public class MyErrandNetworkTask  extends AsyncTask<Map<String, String>, Integer
                 String startTime = obj.getString("startTime");
                 String finishTime = obj.getString("finishTime");
                 String arrivalTime = obj.getString("arrivalTime");
+                JSONObject reqObj = obj.getJSONObject("requestUser");
+                String requestId = reqObj.getString("userId");
                 if(errandType.equals("myRequest")) { // 내 요청목록일 경우
                     if (startTime.equals("null")) {
                         state = "심부름꾼 대기중";
@@ -107,7 +108,7 @@ public class MyErrandNetworkTask  extends AsyncTask<Map<String, String>, Integer
                         }
                     }
                 }
-                adapter.addItem(errandNum, title, errandPrice + productPrice + "" ,addr,errandTime, replyNum,state);
+                adapter.addItem(requestId, errandNum, title, errandPrice + productPrice + "" ,addr,errandTime, replyNum,state);
             }
 
             adapter.notifyDataSetChanged();

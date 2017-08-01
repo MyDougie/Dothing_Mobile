@@ -13,13 +13,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.text.DecimalFormat;
 
-import dvorak.kosta.com.dothing_mobile.LoginActivity;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 //import com.bumptech.glide.Glide;
 //import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -29,12 +33,16 @@ import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
  */
 
 public class MyPageActivity extends AppCompatActivity{
-    LinearLayout myRequestLayout, myResponseLayout, myLogout, myInfoPW;
+
+    LinearLayout myRequestLayout, myResponseLayout, myLogout, mySafety, myInfoPW;
+    RatingBar ratingbar;
+
     TextView myName, myEmail, myPoint;
     ImageView myImage;
     Handler handler;
     Bitmap bmImg;
     MyPageListener myPageListener = new MyPageListener();
+
 //    back task;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +56,7 @@ public class MyPageActivity extends AppCompatActivity{
         myRequestLayout = (LinearLayout)findViewById(R.id.requestBtn);
         myResponseLayout = (LinearLayout)findViewById(R.id.responseBtn);
         myLogout = (LinearLayout) findViewById(R.id.logoutBtn);
+
         myInfoPW = (LinearLayout) findViewById(R.id.myinfoupdate);
 
         myRequestLayout.setOnClickListener(myPageListener);
@@ -56,13 +65,23 @@ public class MyPageActivity extends AppCompatActivity{
         myInfoPW.setOnClickListener(myPageListener);
 
         Log.e("정보들", MemberInfo.name + " " + MemberInfo.userId + " " + MemberInfo.selfImgUrlPath);
+
+        mySafety = (LinearLayout)findViewById(R.id.safetyBtn);
+        ratingbar = (RatingBar)findViewById(R.id.myRating);
+        myRequestLayout.setOnClickListener(myPageListener);
+        myResponseLayout.setOnClickListener(myPageListener);
+        myLogout.setOnClickListener(myPageListener);
+        mySafety.setOnClickListener(myPageListener);
+        Log.e("정보들", MemberInfo.name + " " + MemberInfo.userId + " " + MemberInfo.selfImgUrlPath + " " + MemberInfo.averageGPA);
+
         myName.setText(MemberInfo.name);
         myEmail.setText(MemberInfo.userId);
+        ratingbar.setRating(MemberInfo.averageGPA);
         DecimalFormat formatter = new DecimalFormat("#,###");
         String currentPoint = formatter.format(Double.parseDouble(MemberInfo.currentPoint));
         myPoint.setText(currentPoint + "원");
 
-       // Glide.with(this).load(MemberInfo.selfImgUrlPath).bitmapTransform(new CropCircleTransformation(this)).into(myImage);
+        Glide.with(this).load(MemberInfo.selfImgUrlPath).bitmapTransform(new CropCircleTransformation(this)).into(myImage);
 
 
 
@@ -106,6 +125,19 @@ public class MyPageActivity extends AppCompatActivity{
                     startActivity(pwIntent);
                     break;
 
+                case R.id.safetyBtn:
+                    if(MemberInfo.auth == 2){
+                        Toast.makeText(MyPageActivity.this, "이미 안전심부름꾼입니다 :)",Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    Log.i("SSNIMG", MemberInfo.ssnImg);
+                    if(!MemberInfo.ssnImg.equals("null")){
+                        Toast.makeText(MyPageActivity.this, "안전심부름꾼 심사 대기중입니다 :)",Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    Intent safetyIntent = new Intent(MyPageActivity.this, SafetyActivity.class);
+                    startActivity(safetyIntent);
+                    break;
             }
         }
     }

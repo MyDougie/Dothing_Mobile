@@ -9,7 +9,6 @@ import android.widget.EditText;
 
 import net.daum.mf.map.api.MapView;
 
-import dvorak.kosta.com.dothing_mobile.AddrWebviewActivity;
 import dvorak.kosta.com.dothing_mobile.R;
 
 public class ErrandRegisterAddrActivity extends AppCompatActivity {

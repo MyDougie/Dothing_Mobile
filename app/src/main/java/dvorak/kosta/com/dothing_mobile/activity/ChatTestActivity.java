@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
+import dvorak.kosta.com.dothing_mobile.network.HttpClient;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.adapter.ChatViewAdapter;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
@@ -84,7 +84,7 @@ public class ChatTestActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 long time = System.currentTimeMillis();
-                SimpleDateFormat dayTime = new SimpleDateFormat("MM/dd hh시 mm분");
+                SimpleDateFormat dayTime = new SimpleDateFormat("MM/dd HH시 mm분");
 
                 String str = dayTime.format(new Date(time));
                 String message = MemberInfo.userId + ":" + inputChat.getText() + ":" + str + ":" + you + ":" + meImg.substring(meImg.lastIndexOf("/") + 1, meImg.length()); // 보내는사람(나) : 채팅내용 : 시간 : 상대방
@@ -98,7 +98,7 @@ public class ChatTestActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    sk = new Socket("192.168.0.3", 8888);
+                    sk = new Socket("13.113.174.159", 8888);
                     pw = new PrintWriter(new OutputStreamWriter(sk.getOutputStream(), "UTF-8"), true);
                     br = new BufferedReader(
                             new InputStreamReader(sk.getInputStream(), "UTF-8"));

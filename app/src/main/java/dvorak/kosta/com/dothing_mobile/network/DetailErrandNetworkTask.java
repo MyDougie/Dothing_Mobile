@@ -13,7 +13,6 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.adapter.ReplyListViewAdapter;
 import dvorak.kosta.com.dothing_mobile.fragment.DetailOneFragment;
@@ -60,6 +59,7 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
         post.request(); // 응답 상태코드 가져오기
         int statusCode = post.getHttpStatusCode(); // 응답 본문 가져오기
         String body = post.getBody();
+
         return body;
     }
 
@@ -107,12 +107,11 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
             DetailOneFragment.errandTime=errandTime;
             Glide.with(view.getContext()).load(ConstantUtil.ipAddr + "errands/" + errandNum + "/" + errandImg).into(this.errandImg);
 
-            ///
-
             JSONArray replyList = obj.getJSONArray("replyList");
             JSONArray avgGpaList = obj.getJSONArray("avgGpaList");
             for(int i=0; i<replyList.length(); i++){
                 JSONObject replyObj=  replyList.getJSONObject(i);
+                int replyNum = replyObj.getInt("replyNum");
                 String content = replyObj.getString("replyContent");
                 String arrivalTime = replyObj.getString("arrivalTime");
                 String replyDate = replyObj.getString("replyDate");
@@ -127,6 +126,7 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
                 content = content.replaceAll("<p>","");
                 content = content.replaceAll("</p>","\n");
 
+                Log.i("replyNum!! : ", replyNum+"");
                 Log.i("userId : ", userId);
                 Log.i("name : ", name);
                 Log.i("content : ", content);
@@ -135,7 +135,7 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
                 Log.i("imgPath : ", imgPath);
                 Log.i("avgGpa : ", avgGpa+"");
 
-                adapter.addItem(userId, name, content, arrivalTime, replyDate, imgPath, avgGpa);
+                adapter.addItem(replyNum, userId, name, content, arrivalTime, replyDate, imgPath, avgGpa);
             }
             adapter.notifyDataSetChanged();
             Log.e("현재 사이즈: ", "" +adapter.getCount());

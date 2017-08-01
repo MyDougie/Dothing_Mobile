@@ -5,13 +5,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
+import dvorak.kosta.com.dothing_mobile.activity.LoginActivity;
+import dvorak.kosta.com.dothing_mobile.activity.ChatTestActivity;
+import dvorak.kosta.com.dothing_mobile.activity.DetailViewActivity;
+import dvorak.kosta.com.dothing_mobile.activity.LoginApiActivity;
 import dvorak.kosta.com.dothing_mobile.activity.FrameActivity;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
@@ -24,9 +29,14 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
     Activity activity;
     SharedPreferences auto;
     SharedPreferences.Editor autoLogin;
+    String click, errandsNum, requestUserId;
+    String name, email, gender, selfImg, isApi, password;
+    public LoginNetworkTask(Activity activity, String click, String errandsNum, String requestUserId){
 
-    public LoginNetworkTask(Activity activity){
         this.activity = activity;
+        this.errandsNum = errandsNum;
+        this.click = click;
+        this.requestUserId =requestUserId;
     }
 
     /** * doInBackground 실행되기 이전에 동작한다. */
@@ -38,14 +48,28 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
 
     /** * 본 작업을 쓰레드로 처리해준다. * @param params * @return */
     protected String doInBackground(Map<String,String>... maps) {
+        password = maps[0].get("password");
+        email = maps[0].get("userId");
+        name = maps[0].get("name");
+        gender = maps[0].get("gender");
+        selfImg = maps[0].get("selfImg");
+        isApi = maps[0].get("isApi");
+
+        String url="";
+
+        if("true".equals(isApi)){
+            url="androidMember/apiCheckId";
+        } else{
+            url= "androidMember/checkId";
+        }
+
         // HTTP 요청 준비 작업
 
         HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidMember/checkId");
+
+        //HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + url);
+
         http.addAllParameters(maps[0]);
-        String password = maps[0].get("password");
-        auto = activity.getSharedPreferences("auto",Activity.MODE_PRIVATE);
-        autoLogin = auto.edit();
-        autoLogin.putString("LoginPassword",password);
 
         // HTTP 요청 전송
         HttpClient post = http.create();
@@ -62,36 +86,90 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
     protected void onPostExecute(String s) {
 
         if(s.trim().equals("")) {
-            Toast.makeText(activity,"로그인 실패",Toast.LENGTH_SHORT).show();
+            if(!"true".equals(isApi))
+                Toast.makeText(activity,"로그인 실패",Toast.LENGTH_SHORT).show();
+            if("true".equals(isApi)) {
+                Toast.makeText(activity,"추가 정보를 입력해주세요!",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(activity, LoginApiActivity.class);
+                intent.putExtra("userId", email);
+                intent.putExtra("gender", gender);
+                intent.putExtra("id", password);
+                intent.putExtra("name", name);
+                intent.putExtra("selfImg", selfImg);
+                activity.startActivity(intent);
+                activity.finish();
+            }
         }else {
-            try {
 
+            try {
+                if(LoginActivity.progressBar != null)
+                    LoginActivity.progressBar.setVisibility(View.VISIBLE);
                 JSONObject jsonObject = new JSONObject(s);
                 MemberInfo.userId = jsonObject.getString("userId");
                 MemberInfo.name = jsonObject.getString("name");
-                MemberInfo.password = jsonObject.getString("password");
                 MemberInfo.selfImgUrlPath = ConstantUtil.ipAddr + "users/" + MemberInfo.userId + "/" + jsonObject.getString("selfImg");
                 Log.e("pathURLIMG", MemberInfo.selfImgUrlPath);
                 MemberInfo.preAddr = jsonObject.getString("preAddr");
                 MemberInfo.detailAddr = jsonObject.getString("detailAddr");
                 MemberInfo.sex = jsonObject.getString("sex");
+                MemberInfo.ssnImg = jsonObject.getString("ssnImg");
                 MemberInfo.joinDate = jsonObject.getString("joinDate");
                 MemberInfo.introduce = jsonObject.getString("introduce");
                 MemberInfo.latitude = jsonObject.getString("latitude");
                 MemberInfo.longitude = jsonObject.getString("longitude");
                 MemberInfo.currentPoint = jsonObject.getJSONObject("point").getString("currentPoint");
 
+                MemberInfo.auth = jsonObject.getInt("auth");
+                JSONArray jsonArray = jsonObject.getJSONArray("gpaList");
+                int totalRes = 0, totalReq = 0;
+                int totalResSum = 0, totalReqSum = 0;
+                for(int i=0; i<jsonArray.length(); i++){
+                    JSONObject gpa = jsonArray.getJSONObject(i);
+                    int responseAccuracy = gpa.getInt("responseAccuracy");
+                    int responseSpeed = gpa.getInt("responseSpeed");
+                    int responseKindness = gpa.getInt("responseKindness");
+                    int requestManners = gpa.getInt("requestManners");
+                    if(responseAccuracy != 0){
+                        totalResSum = (responseAccuracy + responseKindness + responseSpeed) / 3;
+                        totalRes++;
+                    }else {
+                        totalReqSum = requestManners;
+                        totalReq++;
+                    }
+                }
+                int avg = 0;
+                if(totalReq != 0) avg += totalReqSum / totalReq;
+                if(totalRes != 0) avg += totalResSum / totalRes;
+                if(totalRes == 0 || totalReq == 0) MemberInfo.averageGPA = avg;
+                else if(totalRes != 0 && totalReq != 0) MemberInfo.averageGPA = avg/2;
+                else if(totalRes == 0 && totalReq ==0) MemberInfo.averageGPA = 0;
+
+
+                auto = activity.getSharedPreferences("auto", Activity.MODE_PRIVATE);
+                autoLogin = auto.edit();
+                autoLogin.putString("LoginPassword", password);
                 autoLogin.putString("LoginId",jsonObject.getString("userId"));
 
                 autoLogin.commit();
-
-                Intent intent = new Intent(activity,FrameActivity.class);
+                Intent intent = null;
+                Log.i("인자들", click + " : " + errandsNum + " : " + requestUserId);
+                if(click == null) {
+                    intent = new Intent(activity, FrameActivity.class);
+                }else if(click.equals("DETAIL_ACTIVITY")){
+                    intent = new Intent(activity, DetailViewActivity.class);
+                    intent.putExtra("errandNum", errandsNum);
+                    intent.putExtra("requestUserId", requestUserId);
+                }else if(click.equals("CHAT_ACTIVITY")){
+                    intent = new Intent(activity, ChatTestActivity.class);
+                    intent.putExtra("errandsNum", errandsNum);
+                }
+                if(LoginActivity.progressBar != null)
+                LoginActivity.progressBar.setVisibility(View.GONE);
                 activity.startActivity(intent);
                 activity.finish();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
 }

@@ -16,17 +16,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.LoginActivity;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.network.LoginNetworkTask;
 
 public class SplashActivity extends AppCompatActivity {
     int checkstate = 0;
+    String click, errandsNum, requestUserId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null) {
+            click = bundle.getString("click");
+            errandsNum = bundle.getString("errandsNum");
+            requestUserId = bundle.getString("requestUserId");
+        }
         PermissionListener permissionListener = new PermissionListener(){
             @Override
             public void onPermissionGranted() {
@@ -67,11 +72,12 @@ public class SplashActivity extends AppCompatActivity {
                 if(id != null && password !=null){
 
                     Map<String,String> map = new HashMap<String, String>();
-                    map.put("email",id);
+                    map.put("userId",id);
                     map.put("password",password);
                     map.put("token", FirebaseInstanceId.getInstance().getToken());
+                    map.put("isApi","false");
 
-                    LoginNetworkTask networkTask = new LoginNetworkTask(SplashActivity.this);
+                    LoginNetworkTask networkTask = new LoginNetworkTask(SplashActivity.this, click, errandsNum, requestUserId);
                     networkTask.execute(map);
                 } else {
                     Intent intent = new Intent(SplashActivity.this, LoginActivity.class);

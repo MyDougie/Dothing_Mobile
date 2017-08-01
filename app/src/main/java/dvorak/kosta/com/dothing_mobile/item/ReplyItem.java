@@ -12,6 +12,8 @@ public class ReplyItem {
     private String replyDate;
     private int responserAvgRating;
     private Member user;
+    private int click;
+
 
 
     @Override
@@ -59,4 +61,6 @@ public class ReplyItem {
         return responserAvgRating;
     }
     public void setResponserAvgRating(int responserAvgRating) { this.responserAvgRating = responserAvgRating; }
+    public int getClick() { return click; }
+    public void setClick(int click) { this.click = click;  }
 }

@@ -30,7 +30,6 @@ public class ErrandActivity extends AppCompatActivity{
     MapErrandsListener mapErrandsListener;
     MapView mapView;
     ListViewAdapter adapter = new ListViewAdapter();
-
     ViewGroup mapViewContainer;
     FloatingActionButton writeBtn;
     int selection = 0;
@@ -101,6 +100,7 @@ public class ErrandActivity extends AppCompatActivity{
                     item.setClick(0);
                     Intent intent = new Intent(getApplicationContext(), DetailViewActivity.class);
                     intent.putExtra("errandNum",item.getErrandNum()+"");
+                    intent.putExtra("requestUserId", item.getRequesterId());
                     startActivity(intent);
                 }
             }

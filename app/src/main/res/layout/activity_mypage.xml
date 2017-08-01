@@ -21,7 +21,7 @@
             android:layout_toRightOf="@+id/userName">
 
             <RatingBar
-                android:id="@+id/ratingBar5"
+                android:id="@+id/myRating"
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -216,6 +216,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/safetyBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"

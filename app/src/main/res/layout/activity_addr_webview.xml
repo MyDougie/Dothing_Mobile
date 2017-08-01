@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dvorak.kosta.com.dothing_mobile.AddrWebviewActivity">
+    tools:context="dvorak.kosta.com.dothing_mobile.activity.AddrWebviewActivity">
 
     <WebView
         android:id="@+id/addrWebView"

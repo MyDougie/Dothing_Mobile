@@ -9,7 +9,6 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.activity.ErrandsListActivity;
 import dvorak.kosta.com.dothing_mobile.adapter.ListViewAdapter;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
@@ -74,8 +73,15 @@ public class ErrandListSearchNetworkTask extends AsyncTask<Map<String, String>, 
                 String errandTime = obj.getString("endTime");
                 int errandNum = obj.getInt("errandsNum");
 
+                JSONObject requestUser = obj.getJSONObject("requestUser");
+                String requesteUserId = requestUser.getString("userId");
+                Log.i("requestUserIdxxxxx", requesteUserId);
+
+
+
                // adapter.addItem(title, errandPrice,addr, lat,lng,errandTime) ;
-                adapter.addItem(errandNum, title, errandPrice,addr, lat,lng,errandTime, replyArray.length()) ;
+                adapter.addItem(requesteUserId, errandNum, title, errandPrice,addr, lat,lng,errandTime, replyArray.length()) ;
+
             }
             ErrandsListActivity.progressBar.setVisibility(View.GONE);
             adapter.notifyDataSetChanged();

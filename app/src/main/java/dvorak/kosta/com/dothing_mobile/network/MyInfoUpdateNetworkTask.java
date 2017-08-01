@@ -76,19 +76,19 @@ public class MyInfoUpdateNetworkTask extends AsyncTask<Map<String, Object>,Integ
             e.printStackTrace();
         }
 
-        //http 요청 준비 작업
+        /*//http 요청 준비 작업
         dvorak.kosta.com.dothing_mobile.HttpClient.Builder http = new dvorak.kosta.com.dothing_mobile.HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidMember/myinfoUpdate");
         dvorak.kosta.com.dothing_mobile.HttpClient post = http.create();
-        /*http.addAllParameters(params[0]);
-        http.addOrReplace();*/
+        *//*http.addAllParameters(params[0]);
+        http.addOrReplace();*//*
         post.request();
 
         //응답 상태 코드 가져오기
         int statusCode = post.getHttpStatusCode();
 
         //응답 본문
-        String body = post.getBody();
-        return body;
+        String body = post.getBody();*/
+        return "";
         //Log.d("이건가 -->", body);
 
     }

@@ -10,9 +10,8 @@ import com.google.gson.Gson;
 
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
-import dvorak.kosta.com.dothing_mobile.MainActivity;
-import dvorak.kosta.com.dothing_mobile.dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
+import dvorak.kosta.com.dothing_mobile.activity.LoginActivity;
+import dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
@@ -59,7 +58,7 @@ public class SignUpNetworkTask extends AsyncTask<Map<String, String>, Integer, S
         if(dto.getResult().equals("1")){
             Toast toast = Toast.makeText(activity,"회원가입이 되었습니다!",Toast.LENGTH_SHORT);
             toast.show();
-            Intent intent = new Intent(activity,MainActivity.class);
+            Intent intent = new Intent(activity, LoginActivity.class);
             activity.startActivity(intent);
             activity.finish();
         } else{

@@ -18,7 +18,6 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.fragment.DetailTwoFragment;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;

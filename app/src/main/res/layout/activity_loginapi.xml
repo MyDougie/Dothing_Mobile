@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar8"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/holo_orange_light"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="추가정보를 입력하세요" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_background"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/apiAddr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:hint="주소를 검색해주세요." />
+
+        <EditText
+            android:id="@+id/apiDetailAddr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="상세 주소를 입력해주세요." />
+
+        <Button
+            android:id="@+id/apiBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="완료" />
+    </LinearLayout>
+
+
+</LinearLayout>
