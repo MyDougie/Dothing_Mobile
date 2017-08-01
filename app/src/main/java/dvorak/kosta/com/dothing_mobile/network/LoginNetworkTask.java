@@ -64,11 +64,16 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
         }
 
         // HTTP 요청 준비 작업
-        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + url);
+
+        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidMember/checkId");
+
+        //HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + url);
+
         http.addAllParameters(maps[0]);
 
         // HTTP 요청 전송
         HttpClient post = http.create();
+
         post.request();
 
         // 응답 상태코드 가져오기

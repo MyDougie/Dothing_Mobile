@@ -33,13 +33,16 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
  */
 
 public class MyPageActivity extends AppCompatActivity{
-    LinearLayout myRequestLayout, myResponseLayout, myLogout, mySafety;
+
+    LinearLayout myRequestLayout, myResponseLayout, myLogout, mySafety, myInfoPW;
     RatingBar ratingbar;
+
     TextView myName, myEmail, myPoint;
     ImageView myImage;
     Handler handler;
     Bitmap bmImg;
     MyPageListener myPageListener = new MyPageListener();
+
 //    back task;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,9 +52,20 @@ public class MyPageActivity extends AppCompatActivity{
         myEmail = (TextView)findViewById(R.id.userEmail);
         myPoint = (TextView)findViewById(R.id.userPoint);
         myImage = (ImageView)findViewById(R.id.userImage);
+
         myRequestLayout = (LinearLayout)findViewById(R.id.requestBtn);
         myResponseLayout = (LinearLayout)findViewById(R.id.responseBtn);
         myLogout = (LinearLayout) findViewById(R.id.logoutBtn);
+
+        myInfoPW = (LinearLayout) findViewById(R.id.myinfoupdate);
+
+        myRequestLayout.setOnClickListener(myPageListener);
+        myResponseLayout.setOnClickListener(myPageListener);
+        myLogout.setOnClickListener(myPageListener);
+        myInfoPW.setOnClickListener(myPageListener);
+
+        Log.e("정보들", MemberInfo.name + " " + MemberInfo.userId + " " + MemberInfo.selfImgUrlPath);
+
         mySafety = (LinearLayout)findViewById(R.id.safetyBtn);
         ratingbar = (RatingBar)findViewById(R.id.myRating);
         myRequestLayout.setOnClickListener(myPageListener);
@@ -106,6 +120,11 @@ public class MyPageActivity extends AppCompatActivity{
                     startActivity(logoutIntent);
                     finish();
                     break;
+                case R.id.myinfoupdate:
+                    Intent pwIntent = new Intent(MyPageActivity.this, PwConfirmActivity.class);
+                    startActivity(pwIntent);
+                    break;
+
                 case R.id.safetyBtn:
                     if(MemberInfo.auth == 2){
                         Toast.makeText(MyPageActivity.this, "이미 안전심부름꾼입니다 :)",Toast.LENGTH_SHORT).show();

@@ -81,9 +81,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.LocationDialogActivity"
-            android:theme="@android:style/Theme.Dialog" />
+
+        <activity android:name=".activity.PwConfirmActivity"/>
+        <activity android:name=".activity.MyInfoUpdateActivity"/>
+        <activity android:name=".activity.LocationDialogActivity"
+            android:theme="@android:style/Theme.Dialog"/>
+
         <activity
             android:name=".activity.RatingActivity"
             android:theme="@android:style/Theme.Dialog" />

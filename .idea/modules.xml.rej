@@ -1,0 +1,13 @@
+diff a/.idea/modules.xml b/.idea/modules.xml	(rejected hunks)
+@@ -2,11 +2,7 @@
+ <project version="4">
+   <component name="ProjectModuleManager">
+     <modules>
+-<<<<<<< HEAD
+       <module fileurl="file://$PROJECT_DIR$/DoThing.iml" filepath="$PROJECT_DIR$/DoThing.iml" />
+-=======
+-      <module fileurl="file://$PROJECT_DIR$/Dothing_Mobile.iml" filepath="$PROJECT_DIR$/Dothing_Mobile.iml" />
+->>>>>>> 0f0623711a4863fe1900776092d69e7a9714211a
+       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+     </modules>
+   </component>
