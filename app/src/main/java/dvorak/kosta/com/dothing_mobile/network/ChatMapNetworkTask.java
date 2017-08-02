@@ -14,6 +14,7 @@ import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by YTK on 2017-07-23.
+ * @brief : 채팅 실시간 상대방 위치 검색 NetWorkTask Class
  */
 
 public class ChatMapNetworkTask extends AsyncTask<Map<String, String>, Integer, String>{
@@ -23,16 +24,19 @@ public class ChatMapNetworkTask extends AsyncTask<Map<String, String>, Integer, 
     public ChatMapNetworkTask(Context context){
         this.context = context;
     }
+
     /**
-     * doInBackground 실행되기 이전에 동작한다.
-     */
+     * @brief : background을 실행하기 전 준비 단계 메소드
+     * */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
     }
 
     /**
-     * 본 작업을 쓰레드로 처리해준다. * @param params * @return
+     * @brief : 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param : Map<String,String> maps 웹으로 보내는 params
+     * @return : String
      */
     @Override
     protected String doInBackground(Map<String, String>... maps) {
@@ -48,17 +52,17 @@ public class ChatMapNetworkTask extends AsyncTask<Map<String, String>, Integer, 
     }
 
     /**
-     * doInBackground 종료되면 동작한다. * @param s : doInBackground가 리턴한 값이 들어온다.
-     */
+     * @brief : UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
+     * s로 시간과 위도, 경도를 받아서 위치를 보여준다.
+     * @param : String s doInBackground()에서 return한 parameter
+     * */
     @Override
     protected void onPostExecute(String s) {
-        Log.d("HTTP_RESULT", s);
         try {
             JSONObject obj = new JSONObject(s);
             String time = obj.getString("time");
             String latitude = obj.getString("latitude");
             String longitude = obj.getString("longitude");
-            Log.e("채팅지도검색",  "결과: " + time + ":" + latitude + ":" + longitude);
             Intent intent = new Intent(context, LocationDialogActivity.class);
             intent.putExtra("time", time);
             intent.putExtra("latitude", latitude);
