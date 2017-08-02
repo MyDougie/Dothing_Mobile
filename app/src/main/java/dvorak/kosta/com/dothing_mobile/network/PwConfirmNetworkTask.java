@@ -17,6 +17,7 @@ import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by crw12 on 2017-07-26.
+ * User의 개인정보를 수정하기전 비밀번호 정보 비교를 위한 NetworkTask Class
  */
 
 public class PwConfirmNetworkTask extends AsyncTask<Map<String, String>,Integer, String> {
@@ -27,11 +28,19 @@ public class PwConfirmNetworkTask extends AsyncTask<Map<String, String>,Integer,
         this.activity = activity;
     }
 
+    /**
+     * background을 실행하기 전 준비 단계 메소드
+     * */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
     }
 
+    /**
+     * 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param params 웹으로 보내는 params
+     * @return String
+     */
     @Override
     protected String doInBackground(Map<String, String>... params) {
         //http 요청 준비 작업
@@ -50,6 +59,11 @@ public class PwConfirmNetworkTask extends AsyncTask<Map<String, String>,Integer,
         return body;
     }
 
+    /**
+     * UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
+     * controller에서 비교 후 s의 값이 있는 것과 없는 것으로 개인정보를 수정 할 수 있게 한다.
+     * @param s doInBackground()에서 return한 parameter
+     * */
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);

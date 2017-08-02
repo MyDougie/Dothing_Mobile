@@ -26,6 +26,7 @@ import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by crw12 on 2017-07-26.
+ * User의 개인 정보를 수정하기 위해서 원래 User의 정보를 가져오는 NetworkTask Class
  */
 
 public class MyInfoUpdateNetworkTask extends AsyncTask<Map<String, Object>,Integer, String> {
@@ -66,11 +67,6 @@ public class MyInfoUpdateNetworkTask extends AsyncTask<Map<String, Object>,Integ
             }
             httpPost.setEntity(reqEntity);
             HttpResponse response = httpClient.execute(httpPost);
-
-///
-
-
-            ////
 
         }catch(Exception e){
             e.printStackTrace();

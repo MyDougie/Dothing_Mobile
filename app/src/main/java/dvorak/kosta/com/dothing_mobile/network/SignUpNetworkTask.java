@@ -16,6 +16,7 @@ import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by Administrator on 2017-07-17.
+ * User의 회원가입 후 등록을 위한 NetWorkTask Class
  */
 
 public class SignUpNetworkTask extends AsyncTask<Map<String, String>, Integer, String>  {
@@ -26,6 +27,11 @@ public class SignUpNetworkTask extends AsyncTask<Map<String, String>, Integer, S
         this.activity = activity;
     }
 
+    /**
+     * 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param maps 웹으로 보내는 params
+     * @return String
+     */
     @Override
     protected String doInBackground(Map<String, String>... maps) { // 내가 전송하고 싶은 파라미터
 
@@ -48,6 +54,11 @@ public class SignUpNetworkTask extends AsyncTask<Map<String, String>, Integer, S
         return body;
     }
 
+    /**
+     * UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
+     * s에 성공여부 값이 넘어오며 LoginResultDTO의 값과 비교하여 가입 여부를 보여준다.
+     * @param s doInBackground()에서 return한 parameter
+     * */
     @Override
     protected void onPostExecute(String s) {
         Log.d("RESULT : ",s);
