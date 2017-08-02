@@ -23,7 +23,7 @@ import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by Administrator on 2017-07-17.
- * @brief : Login NetworkTask Class
+ * Login NetworkTask Class
  */
 
 public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String>  {
@@ -41,7 +41,7 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
     }
 
     /**
-     * @brief : background을 실행하기 전 준비 단계 메소드
+     * background을 실행하기 전 준비 단계 메소드
      * */
     @Override
     protected void onPreExecute() {
@@ -50,9 +50,9 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
     }
 
     /**
-     * @brief : 네트워크 기능을 background 스레드로 처리하는 메소드
-     * @param : Map<String,String> maps 웹으로 보내는 params
-     * @return : String
+     * 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param maps 웹으로 보내는 params
+     * @return String
      */
     protected String doInBackground(Map<String,String>... maps) {
         password = maps[0].get("password");
@@ -91,9 +91,9 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
     }
 
     /**
-     * @brief : UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
+     * UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
      * isApi로 비교하여 로그인을 판단하고 User의 정보를 MemberInfo에 저장해준다.
-     * @param : String s doInBackground()에서 return한 parameter
+     * @param s doInBackground()에서 return한 parameter
      * */
     protected void onPostExecute(String s) {
 

@@ -17,7 +17,7 @@ import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by Administrator on 2017-07-13.
- * @brief : 심부름을 검색 할때 심부름 위치 이벤트를 받는 Class
+ * 심부름을 검색 할때 심부름 위치 이벤트를 받는 Class
  */
 
 public class MapErrandsListener implements MapView.MapViewEventListener {
@@ -60,9 +60,9 @@ public class MapErrandsListener implements MapView.MapViewEventListener {
 
 
     /**
-     * @brief : 맵이 드래그 됐을 때 심부름 위치를 받아 오는 메소드
-     * @param : MapView mapView MapView 객체
-     * @param : MapPoint mapPoint Map에서 좌표를 나태내는 변수
+     * 맵이 드래그 됐을 때 심부름 위치를 받아 오는 메소드
+     * @param mapView MapView 객체
+     * @param mapPoint Map에서 좌표를 나태내는 변수
      * */
     @Override
     public void onMapViewDragEnded(MapView mapView, MapPoint mapPoint) {
@@ -89,9 +89,9 @@ public class MapErrandsListener implements MapView.MapViewEventListener {
     }
 
     /**
-     * @brief : MapView가 사용 가능한 상태가 되었음을 알려준다.\n
+     * MapView가 사용 가능한 상태가 되었음을 알려준다.\n
      * onMapViewInitialized()가 호출된 이후에 MapView 객체가 제공하는 지도 조작 API들을 사용할 수 있다.
-     * @param : MapView mapView MapView 객체
+     * @param mapView MapView 객체
      * */
     @Override
     public void onMapViewInitialized(MapView mapView) {

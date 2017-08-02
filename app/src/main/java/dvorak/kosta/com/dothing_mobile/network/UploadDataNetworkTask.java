@@ -20,6 +20,7 @@ import java.util.Map;
 
 /**
  * Created by YTK on 2017-07-15.
+ * 가입할때 User의 정보를 등록하기 위한 NetWorkTask Class
  */
 
 public class UploadDataNetworkTask extends AsyncTask<Map<String, Object>, Integer, String> {
@@ -33,8 +34,9 @@ public class UploadDataNetworkTask extends AsyncTask<Map<String, Object>, Intege
     }
 
     /**
-     * maps의 key값 -> 스프링 서버에서의 변수 이름
-     * maps의 밸류값 -> 스프링 서버에서의 변수 내용(ex key -> test value -> "안녕"이면 컨트롤러의 파라미터에서 String test 로 받고 sysout찍으면 안녕이 찍힘)
+     * 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param maps 웹으로 보내는 params
+     * @return String
      */
     @Override
     protected String doInBackground(Map<String, Object>... maps) { // 내가 전송하고 싶은 파라미터
@@ -67,7 +69,6 @@ public class UploadDataNetworkTask extends AsyncTask<Map<String, Object>, Intege
     protected void onPostExecute(String s) {
         Toast.makeText(activity, "전송 완료하였습니다.", Toast.LENGTH_SHORT).show();
         activity.finish();
-
     }
 
 }

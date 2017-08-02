@@ -123,9 +123,16 @@ public class ChatListActivity extends AppCompatActivity {
                         youId = user.getString("userId");
                     }
 
-                    adapter.addItem(object.getString("title"), name, object.getString("errandsNum"),
-                            ConstantUtil.ipAddr + "users/" + user.getString("userId") + "/" + user.getString("selfImg"),
-                            ConstantUtil.ipAddr + "users/" + user2.getString("userId") + "/" + user2.getString("selfImg"), youId, isRequest) ;
+                    ChatListItem chatListItem = new ChatListItem();
+                    chatListItem.setChatName(name);
+                    chatListItem.setChatTitle(object.getString("title"));
+                    chatListItem.setErradsNum(object.getString("errandsNum"));
+                    chatListItem.setUserImgPath(ConstantUtil.ipAddr + "users/" + user.getString("userId") + "/" + user.getString("selfImg"));
+                    chatListItem.setUserImgPathTwo(ConstantUtil.ipAddr + "users/" + user2.getString("userId") + "/" + user2.getString("selfImg"));
+                    chatListItem.setYou(youId);
+                    chatListItem.setRequest(isRequest);
+
+                    adapter.addItem(chatListItem) ;
                 }
                 adapter.notifyDataSetChanged();
             }catch(Exception e){

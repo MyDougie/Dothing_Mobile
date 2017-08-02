@@ -25,7 +25,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * Created by Administrator on 2017-07-17.
- * @brief : 심부름 등록자 상세정보를 가져오는 NetWorkTask Class
+ * 심부름 등록자 상세정보를 가져오는 NetWorkTask Class
  */
 public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, Integer, String> {
 
@@ -55,9 +55,9 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
     }
 
     /**
-     * @brief : 네트워크 기능을 background 스레드로 처리하는 메소드
-     * @param : Map<String,String> maps 웹으로 보내는 params
-     * @return : String
+     * 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param maps 웹으로 보내는 params
+     * @return String
      */
     @Override
     protected String doInBackground(Map<String, String>... maps) {
@@ -73,7 +73,7 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
     }
 
     /**
-     * @brief : background을 실행하기 전 준비 단계 메소드
+     * background을 실행하기 전 준비 단계 메소드
      * */
     @Override
     protected void onPreExecute() {
@@ -88,9 +88,9 @@ public class DetailRequesterNetworkTask extends AsyncTask<Map<String, String>, I
     }
 
     /**
-     * @brief : UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
+     * UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
      * s로 필요한 데이터 정보들을 받아와서 심부름 등록자의 상세정보를 보여준다.
-     * @param : String s doInBackground()에서 return한 parameter
+     * @param s doInBackground()에서 return한 parameter
      * */
     @Override
     protected void onPostExecute(String s) {

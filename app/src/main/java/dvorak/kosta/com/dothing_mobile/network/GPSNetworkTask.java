@@ -8,7 +8,7 @@ import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by YTK on 2017-07-23.
- * @brief : User의 GPS 정보를 Update 하는 NetWorkTask Class
+ * User의 GPS 정보를 Update 하는 NetWorkTask Class
  */
 
 public class GPSNetworkTask extends AsyncTask<Map<String, String>, Integer, String> {
@@ -19,7 +19,7 @@ public class GPSNetworkTask extends AsyncTask<Map<String, String>, Integer, Stri
     }
 
     /**
-     * @brief : background을 실행하기 전 준비 단계 메소드
+     * background을 실행하기 전 준비 단계 메소드
      * */
     @Override
     protected void onPreExecute() {
@@ -27,9 +27,9 @@ public class GPSNetworkTask extends AsyncTask<Map<String, String>, Integer, Stri
     }
 
     /**
-     * @brief : 네트워크 기능을 background 스레드로 처리하는 메소드
-     * @param : Map<String,String> maps 웹으로 보내는 params
-     * @return : String
+     * 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param maps 웹으로 보내는 params
+     * @return String
      */
     @Override
     protected String doInBackground(Map<String, String>... maps) {

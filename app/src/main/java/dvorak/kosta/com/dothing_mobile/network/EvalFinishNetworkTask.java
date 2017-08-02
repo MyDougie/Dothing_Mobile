@@ -12,7 +12,7 @@ import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by YTK on 2017-07-23.
- * @brief : 심부름 완료가 되었는지 판단 여부 NetworkTask Class
+ * 심부름 완료가 되었는지 판단 여부 NetworkTask Class
  */
 public class EvalFinishNetworkTask extends AsyncTask<Map<String, String>, Integer, String> {
     Context context;
@@ -21,7 +21,7 @@ public class EvalFinishNetworkTask extends AsyncTask<Map<String, String>, Intege
     }
 
     /**
-     * @brief : background을 실행하기 전 준비 단계 메소드
+     * background을 실행하기 전 준비 단계 메소드
      * */
     @Override
     protected void onPreExecute() {
@@ -29,9 +29,9 @@ public class EvalFinishNetworkTask extends AsyncTask<Map<String, String>, Intege
     }
 
     /**
-     * @brief : 네트워크 기능을 background 스레드로 처리하는 메소드
-     * @param : Map<String,String> maps 웹으로 보내는 params
-     * @return : String
+     * 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param maps 웹으로 보내는 params
+     * @return String
      */
     @Override
     protected String doInBackground(Map<String, String>... maps) {
@@ -47,9 +47,9 @@ public class EvalFinishNetworkTask extends AsyncTask<Map<String, String>, Intege
     }
 
     /**
-     * @brief : UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
+     * UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
      * s로 심부름이 완료가 제대로 되었는지 판단 여부 확인 한다.
-     * @param : String s doInBackground()에서 return한 parameter
+     * @param s doInBackground()에서 return한 parameter
      * */
     @Override
     protected void onPostExecute(String s) {

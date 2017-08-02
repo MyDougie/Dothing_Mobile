@@ -17,6 +17,7 @@ import java.util.Map;
 import dvorak.kosta.com.dothing_mobile.activity.ErrandActivity;
 import dvorak.kosta.com.dothing_mobile.activity.TutorialActivity;
 import dvorak.kosta.com.dothing_mobile.adapter.ListViewAdapter;
+import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -24,7 +25,7 @@ import static dvorak.kosta.com.dothing_mobile.activity.ErrandActivity.tutorial;
 
 /**
  * Created by Administrator on 2017-07-13.
- * @brief : Map에 심부름 목록을 가져오는 NetWorkTask Class
+ * Map에 심부름 목록을 가져오는 NetWorkTask Class
  */
 public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Integer, String> {
     ListViewAdapter adapter;
@@ -38,7 +39,7 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
     }
 
     /**
-     * @brief : background을 실행하기 전 준비 단계 메소드
+     * background을 실행하기 전 준비 단계 메소드
      * */
     @Override
     protected void onPreExecute() {
@@ -46,9 +47,9 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
     }
 
     /**
-     * @brief : 네트워크 기능을 background 스레드로 처리하는 메소드
-     * @param : Map<String,String> maps 웹으로 보내는 params
-     * @return : String
+     * 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param maps 웹으로 보내는 params
+     * @return String
      */
     @Override
     protected String doInBackground(Map<String, String>... maps) {
@@ -64,9 +65,9 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
     }
 
     /**
-     * @brief : UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
+     * UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
      * s로 심부름 목록에 대한 정보들을 받아와서 Map에 보여준다
-     * @param : String s doInBackground()에서 return한 parameter
+     * @param s doInBackground()에서 return한 parameter
      * */
     @Override
     protected void onPostExecute(String s) {
@@ -99,7 +100,20 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
                 marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
                 marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
                 mapView.addPOIItem(marker);
-                adapter.addItem(requesteUserId, errandNum, title, errandPrice,addr, lat,lng,errandTime, replyArray.length()) ;
+
+                ErrandsItem item = new ErrandsItem();
+                item.setRequesterId(requesteUserId);
+                item.setErrandNum(errandNum);
+                item.setErrandTitle(title);
+                item.setErrandPrice(errandPrice);
+                item.setAddr(addr);
+                item.setLatitude(lat);
+                item.setLongitude(lng);
+                item.setErrandTime(errandTime);
+                item.setClick(0);
+                item.setReplyNum(replyArray.length()+"");
+
+                adapter.addItem(item) ;
 
             }
             adapter.notifyDataSetChanged();

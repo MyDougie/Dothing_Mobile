@@ -2,7 +2,7 @@ package dvorak.kosta.com.dothing_mobile.item;
 
 /**
  * Created by Administrator on 2017-07-24.
- * @brief : Reply에 필요한 데이터를 저장하고 전달하는 Class
+ * Reply에 필요한 데이터를 저장하고 전달하는 Class
  */
 
 public class ReplyItem {

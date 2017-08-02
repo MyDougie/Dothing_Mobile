@@ -14,7 +14,7 @@ import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by YTK on 2017-07-23.
- * @brief : 채팅 실시간 상대방 위치 검색 NetWorkTask Class
+ * 채팅 실시간 상대방 위치 검색 NetWorkTask Class
  */
 
 public class ChatMapNetworkTask extends AsyncTask<Map<String, String>, Integer, String>{
@@ -26,7 +26,7 @@ public class ChatMapNetworkTask extends AsyncTask<Map<String, String>, Integer, 
     }
 
     /**
-     * @brief : background을 실행하기 전 준비 단계 메소드
+     * background을 실행하기 전 준비 단계 메소드
      * */
     @Override
     protected void onPreExecute() {
@@ -34,9 +34,9 @@ public class ChatMapNetworkTask extends AsyncTask<Map<String, String>, Integer, 
     }
 
     /**
-     * @brief : 네트워크 기능을 background 스레드로 처리하는 메소드
-     * @param : Map<String,String> maps 웹으로 보내는 params
-     * @return : String
+     * 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param maps 웹으로 보내는 params
+     * @return String
      */
     @Override
     protected String doInBackground(Map<String, String>... maps) {
@@ -52,9 +52,9 @@ public class ChatMapNetworkTask extends AsyncTask<Map<String, String>, Integer, 
     }
 
     /**
-     * @brief : UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
+     * UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
      * s로 시간과 위도, 경도를 받아서 위치를 보여준다.
-     * @param : String s doInBackground()에서 return한 parameter
+     * @param s doInBackground()에서 return한 parameter
      * */
     @Override
     protected void onPostExecute(String s) {

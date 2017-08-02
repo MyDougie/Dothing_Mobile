@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import dvorak.kosta.com.dothing_mobile.item.ChatItem;
 import dvorak.kosta.com.dothing_mobile.network.HttpClient;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.adapter.ChatViewAdapter;
@@ -124,9 +125,9 @@ public class ChatTestActivity extends AppCompatActivity {
                                         public void run() {
                                             String imgPath = "";
                                             if (dataArr[0].trim().equals(MemberInfo.userId)) {
-                                                chatViewAdapter.addItemRight(dataArr[0], dataArr[1], meImg, dataArr[2]);
+                                                chatViewAdapter.addItemRight(newChatItem(ChatViewAdapter.RIGHT_ITEM, dataArr[0], dataArr[1], dataArr[2], meImg));
                                             } else {
-                                                chatViewAdapter.addItemLeft(dataArr[0], dataArr[1], youImg, dataArr[2]);
+                                                chatViewAdapter.addItemLeft(newChatItem(ChatViewAdapter.LEFT_ITEM, dataArr[0], dataArr[2], dataArr[1], youImg));
                                             }
                                             chatViewAdapter.notifyDataSetChanged();
                                             listView.setSelection(chatViewAdapter.getCount() - 1);
@@ -193,9 +194,9 @@ public class ChatTestActivity extends AppCompatActivity {
                         restArr[0] = " ";
                     }
                     if (arr[0].trim().equals(MemberInfo.userId)) {
-                        chatViewAdapter.addItemRight(arr[0], restArr[0], meImg, restArr[1]);
+                        chatViewAdapter.addItemRight(newChatItem(ChatViewAdapter.RIGHT_ITEM, arr[0], restArr[0], restArr[2], meImg));
                     } else {
-                        chatViewAdapter.addItemLeft(arr[0], restArr[0], youImg, restArr[1]);
+                        chatViewAdapter.addItemLeft(newChatItem(ChatViewAdapter.LEFT_ITEM, arr[0], restArr[1], restArr[0], youImg));
                     }
 
                 }
@@ -246,5 +247,15 @@ public class ChatTestActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    ChatItem newChatItem(int type, String id, String chat, String date, String imgPath){
+        ChatItem chatItem = new ChatItem();
+        chatItem.setType(type);
+        chatItem.setUserId(id);
+        chatItem.setChat(chat);
+        chatItem.setDate(date);
+        chatItem.setUserImgPath(imgPath);
+        return chatItem;
     }
 }
