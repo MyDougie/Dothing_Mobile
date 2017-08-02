@@ -1,7 +1,7 @@
 package dvorak.kosta.com.dothing_mobile.util;
 
 /**
- * @brief : 서버주소, 검색반경 등의 상수 필드를 가지고 있는 클래스
+ * 서버주소, 검색반경 등의 상수 필드를 가지고 있는 클래스
  * */
 public class ConstantUtil {
 

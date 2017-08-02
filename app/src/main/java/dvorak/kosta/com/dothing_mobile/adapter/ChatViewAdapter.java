@@ -17,12 +17,12 @@ import dvorak.kosta.com.dothing_mobile.item.ChatItem;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
- * @breif : 뷰와 채팅아이템을 연결시켜주는 역할을 하는 클래스
+ * 뷰와 채팅아이템을 연결시켜주는 역할을 하는 클래스
  */
 public class ChatViewAdapter extends BaseAdapter {
     private static final int ITEM_VIEW_TYPE_MAX = 2 ;
-    private static final int LEFT_ITEM = 0 ;
-    private static final int RIGHT_ITEM = 1 ;
+    public static final int LEFT_ITEM = 0 ;
+    public static final int RIGHT_ITEM = 1 ;
 
 
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
@@ -34,8 +34,8 @@ this.context = context;
     }
 
     /**
-     * @brief : Adapter에 사용되는 데이터의 개수를 리턴해주는 함수
-     * @return int: 채팅메세지들의 갯수
+     * Adapter에 사용되는 데이터의 개수를 리턴해주는 함수
+     * @return 채팅메세지들의 갯수 리턴
      */
     @Override
     public int getCount() {
@@ -47,11 +47,11 @@ this.context = context;
 
 
     /**
-     * @brief : position에 위치한 채팅메세지를 화면에 출력하는데 사용될 View를 리턴.
-     * @param : int position -  행의 index를 의미
-     * @param : View convertView -  행 전체를 나타내는 뷰를 의미
-     * @param : ViewGroup parent -  어댑터를 가지고 있는 부모뷰를 의미
-     * @return View: 채팅메세지목록을 화면에 출력하는데 사용될 View
+     * position에 위치한 채팅메세지를 화면에 출력하는데 사용될 View를 리턴.
+     * @param position 행의 index를 의미
+     * @param convertView 행 전체를 나타내는 뷰를 의미
+     * @param parent  어댑터를 가지고 있는 부모뷰를 의미
+     * @return 채팅메세지목록을 화면에 출력하는데 사용될 View
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -90,9 +90,9 @@ this.context = context;
     }
 
     /**
-     * @brief : 선택된 행의 item의 id를 리턴하는 메소드
-     * @param : int position -  행의 index를 의미
-     * @return long: 선택된 row의 id를 리턴
+     * 선택된 행의 item의 id를 리턴하는 메소드
+     * @param position 행의 index를 의미
+     * @return 선택된 row의 id를 리턴
      */
     @Override
     public long getItemId(int position) {
@@ -100,9 +100,9 @@ this.context = context;
     }
 
     /**
-     * @brief : 선택된 행의 item을 리턴
-     * @param : int position -  행의 index를 의미
-     * @return Object: 선택된 row의 item을 리턴
+     * 선택된 행의 item을 리턴
+     * @param position 행의 index를 의미
+     * @return 선택된 row의 item을 리턴
      */
     @Override
     public Object getItem(int position) {
@@ -110,41 +110,29 @@ this.context = context;
     }
 
     /**
-     * @brief : list에 item을 뷰의 왼쪽에 추가하기 위한 메소드.
-     * @param : ChatItem 속성들
+     * list에 item을 뷰의 왼쪽에 추가하기 위한 메소드.
+     * @param chatItem 값이 set된 chatItem
      */
-    public void addItemLeft(String id, String chat, String urlPath, String date) {
-        ChatItem chatItem = new ChatItem();
-        chatItem.setType(LEFT_ITEM);
-        chatItem.setUserImgPath(urlPath);
-        chatItem.setUserId(id);
-        chatItem.setDate(date);
-        chatItem.setChat(chat);
+    public void addItemLeft(ChatItem chatItem) {
         listViewItemList.add(chatItem);
     }
     /**
-     * @brief : list에 item을 뷰의 오른쪽에 추가하기 위한 메소드.
-     * @param : ChatItem 속성들
+     * list에 item을 뷰의 오른쪽에 추가하기 위한 메소드.
+     * @param chatItem 값이 set되어진 chatItem
      */
-    public void addItemRight(String id, String chat, String urlPath, String date) {
-        ChatItem chatItem = new ChatItem();
-        chatItem.setType(RIGHT_ITEM);
-        chatItem.setUserImgPath(urlPath);
-        chatItem.setUserId(id);
-        chatItem.setDate(date);
-        chatItem.setChat(chat);
+    public void addItemRight(ChatItem chatItem) {
         listViewItemList.add(chatItem);
     }
     /**
-     * @brief : list의 모든 아이템을 제거하는 메소드.
+     * list의 모든 아이템을 제거하는 메소드.
      */
     public void removeItem(){
         listViewItemList.clear();
     }
 
     /**
-     * @brief : list의 모든 아이템을 제거하는 메소드.
-     * @return ArrayList<ChatItem> : ChatItem 리스트를 리턴
+     * list의 모든 아이템을 제거하는 메소드.
+     * @return ChatItem 리스트를 리턴
      */
     public ArrayList<ChatItem> getErrandList(){
         return listViewItemList;

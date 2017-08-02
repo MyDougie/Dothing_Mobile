@@ -19,7 +19,7 @@ import dvorak.kosta.com.dothing_mobile.network.GPSNetworkTask;
 import static android.content.Context.LOCATION_SERVICE;
 
 /**
- * @brief : GPS에 관한 메소드들을 가지고 있는 메소드.
+ * GPS에 관한 메소드들을 가지고 있는 메소드.
  * */
 public class GPSInfo implements LocationListener {
 
@@ -52,8 +52,8 @@ public class GPSInfo implements LocationListener {
     }
 
     /**
-     * @brief : Location정보를 가져오는 메소드.
-     * @return : Location - 위치정보를 가지고있는 location 객체 리턴.
+     * Location정보를 가져오는 메소드.
+     * @return 위치정보를 가지고있는 location 객체 리턴.
      * */
     public Location getLocation() {
         try {
@@ -122,7 +122,7 @@ public class GPSInfo implements LocationListener {
     }
 
     /**
-     * @brief : GPS 종료하는 메소드
+     * GPS 종료하는 메소드
      */
     public void stopUsingGPS() {
         if (locationManager != null) {
@@ -131,8 +131,8 @@ public class GPSInfo implements LocationListener {
     }
 
     /**
-     * @brief : 위도값을 리턴하는 메소드
-     * @return : double - 위도값을 리턴.
+     * 위도값을 리턴하는 메소드
+     * @return 위도값을 리턴.
      */
     public double getLatitude() {
         if (location != null) {
@@ -142,8 +142,8 @@ public class GPSInfo implements LocationListener {
     }
 
     /**
-     * @brief : 경도값을 리턴하는 메소드
-     * @return : double - 경도값을 리턴.
+     * 경도값을 리턴하는 메소드
+     * @return 경도값을 리턴.
      */
     public double getLongitude() {
         if (location != null) {
@@ -153,8 +153,8 @@ public class GPSInfo implements LocationListener {
     }
 
     /**
-     * @brief : GPS 나 wife 정보가 켜져있는지 확인합니다.
-     * @return : true - 켜져있음, false - 꺼져있음
+     * GPS 나 wife 정보가 켜져있는지 확인합니다.
+     * @return true - 켜져있음, false - 꺼져있음
      */
     public boolean isGetLocation() {
         return this.isGetLocation;
@@ -162,8 +162,8 @@ public class GPSInfo implements LocationListener {
 
 
     /**
-     * @brief : GPS가 변할때마다 실행되는 메소드
-     * @param : Location location - 사용자의 위치정보를 가지고있는 객체
+     * GPS가 변할때마다 실행되는 메소드
+     * @param location 사용자의 위치정보를 가지고있는 객체
      * */
     public void onLocationChanged(Location location) {
         GPSNetworkTask gpsNetworkTask = new GPSNetworkTask("updateLocation");

@@ -28,7 +28,7 @@ import dvorak.kosta.com.dothing_mobile.network.DetailErrandNetworkTask;
 import dvorak.kosta.com.dothing_mobile.network.StartErrandNetworkTask;
 
 /**
- * @breif : DetailViewActivity의 전체 UI중에 첫번째 탭부분을 담당하는 클래스
+ * DetailViewActivity의 전체 UI중에 첫번째 탭부분을 담당하는 클래스
  */
 public class DetailOneFragment extends Fragment{
     public static String errandTime;
@@ -41,8 +41,8 @@ public class DetailOneFragment extends Fragment{
     }
 
     /**
-     * @brief : Bundle객체를 통해 데이터들을 전송하는 메소드.
-     * @return Fragment : Fragment객체를 리턴.
+     * Bundle객체를 통해 데이터들을 전송하는 메소드.
+     * @return Fragment객체를 리턴.
      */
     public static DetailOneFragment newInstance(){
         Bundle args = new Bundle();
@@ -54,9 +54,11 @@ public class DetailOneFragment extends Fragment{
 
 
     /**
-     * @brief : XML 레이아웃을 inflate하여 Fragment를 위한 View를 생성하고, Fragment 레이아웃의 root에 해당되는 View를 Activity에게 리턴하는 메소드.
-     * @param : LayoutInflater inflater inflater - xml 레이아웃을 inflate할 객체
-     * @return View: Fragment 레이아웃의 root에 해당되는 View를 Activity에게 리턴.
+     * XML 레이아웃을 inflate하여 Fragment를 위한 View를 생성하고, Fragment 레이아웃의 root에 해당되는 View를 Activity에게 리턴하는 메소드.
+     * @param inflater xml 레이아웃을 inflate할 객체
+     * @param container inflate된 레이아웃의 상위가 될 ViewGroup
+     * @param savedInstanceState 프래그먼트가 재개되는 중에 프래그먼트의 이전 인스턴스에 대한 데이터를 제공
+     * @return Fragment 레이아웃의 root에 해당되는 View를 Activity에게 리턴.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

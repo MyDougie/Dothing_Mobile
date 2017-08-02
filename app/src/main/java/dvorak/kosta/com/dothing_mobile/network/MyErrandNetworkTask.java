@@ -10,6 +10,7 @@ import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.adapter.MyListViewAdapter;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
+import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
@@ -114,7 +115,19 @@ public class MyErrandNetworkTask  extends AsyncTask<Map<String, String>, Integer
                         }
                     }
                 }
-                adapter.addItem(requestId, errandNum, title, errandPrice + productPrice + "" ,addr,errandTime, replyNum,state);
+
+                ErrandsItem item = new ErrandsItem();
+                item.setRequesterId(requestId);
+                item.setErrandNum(errandsNum);
+                item.setErrandTitle(title);
+                item.setErrandPrice(errandPrice + productPrice + "");
+                item.setAddr(addr);
+                item.setErrandTime(errandTime);
+                item.setClick(0);
+                item.setReplyNum(replyNum);
+                item.setState(state);
+
+                adapter.addItem(item);
             }
 
             adapter.notifyDataSetChanged();
