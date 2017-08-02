@@ -16,7 +16,7 @@ import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
 
 /**
- * @breif : 뷰와 심부름아이템을 연결시켜주는 역할을 하는 클래스
+ * 뷰와 심부름아이템을 연결시켜주는 역할을 하는 클래스
  */
 public class ListViewAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
@@ -26,8 +26,8 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     /**
-     * @brief : Adapter에 사용되는 데이터의 개수를 리턴해주는 함수
-     * @return int: 심부름의 갯수
+     * Adapter에 사용되는 데이터의 개수를 리턴해주는 함수
+     * @return 심부름의 갯수
      */
     @Override
     public int getCount() {
@@ -35,11 +35,11 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     /**
-     * @brief : position에 위치한 심부름을 화면에 출력하는데 사용될 View를 리턴.
-     * @param : int position -  행의 index를 의미
-     * @param : View convertView -  행 전체를 나타내는 뷰를 의미
-     * @param : ViewGroup parent -  어댑터를 가지고 있는 부모뷰를 의미
-     * @return View: 심부름목록을 화면에 출력하는데 사용될 View
+     * position에 위치한 심부름을 화면에 출력하는데 사용될 View를 리턴.
+     * @param position 행의 index를 의미
+     * @param convertView 행 전체를 나타내는 뷰를 의미
+     * @param parent 어댑터를 가지고 있는 부모뷰를 의미
+     * @return 심부름목록을 화면에 출력하는데 사용될 View
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -86,9 +86,9 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     /**
-     * @brief : 선택된 행의 item의 id를 리턴하는 메소드
-     * @param : int position -  행의 index를 의미
-     * @return long: 선택된 row의 id를 리턴
+     * 선택된 행의 item의 id를 리턴하는 메소드
+     * @param position 행의 index를 의미
+     * @return 선택된 row의 id를 리턴
      */
     @Override
     public long getItemId(int position) {
@@ -96,9 +96,9 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     /**
-     * @brief : 선택된 행의 item을 리턴
-     * @param : int position -  행의 index를 의미
-     * @return Object: 선택된 row의 item을 리턴
+     * 선택된 행의 item을 리턴
+     * @param position 행의 index를 의미
+     * @return 선택된 row의 item을 리턴
      */
     @Override
     public Object getItem(int position) {
@@ -106,34 +106,22 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     /**
-     * @brief : list에 item을 추가하기 위한 메소드.
-     * @param : ErrandsItem 속성들
+     * list에 item을 추가하기 위한 메소드.
+     * @param errandsItem 값이 set되어진 errandsItem
      */
-    public void addItem(String requesteUserId, int errandNum, String title, String errandPrice, String addr, String latitude, String longitude, String time, int replyNum) {
-
-        ErrandsItem item = new ErrandsItem();
-        item.setRequesterId(requesteUserId);
-        item.setErrandNum(errandNum);
-        item.setErrandTitle(title);
-        item.setErrandPrice(errandPrice);
-        item.setAddr(addr);
-        item.setLatitude(latitude);
-        item.setLongitude(longitude);
-        item.setErrandTime(time);
-        item.setClick(0);
-        item.setReplyNum(replyNum + "");
-        listViewItemList.add(item);
+    public void addItem(ErrandsItem errandsItem) {
+        listViewItemList.add(errandsItem);
     }
     /**
-     * @brief : list의 모든 아이템을 제거하는 메소드.
+     * list의 모든 아이템을 제거하는 메소드.
      */
     public void removeItem(){
         listViewItemList.clear();
     }
 
     /**
-     * @brief : list의 모든 아이템을 제거하는 메소드.
-     * @return ArrayList<ErrandsItem> : ErrandsItem 리스트를 리턴
+     * list의 모든 아이템을 제거하는 메소드.
+     * @return ErrandsItem 리스트를 리턴
      */
     public ArrayList<ErrandsItem> getErrandList(){
         return listViewItemList;

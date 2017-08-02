@@ -16,6 +16,8 @@ import java.util.Map;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.adapter.ReplyListViewAdapter;
 import dvorak.kosta.com.dothing_mobile.fragment.DetailOneFragment;
+import dvorak.kosta.com.dothing_mobile.item.Member;
+import dvorak.kosta.com.dothing_mobile.item.ReplyItem;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
@@ -135,7 +137,21 @@ public class DetailErrandNetworkTask extends AsyncTask<Map<String, String>, Inte
                 Log.i("imgPath : ", imgPath);
                 Log.i("avgGpa : ", avgGpa+"");
 
-                adapter.addItem(replyNum, userId, name, content, arrivalTime, replyDate, imgPath, avgGpa);
+                ReplyItem item = new ReplyItem();
+
+                Member member = new Member();
+                member.setId(userId);
+                member.setName(name);
+                member.setUserImgPath(imgPath);
+                item.setUser(member);
+
+                item.setReplyNum(replyNum);
+                item.setReplyContent(content);
+                item.setArrivalTime(arrivalTime);
+                item.setReplyDate(replyDate);
+                item.setResponserAvgRating(avgGpa);
+
+                adapter.addItem(item);
             }
             adapter.notifyDataSetChanged();
             Log.e("현재 사이즈: ", "" +adapter.getCount());

@@ -17,6 +17,7 @@ import java.util.Map;
 import dvorak.kosta.com.dothing_mobile.activity.ErrandActivity;
 import dvorak.kosta.com.dothing_mobile.activity.TutorialActivity;
 import dvorak.kosta.com.dothing_mobile.adapter.ListViewAdapter;
+import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -99,9 +100,20 @@ public class ErrandSearchNetworkTask extends AsyncTask<Map<String, String>, Inte
                 marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
                 marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
                 mapView.addPOIItem(marker);
-               // adapter.addItem(title, errandPrice,addr, lat,lng,errandTime) ;
 
-                adapter.addItem(requesteUserId, errandNum, title, errandPrice,addr, lat,lng,errandTime, replyArray.length()) ;
+                ErrandsItem item = new ErrandsItem();
+                item.setRequesterId(requesteUserId);
+                item.setErrandNum(errandNum);
+                item.setErrandTitle(title);
+                item.setErrandPrice(errandPrice);
+                item.setAddr(addr);
+                item.setLatitude(lat);
+                item.setLongitude(lng);
+                item.setErrandTime(errandTime);
+                item.setClick(0);
+                item.setReplyNum(replyArray.length()+"");
+
+                adapter.addItem(item) ;
 
             }
             adapter.notifyDataSetChanged();
