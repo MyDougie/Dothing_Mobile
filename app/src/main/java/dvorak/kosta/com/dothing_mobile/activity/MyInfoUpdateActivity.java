@@ -14,8 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-
 import net.daum.mf.map.api.MapView;
 
 import java.io.File;
@@ -24,7 +22,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.network.MyInfoUpdateNetworkTask;
@@ -32,9 +29,8 @@ import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 
 /**
- * Created by crw12 on 2017-07-24.
+ * 개인정보수정 엑티비티
  */
-
 public class MyInfoUpdateActivity extends AppCompatActivity {
 
     private EditText addr,name;//addr
@@ -145,6 +141,9 @@ public class MyInfoUpdateActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 엘범에서 이미지 가져오는 메소드
+     */
     public void doTakeAlbumAction() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
@@ -152,6 +151,11 @@ public class MyInfoUpdateActivity extends AppCompatActivity {
         startActivityForResult(intent, 1);
     }
 
+    /**
+     * 이미지 실제 경로 구하는 메소드
+     * @param : uriPath
+     * @return : 이미지 경로
+     */
     public String getRealImagePath(Uri uriPath) {
         String[] proj = { MediaStore.Images.Media.DATA };
 
@@ -163,6 +167,12 @@ public class MyInfoUpdateActivity extends AppCompatActivity {
         return cursor.getString(column_index);
     }
 
+    /**
+     * 콜백함수, 서버에서 전송한 위도, 경도를 split해서 저장
+     * @param : requestCode
+     * @param : resultCode
+     * @param : intent
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
@@ -181,7 +191,11 @@ public class MyInfoUpdateActivity extends AppCompatActivity {
         }
     }
 
-    //비밀번호 조합 검사
+    /**
+     * 비밀번호 숫자,영문,특수문자 조합 8자리 유효성 검사
+     * @param :  password
+     * @return : 맞으면 true, 아니면 false
+     */
     public boolean passwordValidate(String password){
         String regex = "([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])";
         Pattern pattern = Pattern.compile(regex);
@@ -190,6 +204,14 @@ public class MyInfoUpdateActivity extends AppCompatActivity {
         return matcher.matches();
     }
 
+    /**
+     * 주소,상세주소,이름,이미지경로 유효성 검사
+     * @param : addrStr
+     * @param : detailAddrStr
+     * @param : nameStr
+     * @param : imgPath
+     * @return : 맞으면 true, 아니면 false
+     */
     public boolean validCheck(String addrStr, String detailAddrStr, String nameStr, String imgPath){
         if(nameStr.length() < 1){
             Toast.makeText(getApplicationContext(),"이름을 입력해주세요",Toast.LENGTH_SHORT).show();
@@ -210,6 +232,11 @@ public class MyInfoUpdateActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * 비밀번호 유효성 검사
+     * @param : passwordStr
+     * @return : 맞으면 true, 아니면 false
+     */
     public boolean validCheck2(String passwordStr){
         if(!passwordValidate(passwordStr) || passwordStr.length() < 6) {
             Toast.makeText(getApplicationContext(),"영어,숫자,특수문자 조합으로 6자리 이상 사용해주세요.",Toast.LENGTH_LONG).show();

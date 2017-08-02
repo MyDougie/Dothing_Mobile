@@ -5,20 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
-import dvorak.kosta.com.dothing_mobile.network.MyInfoUpdateNetworkTask;
 import dvorak.kosta.com.dothing_mobile.network.PwConfirmNetworkTask;
 
 /**
- * Created by crw12 on 2017-07-24.
+ * 비밀번호 확인 엑티비티
  */
-
 public class PwConfirmActivity extends AppCompatActivity {
 
     EditText password;
@@ -42,6 +39,9 @@ public class PwConfirmActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 비밀번호 확인 메소드, 입력한 비밀번호를 서버로 전송하여 비교
+     */
     private void comparePassword(){
 
         password = (EditText) findViewById(R.id.passwordConfirm);

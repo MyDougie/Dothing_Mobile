@@ -17,6 +17,9 @@ import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.network.GPSNetworkTask;
 import dvorak.kosta.com.dothing_mobile.util.GPSInfo;
 
+/**
+ * 심부름 검색하는 엑티비티
+ */
 public class FrameActivity extends ActivityGroup {
     public static TabHost tabHost;
     public static Toolbar toolbar;

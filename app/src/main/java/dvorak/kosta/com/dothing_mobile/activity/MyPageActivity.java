@@ -29,9 +29,8 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 //import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
- * Created by YTK on 2017-07-15.
+ * 마이페이지 엑티비티
  */
-
 public class MyPageActivity extends AppCompatActivity{
 
     LinearLayout myRequestLayout, myResponseLayout, myLogout, mySafety, myInfoPW;
@@ -43,7 +42,6 @@ public class MyPageActivity extends AppCompatActivity{
     Bitmap bmImg;
     MyPageListener myPageListener = new MyPageListener();
 
-//    back task;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,12 +89,18 @@ public class MyPageActivity extends AppCompatActivity{
 
     }
 
+    /**
+     * 엑티비티 재시작시 actionBar 셋팅
+     */
     @Override
     protected void onResume() {
         super.onResume();
         setSupportActionBar(null);
     }
 
+    /**
+     * 마이페이지 안에 버튼 클릭 리스너, 각 버튼마다 이벤트 동작
+     */
     public class MyPageListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {

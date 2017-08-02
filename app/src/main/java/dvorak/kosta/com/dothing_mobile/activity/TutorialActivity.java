@@ -6,6 +6,9 @@ import android.view.Window;
 
 import dvorak.kosta.com.dothing_mobile.R;
 
+/**
+ * 튜토리얼 보여주는 엑티비티
+ */
 public class TutorialActivity extends Activity{
 
     @Override

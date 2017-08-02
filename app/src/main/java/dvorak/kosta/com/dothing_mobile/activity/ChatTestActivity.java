@@ -34,6 +34,9 @@ import dvorak.kosta.com.dothing_mobile.network.ChatMapNetworkTask;
 import dvorak.kosta.com.dothing_mobile.network.EvalNetworkTask;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
+/**
+ * 채팅을 전송하는 activity
+ */
 public class ChatTestActivity extends AppCompatActivity {
     Toolbar chatTool;
     ChatViewAdapter chatViewAdapter;
@@ -94,6 +97,9 @@ public class ChatTestActivity extends AppCompatActivity {
 
             }
         });
+        /**
+         * 메시지 보내는 스레드
+         */
         Thread th = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -103,7 +109,9 @@ public class ChatTestActivity extends AppCompatActivity {
                     br = new BufferedReader(
                             new InputStreamReader(sk.getInputStream(), "UTF-8"));
                     pw.println(MemberInfo.userId + ":" + errandsNum);//초기 내 아이디 + 방번호 전송
-                    //받는스레드
+                    /**
+                     * 데이터를 받는 스레드
+                     */
                     new Thread() {
                         public void run() {
                             try {
@@ -142,7 +150,15 @@ public class ChatTestActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 채팅 메시지를 서버에 전송하는 클래스
+     */
     public class NetworkTask extends AsyncTask<Map<String, String>, Integer, String> {
+        /**
+         * 파라미터를 받아 서버에 전송하는 메소드
+         * @param : 심부름 번호
+         * @return : 서버에서 보낸 응답
+         */
         @Override
         protected String doInBackground(Map<String, String>... maps) { // 내가 전송하고 싶은 파라미터
 
@@ -157,6 +173,10 @@ public class ChatTestActivity extends AppCompatActivity {
             return body;
         }
 
+        /**
+         * 서버에서 보낸 응답을 받아 처리하는 메소드, chatviewadapter에 img 추가
+         * @param : json 데이터
+         */
         @Override
         protected void onPostExecute(String s) {
             chatViewAdapter.removeItem();
@@ -186,18 +206,27 @@ public class ChatTestActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 엑티비티 종료시 EXIT:userID 서버에 전송
+     */
     @Override
     protected void onDestroy() {
         pw.println("EXIT:" + MemberInfo.userId);
         super.onDestroy();
     }
 
+    /**
+     * 메뉴키 눌렸을 때 호출, 옵션 메뉴 추가
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_chat, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * 메뉴 아이템 클릭시 호출
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){

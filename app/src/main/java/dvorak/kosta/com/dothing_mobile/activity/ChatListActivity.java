@@ -24,9 +24,8 @@ import dvorak.kosta.com.dothing_mobile.item.ChatListItem;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
- * Created by YTK on 2017-07-15.
+ * 채팅 리스트를 보여주는 activity
  */
-
 public class ChatListActivity extends AppCompatActivity {
     ListView chatListView;
     ChatListViewAdapter adapter;
@@ -53,6 +52,9 @@ public class ChatListActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * 자신의 userId를 서버에 전송하는 역할
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -62,7 +64,16 @@ public class ChatListActivity extends AppCompatActivity {
         networkTask.execute(params);
     }
 
+    /**
+     * parameter를 받아서 서버에 전송해주는 클래스
+     */
     public class NetworkTask extends AsyncTask<Map<String, String>, Integer, String> {
+
+        /**
+         * 파라미터를 받아서 서버로 전송
+         * @param : userId 정보
+         * @return : 응답 본문
+         */
         @Override
         protected String doInBackground(Map<String, String>... maps) { // 내가 전송하고 싶은 파라미터
 
@@ -86,6 +97,10 @@ public class ChatListActivity extends AppCompatActivity {
             return body;
         }
 
+        /**
+         * 서버에서 response를 받아 처리하는 역할
+         * @param : 서버에서 보낸 정보
+         */
         @Override
         protected void onPostExecute(String s) {
             adapter.removeItem();

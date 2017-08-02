@@ -19,6 +19,9 @@ import java.util.Map;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.network.LoginNetworkTask;
 
+/**
+ * splash 화면 엑티비티, 권한 설정
+ */
 public class SplashActivity extends AppCompatActivity {
     int checkstate = 0;
     String click, errandsNum, requestUserId;
@@ -32,7 +35,11 @@ public class SplashActivity extends AppCompatActivity {
             errandsNum = bundle.getString("errandsNum");
             requestUserId = bundle.getString("requestUserId");
         }
+
         PermissionListener permissionListener = new PermissionListener(){
+            /**
+             * 권한 허용시
+             */
             @Override
             public void onPermissionGranted() {
                 checkstate++;
@@ -41,6 +48,10 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
 
+            /**
+             * 권한 거부시
+             * @param : deniedPermissions
+             */
             @Override
             public void onPermissionDenied(ArrayList<String> deniedPermissions) {
                 checkstate++;
@@ -59,6 +70,9 @@ public class SplashActivity extends AppCompatActivity {
                 .check();
     }
 
+    /**
+     * 로그인 화면으로 이동하는 메소드
+     */
     public void goPage(){
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

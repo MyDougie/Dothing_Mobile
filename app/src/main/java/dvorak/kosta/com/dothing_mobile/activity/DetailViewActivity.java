@@ -1,44 +1,28 @@
 package dvorak.kosta.com.dothing_mobile.activity;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.fragment.DetailOneFragment;
 import dvorak.kosta.com.dothing_mobile.fragment.DetailThreeFragment;
 import dvorak.kosta.com.dothing_mobile.fragment.DetailTwoFragment;
 
+/**
+ * 심부름 상세정보를 보여주는 엑티비티
+ */
 public class DetailViewActivity extends AppCompatActivity {
     Context mContext;
     ViewPager vp;
     LinearLayout ll;
     private static int TAB_COUNT = 3;
 
-    /**
-     *
-     * <pre>
-     *
-     *
-     * </pre>
-     * @Method Name : onCreate
-     * @return
-     * @throws
-     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,9 +50,19 @@ public class DetailViewActivity extends AppCompatActivity {
         tab_first.setSelected(true);
 
         vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            /**
+             * 페이지 스크롤시 동작
+             * @param : position
+             * @param : positionOffset
+             * @param : positionOffsetPixels
+             */
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
+            /**
+             * 페이지가 선택되면 동작
+             * @param : position
+             */
             @Override
             public void onPageSelected(int position) {
                 for(int i=0; i<TAB_COUNT; i++){
@@ -81,6 +75,10 @@ public class DetailViewActivity extends AppCompatActivity {
                 }
             }
 
+            /**
+             * 페이지 스크롤 상태변화시 동작
+             * @param : state
+             */
             @Override
             public void onPageScrollStateChanged(int state) {}
         });
@@ -107,11 +105,19 @@ public class DetailViewActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * 페이지 어뎁터 클래스
+     */
     private class pagerAdapter extends FragmentStatePagerAdapter {
         public pagerAdapter(android.support.v4.app.FragmentManager fm) {
             super(fm);
         }
 
+        /**
+         * position에 해당하는 페이지 return
+         * @param : position
+         * @return : fragment
+         */
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
             switch(position) {
@@ -125,6 +131,11 @@ public class DetailViewActivity extends AppCompatActivity {
                     return null;
             }
         }
+
+        /**
+         * tab 번호 가져오는 메소드
+         * @return : tab 번호
+         */
         @Override
         public int getCount() {
             return TAB_COUNT;

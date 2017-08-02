@@ -1,15 +1,11 @@
 package dvorak.kosta.com.dothing_mobile.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
@@ -49,7 +45,7 @@ import dvorak.kosta.com.dothing_mobile.network.LoginNetworkTask;
 
 
 /**
- * A login screen that offers login via email/password.
+ * @brief : 로그인 화면 activity
  */
 public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<Cursor> {
 
@@ -93,12 +89,19 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         //populateAutoComplete();
 
+        /**
+         * @brief : 페이스북 로그인 버튼 클릭시 동작
+         */
         facebookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email","user_friends","public_profile","user_birthday"));
                 LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                    /**
+                     * @brief : 로그인 성공시 동작 메소드, 로그인 정보 서버로 전송
+                     * @param : 로그인한 사용자 정보
+                     */
                     @Override
                     public void onSuccess(final LoginResult loginResult) {
                         Log.e("facebookSuccess","onSuccess");
@@ -145,11 +148,17 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
                         request.executeAsync();
                     }
 
+                    /**
+                     * @brief : 로그인 취소시 동작
+                     */
                     @Override
                     public void onCancel() {
                         Log.e("onCancel","onCancel");
                     }
 
+                    /**
+                     * @brief : 로그인 실패시 동작
+                     */
                     @Override
                     public void onError(FacebookException error) {
                         Log.e("onError","onError"+error.getLocalizedMessage());
@@ -184,22 +193,18 @@ public class LoginActivity extends ActionBarActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
     }//oncreate 끝
 
+    /**
+     * @brief : callback 메소드
+     * @param : requestCode - 요청코드, resultCode - 결과코드, data - 전송한 데이터
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode,resultCode,data);
     }
 
-    private void populateAutoComplete() {
-
-        getLoaderManager().initLoader(0, null, this);
-    }
-
-
     /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
+     * @brief : 사용자가 입력한 email, password를 받아 서버로 전송, 성공시 로그인
      */
     private void attemptLogin() {
         /*if (mAuthTask != null) {
@@ -253,50 +258,24 @@ Log.i("로그인" , "파람: " + params);
         }
     }
 
+    /**
+     * @brief : email 형식 여부 체크
+     * @param : email
+     * @return : 맞으면 true, 틀리면 false
+     */
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
+    /**
+     * @brief : password 유효성 검사
+     * @param : password
+     * @return : 5자리 이상이면 true, 아니면 false
+     */
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
-    }
-
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
     }
 
     @Override
@@ -353,6 +332,9 @@ Log.i("로그인" , "파람: " + params);
         int IS_PRIMARY = 1;
     }
 
+    /**
+     * @brief : joinActivity1 엑티비티 시작 메소드
+     */
     public void attemptSign(View v){
         Intent intent = new Intent(v.getContext(), JoinActivity1.class);
         startActivity(intent);
