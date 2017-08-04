@@ -9,11 +9,16 @@ import android.util.Log;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
+/**
+ * 푸쉬메세지 전송을 위한 FCM 토큰에 관한 클래스
+ */
 public class FirebaseInstanceIDService extends FirebaseInstanceIdService {
 
     private static final String TAG = "MyFirebaseIIDService";
 
-    // [START refresh_token]
+    /**
+     * 토큰이 갱신되었을 경우
+     */
     @Override
     public void onTokenRefresh() {
         // Get updated InstanceID token.
