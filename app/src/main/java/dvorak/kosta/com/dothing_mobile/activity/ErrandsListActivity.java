@@ -25,9 +25,8 @@ import dvorak.kosta.com.dothing_mobile.network.ErrandListSearchNetworkTask;
 import static dvorak.kosta.com.dothing_mobile.R.id.listBackBtn;
 
 /**
- * Created by YTK on 2017-07-25.
+ * 심부름 목록을 보여주는 엑티비티
  */
-
 public class ErrandsListActivity extends AppCompatActivity implements View.OnClickListener{
     ErrandListSearchNetworkTask errandListSearchNetworkTask;
     ListViewAdapter listViewAdapter;
@@ -81,6 +80,10 @@ public class ErrandsListActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
+    /**
+     * 목록 아이템 클릭시 동작 이벤트, 정렬 선택
+     * @param : view
+     */
     @Override
     public void onClick(View v) {
         switch(v.getId()){

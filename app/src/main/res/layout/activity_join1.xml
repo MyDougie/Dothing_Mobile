@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context="dvorak.kosta.com.dothing_mobile.JoinActivity1">
+    tools:context="dvorak.kosta.com.dothing_mobile.activity.JoinActivity1">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar7"

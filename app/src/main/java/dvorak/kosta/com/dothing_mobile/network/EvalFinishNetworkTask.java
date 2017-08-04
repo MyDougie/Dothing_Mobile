@@ -7,29 +7,31 @@ import android.widget.Toast;
 
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.activity.RatingActivity;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by YTK on 2017-07-23.
+ * 심부름 완료가 되었는지 판단 여부 NetworkTask Class
  */
-
 public class EvalFinishNetworkTask extends AsyncTask<Map<String, String>, Integer, String> {
     Context context;
     public EvalFinishNetworkTask(Context context){
         this.context = context;
     }
+
     /**
-     * doInBackground 실행되기 이전에 동작한다.
-     */
+     * background을 실행하기 전 준비 단계 메소드
+     * */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
     }
 
     /**
-     * 본 작업을 쓰레드로 처리해준다. * @param params * @return
+     * 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param maps 웹으로 보내는 params
+     * @return String
      */
     @Override
     protected String doInBackground(Map<String, String>... maps) {
@@ -45,11 +47,12 @@ public class EvalFinishNetworkTask extends AsyncTask<Map<String, String>, Intege
     }
 
     /**
-     * doInBackground 종료되면 동작한다. * @param s : doInBackground가 리턴한 값이 들어온다.
-     */
+     * UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
+     * s로 심부름이 완료가 제대로 되었는지 판단 여부 확인 한다.
+     * @param s doInBackground()에서 return한 parameter
+     * */
     @Override
     protected void onPostExecute(String s) {
-        Log.d("HTTP_RESULT", s);
         try {
             if(s.equals("true")){
                 ((RatingActivity)context).finish();

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -12,16 +13,17 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
+import dvorak.kosta.com.dothing_mobile.activity.LoginActivity;
 import dvorak.kosta.com.dothing_mobile.activity.ChatTestActivity;
 import dvorak.kosta.com.dothing_mobile.activity.DetailViewActivity;
-import dvorak.kosta.com.dothing_mobile.LoginApiActivity;
+import dvorak.kosta.com.dothing_mobile.activity.LoginApiActivity;
 import dvorak.kosta.com.dothing_mobile.activity.FrameActivity;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by Administrator on 2017-07-17.
+ * Login NetworkTask Class
  */
 
 public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String>  {
@@ -38,14 +40,20 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
         this.requestUserId =requestUserId;
     }
 
-    /** * doInBackground 실행되기 이전에 동작한다. */
+    /**
+     * background을 실행하기 전 준비 단계 메소드
+     * */
     @Override
     protected void onPreExecute() {
 
         super.onPreExecute();
     }
 
-    /** * 본 작업을 쓰레드로 처리해준다. * @param params * @return */
+    /**
+     * 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param maps 웹으로 보내는 params
+     * @return String
+     */
     protected String doInBackground(Map<String,String>... maps) {
         password = maps[0].get("password");
         email = maps[0].get("userId");
@@ -63,11 +71,16 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
         }
 
         // HTTP 요청 준비 작업
-        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + url);
+
+        HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidMember/checkId");
+
+        //HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + url);
+
         http.addAllParameters(maps[0]);
 
         // HTTP 요청 전송
         HttpClient post = http.create();
+
         post.request();
 
         // 응답 상태코드 가져오기
@@ -76,7 +89,12 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
         String body = post.getBody();
         return body;
     }
-    /** * doInBackground 종료되면 동작한다. * @param s : doInBackground가 리턴한 값이 들어온다. */
+
+    /**
+     * UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
+     * isApi로 비교하여 로그인을 판단하고 User의 정보를 MemberInfo에 저장해준다.
+     * @param s doInBackground()에서 return한 parameter
+     * */
     protected void onPostExecute(String s) {
 
         if(s.trim().equals("")) {
@@ -94,8 +112,10 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
                 activity.finish();
             }
         }else {
-            try {
 
+            try {
+                if(LoginActivity.progressBar != null)
+                    LoginActivity.progressBar.setVisibility(View.VISIBLE);
                 JSONObject jsonObject = new JSONObject(s);
                 MemberInfo.userId = jsonObject.getString("userId");
                 MemberInfo.name = jsonObject.getString("name");
@@ -155,12 +175,13 @@ public class LoginNetworkTask extends AsyncTask<Map<String,String>,String,String
                     intent = new Intent(activity, ChatTestActivity.class);
                     intent.putExtra("errandsNum", errandsNum);
                 }
+                if(LoginActivity.progressBar != null)
+                LoginActivity.progressBar.setVisibility(View.GONE);
                 activity.startActivity(intent);
                 activity.finish();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
 }

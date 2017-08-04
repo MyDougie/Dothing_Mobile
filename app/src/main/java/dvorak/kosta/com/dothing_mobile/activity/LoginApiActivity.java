@@ -1,4 +1,4 @@
-package dvorak.kosta.com.dothing_mobile;
+package dvorak.kosta.com.dothing_mobile.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +13,13 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import java.util.HashMap;
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.activity.RegisterWebviewActivity;
+import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.network.LoginNetworkTask;
 
+/**
+ * @brief : 페이스북 로그인시 추가정보 입력받는 엑티비티
+ *           사용자 입력을 받아 서버로 전송, 로그인 시도
+ */
 public class LoginApiActivity extends AppCompatActivity {
     String email,id,name,gender,selfImg;
     String latitude, longitude;
@@ -74,6 +78,11 @@ public class LoginApiActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * @brief : 입력값 유효성 검사
+     * @param : apiAddrStr - 주소, apiDetailAddrStr - 상세주소
+     * @return : 입력값이 있으면 true, 없으면 false
+     */
     public boolean validCheck(String apiAddrStr,String apiDetailAddrStr){
 
         if(apiAddrStr.length() < 1){
@@ -89,6 +98,10 @@ public class LoginApiActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * @brief : callback 메소드
+     * @param : requestCode - 요청코드, resultCode - 결과코드, data - 전송한 데이터
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);

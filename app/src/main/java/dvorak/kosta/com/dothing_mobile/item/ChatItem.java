@@ -2,6 +2,7 @@ package dvorak.kosta.com.dothing_mobile.item;
 
 /**
  * Created by YTK on 2017-07-21.
+ * 채팅에 필요한 데이터를 저장 및 전달을 하는 Class
  */
 
 public class ChatItem {

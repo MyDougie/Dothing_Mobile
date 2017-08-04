@@ -16,6 +16,9 @@ import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
 import dvorak.kosta.com.dothing_mobile.network.MyErrandNetworkTask;
 
+/**
+ * 내 응답 엑티비티
+ */
 public class MyResponseActivity extends AppCompatActivity {
     MyListViewAdapter myListViewAdapter = new MyListViewAdapter();
     ListView listView;

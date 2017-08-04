@@ -2,6 +2,7 @@ package dvorak.kosta.com.dothing_mobile.item;
 
 /**
  * Created by Administrator on 2017-07-24.
+ * 멤버에 필요한 데이터를 저장 및 전달 하는 Class
  */
 
 public class Member {

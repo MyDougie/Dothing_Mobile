@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Created by YTK on 2017-07-16.
+ * 로그인 한 User의 정보를 저장한 class
  */
 
 public class MemberInfo {

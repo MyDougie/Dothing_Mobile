@@ -9,30 +9,32 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.activity.ErrandsListActivity;
 import dvorak.kosta.com.dothing_mobile.adapter.ListViewAdapter;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by Administrator on 2017-07-13.
+ * List에 심부름 목록을 가져오는 NetWorkTask Class
  */
-
 public class ErrandListSearchNetworkTask extends AsyncTask<Map<String, String>, Integer, String> {
     ListViewAdapter adapter;
     public ErrandListSearchNetworkTask(ListViewAdapter adapter){
         this.adapter = adapter;
     }
+
     /**
-     * doInBackground 실행되기 이전에 동작한다.
-     */
+     * background을 실행하기 전 준비 단계 메소드
+     * */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
     }
 
     /**
-     * 본 작업을 쓰레드로 처리해준다. * @param params * @return
+     * 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param maps 웹으로 보내는 params
+     * @return String
      */
     @Override
     protected String doInBackground(Map<String, String>... maps) {
@@ -48,21 +50,19 @@ public class ErrandListSearchNetworkTask extends AsyncTask<Map<String, String>, 
     }
 
     /**
-     * doInBackground 종료되면 동작한다. * @param s : doInBackground가 리턴한 값이 들어온다.
-     */
+     * UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
+     * s로 심부름 목록에 대한 정보들을 받아와서 보여준다
+     * @param s doInBackground()에서 return한 parameter
+     * */
     @Override
     protected void onPostExecute(String s) {
-        Log.d("HTTP_RESULT", s);
         try {
 
             adapter.removeItem();
             JSONArray jsonArray = new JSONArray(s);
             for(int i=0; i < jsonArray.length(); i++){
                 JSONObject obj = jsonArray.getJSONObject(i);
-//                    Log.d(i+"번 심부름", obj.toString());
                 JSONObject posObj = obj.getJSONObject("errandsPos");
-//                    Log.d(i+"번 심부름의 lat", posObj.getDouble("latitude") + "");
-//                    Log.d(i+"번 심부름의 lng", posObj.getDouble("longitude") + "");
                 JSONArray replyArray = obj.getJSONArray("errandsReply");
                 double latitude = posObj.getDouble("latitude");
                 double longitude = posObj.getDouble("longitude");
@@ -76,11 +76,7 @@ public class ErrandListSearchNetworkTask extends AsyncTask<Map<String, String>, 
 
                 JSONObject requestUser = obj.getJSONObject("requestUser");
                 String requesteUserId = requestUser.getString("userId");
-                Log.i("requestUserIdxxxxx", requesteUserId);
 
-
-
-               // adapter.addItem(title, errandPrice,addr, lat,lng,errandTime) ;
                 adapter.addItem(requesteUserId, errandNum, title, errandPrice,addr, lat,lng,errandTime, replyArray.length()) ;
 
             }

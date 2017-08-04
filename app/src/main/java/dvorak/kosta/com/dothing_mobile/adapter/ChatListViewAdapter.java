@@ -14,7 +14,7 @@ import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.item.ChatListItem;
 
 /**
- * Created by YTK on 2017-07-12.
+ * 뷰와 채팅 리스트를 연결시켜주는 역할을 하는 클래스
  */
 
 public class ChatListViewAdapter extends BaseAdapter {
@@ -26,13 +26,22 @@ public class ChatListViewAdapter extends BaseAdapter {
 
     }
 
-    // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
+    /**
+     * Adapter에 사용되는 데이터의 개수를 리턴해주는 함수
+     * @return 채팅목록의 갯수 리턴
+     */
     @Override
     public int getCount() {
         return listViewItemList.size() ;
     }
 
-    // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현
+    /**
+     * position에 위치한 채팅목록을 화면에 출력하는데 사용될 View를 리턴.
+     * @param position 행의 index를 의미
+     * @param convertView 행 전체를 나타내는 뷰를 의미
+     * @param parent 어댑터를 가지고 있는 부모뷰를 의미
+     * @return 채팅목록을 화면에 출력하는데 사용될 View 리턴
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final int pos = position;
@@ -53,40 +62,47 @@ public class ChatListViewAdapter extends BaseAdapter {
         chatListTitle.setText(chatItem.getChatTitle());
         chatListName.setText(chatItem.getChatName() + "님과의 대화");
 
-
         return convertView;
     }
 
-    // 지정한 위치(position)에 있는 데이터와 관계된 아이템(row)의 ID를 리턴. : 필수 구현
+    /**
+     * 선택된 행의 item의 id를 리턴하는 메소드
+     * @param position 행의 index를 의미
+     * @return 선택된 row의 id를 리턴
+     */
     @Override
     public long getItemId(int position) {
         return position ;
     }
 
-    // 지정한 위치(position)에 있는 데이터 리턴 : 필수 구현
+    /**
+     * 선택된 행의 item을 리턴
+     * @param position  행의 index를 의미
+     * @return 선택된 row의 item을 리턴
+     */
     @Override
     public Object getItem(int position) {
         return listViewItemList.get(position) ;
     }
 
-    // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String title, String name, String errandsNum, String userImgPath, String userImgPathTwo, String you, boolean isRequest) {
-        ChatListItem chatListItem = new ChatListItem();
-        chatListItem.setChatName(name);
-        chatListItem.setChatTitle(title);
-        chatListItem.setErradsNum(errandsNum);
-        chatListItem.setUserImgPath(userImgPath);
-        chatListItem.setUserImgPathTwo(userImgPathTwo);
-        chatListItem.setYou(you);
-        chatListItem.setRequest(isRequest);
+    /**
+     * list에 item을 추가하기 위한 메소드.
+     * @param chatListItem 값이 set되어진 chatListItem을 의미
+     */
+    public void addItem(ChatListItem chatListItem) {
         listViewItemList.add(chatListItem);
     }
-    //리스트의 모든 아이템 제거
+    /**
+     * list의 모든 아이템을 제거하는 메소드.
+     */
     public void removeItem(){
         listViewItemList.clear();
     }
 
-    //아이템 리스트를 리턴
+    /**
+     * list의 모든 아이템을 제거하는 메소드.
+     * @return ChatListItem 리스트를 리턴
+     */
     public ArrayList<ChatListItem> getErrandList(){
         return listViewItemList;
     }

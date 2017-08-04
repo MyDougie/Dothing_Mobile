@@ -39,6 +39,9 @@ import dvorak.kosta.com.dothing_mobile.listener.RegisterErrandListener;
 import dvorak.kosta.com.dothing_mobile.network.UploadDataNetworkTask;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
+/**
+ * 심부름 등록 엑티비티
+ */
 public class ErrandRegisterActivity extends ActivityGroup {
     String fileName, imgPath;
     ImageView registerImage;
@@ -84,13 +87,18 @@ public class ErrandRegisterActivity extends ActivityGroup {
         }
     };
 
-
+    /**
+     * 엑티비티 중지시 동작, mapView 제거
+     */
     @Override
     protected void onPause() {
         super.onPause();
         mapViewContainer.removeView(mapView);
     }
 
+    /**
+     * 엑티비티 재시작시 동작, mapView 생성 및 터치 이벤트 등록
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -121,6 +129,9 @@ public class ErrandRegisterActivity extends ActivityGroup {
 
     }
 
+    /**
+     * 뒤로가기 버튼 누르면 동작, AlertDialog 생성
+     */
     @Override
     public void onBackPressed() {
         AlertDialog.Builder alert_confirm = new AlertDialog.Builder(this);
@@ -144,6 +155,10 @@ public class ErrandRegisterActivity extends ActivityGroup {
 
     }
 
+    /**
+     * 엑티비티 시작시 동작, 입력한 심부름 정보를 서버로 전달
+     * @param : savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -281,7 +296,9 @@ public class ErrandRegisterActivity extends ActivityGroup {
 
     }
 
-
+    /**
+     * 엘범에서 사진 가져오기
+     */
     public void doTakeAlbumAction() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
@@ -289,6 +306,11 @@ public class ErrandRegisterActivity extends ActivityGroup {
         startActivityForResult(intent, 1);
     }
 
+    /**
+     * 사진의 실제 경로 가져오는 메소드
+     * @param : uriPath
+     * @return : ImagePath
+     */
     public String getRealImagePath(Uri uriPath) {
         String[] proj = { MediaStore.Images.Media.DATA };
 

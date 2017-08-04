@@ -21,9 +21,8 @@ import dvorak.kosta.com.dothing_mobile.network.EvalFinishNetworkTask;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
- * Created by YTK on 2017-07-24.
+ * 심부름꾼 평점 등록하는 엑티비티
  */
-
 public class RatingActivity extends Activity implements View.OnClickListener{
     String errandsNum;
     RatingBar responseAccuracy, responseSpeed, responseKindness, requestManners;
@@ -69,6 +68,10 @@ public class RatingActivity extends Activity implements View.OnClickListener{
         }
     }
 
+    /**
+     * 버튼 클릭 이벤트
+     * @param : view
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()){

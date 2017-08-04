@@ -29,7 +29,7 @@ import dvorak.kosta.com.dothing_mobile.network.ReplyInsertNetworkTask;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * DetailViewActivity의 전체 UI중에 세번째 탭부분을 담당하는 클래스
  */
 public class DetailThreeFragment extends Fragment {
 
@@ -44,6 +44,10 @@ public class DetailThreeFragment extends Fragment {
     }
 
 
+    /**
+     * Bundle객체를 통해 데이터들을 전송하는 메소드.
+     * @return Fragment객체를 리턴.
+     */
     public static DetailThreeFragment newInstance() {
         Bundle args = new Bundle();
 
@@ -53,6 +57,13 @@ public class DetailThreeFragment extends Fragment {
     }
 
 
+    /**
+     * XML 레이아웃을 inflate하여 Fragment를 위한 View를 생성하고, Fragment 레이아웃의 root에 해당되는 View를 Activity에게 리턴하는 메소드.
+     * @param inflater xml 레이아웃을 inflate할 객체
+     * @param container inflate된 레이아웃의 상위가 될 ViewGroup
+     * @param savedInstanceState 프래그먼트가 재개되는 중에 프래그먼트의 이전 인스턴스에 대한 데이터를 제공
+     * @return Fragment 레이아웃의 root에 해당되는 View를 Activity에게 리턴.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,10 +75,8 @@ public class DetailThreeFragment extends Fragment {
         String errandNum = getActivity().getIntent().getStringExtra("errandNum");
         errandsNum = errandNum;
 
-
         arrivalTime = (TextView) v.findViewById(R.id.arrival_time);
         replyContent = (EditText) v.findViewById(R.id.reply_content);
-
 
         //현재 날짜와 시간 가져오기
         Calendar calender = new GregorianCalendar();
@@ -77,8 +86,7 @@ public class DetailThreeFragment extends Fragment {
         curHour = calender.get(Calendar.HOUR_OF_DAY);
         curMinute = calender.get(Calendar.MINUTE);
 
-        //updateTime();
-
+        //클릭이벤트
         Button dateChoiceBtn = (Button) v.findViewById(R.id.date_choice_btn);
         dateChoiceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +140,9 @@ public class DetailThreeFragment extends Fragment {
         return v;
     }
 
-
+    /**
+     * 사용자가 날짜를 선택하고 확인을 눌렀을 때 실행되는 Listener
+     * */
     DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -146,6 +156,9 @@ public class DetailThreeFragment extends Fragment {
         }
     };
 
+    /**
+     * 사용자가 시간을 선택하고 확인을 눌렀을 때 실행되는 Listener
+     * */
     TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -158,21 +171,16 @@ public class DetailThreeFragment extends Fragment {
         }
     };
 
-
+    /**
+     * 도착예정시간 TextView객체에 사용자가 입력한 시간을 set하는 메소드.
+     * */
     void updateTime() {
-        System.out.println("year : " + curYear);
-        System.out.println("month : " + curMonth);
-        System.out.println("day : " + curDay);
-        System.out.println("hour : " + curHour);
-        System.out.println("minute : " + curMinute);
-        System.out.println("arrivalTime : " + arrivalTime);
-
         if (curMinute < 10) {
             arrivalTime.setText(String.format("%d-%02d-%02d %02d:%02d", curYear, curMonth + 1, curDay, curHour, curMinute));
         } else {
             arrivalTime.setText(String.format("%d-%02d-%02d %02d:%02d", curYear, curMonth + 1, curDay, curHour, curMinute));
         }
-        System.out.println("arrivalTime.getText : " + arrivalTime.getText());
+
     }
 
 }

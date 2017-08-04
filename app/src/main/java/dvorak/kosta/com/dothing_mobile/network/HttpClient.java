@@ -1,4 +1,4 @@
-package dvorak.kosta.com.dothing_mobile;
+package dvorak.kosta.com.dothing_mobile.network;
 
 import java.io.BufferedReader;
 import java.io.IOException;

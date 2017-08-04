@@ -9,9 +9,11 @@ import android.widget.EditText;
 
 import net.daum.mf.map.api.MapView;
 
-import dvorak.kosta.com.dothing_mobile.AddrWebviewActivity;
 import dvorak.kosta.com.dothing_mobile.R;
 
+/**
+ * 심부름 등록시 주소 검색 엑티비티
+ */
 public class ErrandRegisterAddrActivity extends AppCompatActivity {
     private static final int SEARCH_ADDRESS_ACTIVITY = 10000;
     MapView mapView;
@@ -27,13 +29,18 @@ public class ErrandRegisterAddrActivity extends AppCompatActivity {
         setContentView(R.layout.activity_errand_register_addr);
     }
 
-
+    /**
+     * 엑티비티 중지시 맵뷰 제거
+     */
     @Override
     protected void onPause() {
         super.onPause();
         mapViewContainer.removeView(mapView);
     }
 
+    /**
+     * 엑티비티 재시작시 맵뷰 생성
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -54,7 +61,12 @@ public class ErrandRegisterAddrActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * 콜백함수, 주소 저장
+     * @param : requestCode
+     * @param : resultCode
+     * @param : intent
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent intent){
 
         super.onActivityResult(requestCode, resultCode, intent);

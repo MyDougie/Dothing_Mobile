@@ -2,6 +2,7 @@ package dvorak.kosta.com.dothing_mobile.item;
 
 /**
  * Created by YTK on 2017-07-12.
+ * 채팅 리스트에 필요한 데이터를 저장 및 전달 하는 Class
  */
 
 public class ChatListItem {
@@ -12,6 +13,7 @@ public class ChatListItem {
     private String userImgPath;
     private String userImgPathTwo;
     private boolean isRequest;
+
 
     public boolean isRequest() {
         return isRequest;

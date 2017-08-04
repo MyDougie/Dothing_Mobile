@@ -21,7 +21,6 @@ import com.bumptech.glide.Glide;
 
 import java.text.DecimalFormat;
 
-import dvorak.kosta.com.dothing_mobile.LoginActivity;
 import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -30,18 +29,19 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 //import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
- * Created by YTK on 2017-07-15.
+ * 마이페이지 엑티비티
  */
-
 public class MyPageActivity extends AppCompatActivity{
-    LinearLayout myRequestLayout, myResponseLayout, myLogout, mySafety;
+
+    LinearLayout myRequestLayout, myResponseLayout, myLogout, mySafety, myInfoPW;
     RatingBar ratingbar;
+
     TextView myName, myEmail, myPoint;
     ImageView myImage;
     Handler handler;
     Bitmap bmImg;
     MyPageListener myPageListener = new MyPageListener();
-//    back task;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +50,20 @@ public class MyPageActivity extends AppCompatActivity{
         myEmail = (TextView)findViewById(R.id.userEmail);
         myPoint = (TextView)findViewById(R.id.userPoint);
         myImage = (ImageView)findViewById(R.id.userImage);
+
         myRequestLayout = (LinearLayout)findViewById(R.id.requestBtn);
         myResponseLayout = (LinearLayout)findViewById(R.id.responseBtn);
         myLogout = (LinearLayout) findViewById(R.id.logoutBtn);
+
+        myInfoPW = (LinearLayout) findViewById(R.id.myinfoupdate);
+
+        myRequestLayout.setOnClickListener(myPageListener);
+        myResponseLayout.setOnClickListener(myPageListener);
+        myLogout.setOnClickListener(myPageListener);
+        myInfoPW.setOnClickListener(myPageListener);
+
+        Log.e("정보들", MemberInfo.name + " " + MemberInfo.userId + " " + MemberInfo.selfImgUrlPath);
+
         mySafety = (LinearLayout)findViewById(R.id.safetyBtn);
         ratingbar = (RatingBar)findViewById(R.id.myRating);
         myRequestLayout.setOnClickListener(myPageListener);
@@ -78,12 +89,18 @@ public class MyPageActivity extends AppCompatActivity{
 
     }
 
+    /**
+     * 엑티비티 재시작시 actionBar 셋팅
+     */
     @Override
     protected void onResume() {
         super.onResume();
         setSupportActionBar(null);
     }
 
+    /**
+     * 마이페이지 안에 버튼 클릭 리스너, 각 버튼마다 이벤트 동작
+     */
     public class MyPageListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
@@ -107,6 +124,11 @@ public class MyPageActivity extends AppCompatActivity{
                     startActivity(logoutIntent);
                     finish();
                     break;
+                case R.id.myinfoupdate:
+                    Intent pwIntent = new Intent(MyPageActivity.this, PwConfirmActivity.class);
+                    startActivity(pwIntent);
+                    break;
+
                 case R.id.safetyBtn:
                     if(MemberInfo.auth == 2){
                         Toast.makeText(MyPageActivity.this, "이미 안전심부름꾼입니다 :)",Toast.LENGTH_SHORT).show();

@@ -1,4 +1,4 @@
-package dvorak.kosta.com.dothing_mobile;
+package dvorak.kosta.com.dothing_mobile.activity;
 
 import android.app.Dialog;
 import android.content.CursorLoader;
@@ -24,10 +24,13 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.activity.RegisterWebviewActivity;
+import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.network.UploadDataNetworkTask;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
+/**
+ * @brief : 회원가입 엑티비티
+ */
 public class JoinActivity3 extends AppCompatActivity {
 
     private WebView webView;
@@ -66,6 +69,9 @@ public class JoinActivity3 extends AppCompatActivity {
 
 
         Button joinBtn = (Button)findViewById(R.id.continueBtn3);
+        /**
+         * @brief : 회원가입 버튼 클릭시 동작, 입력값을 받아 서버로 전송해서 가입시도
+         */
         joinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,14 +106,18 @@ public class JoinActivity3 extends AppCompatActivity {
 
             }
         });
-
+        /**
+         * @brief : 프로필사진 업로드 버튼 클릭시 동작
+         */
         myImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 doTakeAlbumAction();
             }
         });
-
+        /**
+         * @brief : 주소 검색 클릭시 동작, registerWebview엑티비티 실행
+         */
         addr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,12 +128,20 @@ public class JoinActivity3 extends AppCompatActivity {
 
 
     }
+
+    /**
+     * @brief : 엘범에서 이미지를 가져오는 메소드
+     */
     public void doTakeAlbumAction() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
         intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, 1);
     }
+
+    /**
+     * @brief : 이미지 실제 경로 구하는 메소드
+     */
     public String getRealImagePath(Uri uriPath) {
         String[] proj = { MediaStore.Images.Media.DATA };
 
@@ -135,6 +153,9 @@ public class JoinActivity3 extends AppCompatActivity {
         return cursor.getString(column_index);
     }
 
+    /**
+     * @brief : callback 메소드, 서버에서 보내온 데이터를 split해서 위도,경도 저장
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
@@ -153,6 +174,11 @@ public class JoinActivity3 extends AppCompatActivity {
         }
     }
 
+    /**
+     * @brief : 주소,상세주소 이름, 이미지 경로 유효성 검사
+     * @param : addr, detailAddr, name, imgPath
+     * @return : 유효성 검사 통과하면 true, 아니면 false
+     */
     public boolean validCheck(String addrStr, String detailAddrStr, String nameStr, String imgPath){
         if(nameStr.length() < 1){
             Toast.makeText(getApplicationContext(),"이름을 입력해주세요",Toast.LENGTH_SHORT).show();

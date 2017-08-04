@@ -25,6 +25,9 @@ import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
 import dvorak.kosta.com.dothing_mobile.listener.MapErrandsListener;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
+/**
+ * 심부름 리스트를 보여주는 엑티비티, 지도로딩, 심부름 리스트뷰 생성
+ */
 public class ErrandActivity extends AppCompatActivity{
 
     MapErrandsListener mapErrandsListener;
@@ -34,6 +37,10 @@ public class ErrandActivity extends AppCompatActivity{
     FloatingActionButton writeBtn;
     int selection = 0;
     public static int tutorial=0;
+
+    /**
+     * 엑티비티 재시작시 동작, 지도 로딩
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -50,11 +57,19 @@ public class ErrandActivity extends AppCompatActivity{
 
     }
 
+    /**
+     * 엑티비티 중지시 동작, mapView 제거
+     */
     @Override
     protected void onPause() {
         super.onPause();
         mapViewContainer.removeView(mapView);
     }
+
+    /**
+     * 엑티비티 시작시 동작, 심부름 리스트뷰 셋팅
+     * @param : Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,12 +121,23 @@ public class ErrandActivity extends AppCompatActivity{
             }
         });
     }
+
+    /**
+     * OptionsMenu 생성, 심부름 메뉴 생성
+     * @param : menu
+     * @return 성공시 true, 실패시 false
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_errand, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * 메뉴 아이템 선택시 동작, 심부름 선택시 검색반경 설정
+     * @param : item
+     * @return 성공시 true, 에러나면 false
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){

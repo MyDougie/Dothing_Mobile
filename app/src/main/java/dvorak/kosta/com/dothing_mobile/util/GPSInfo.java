@@ -19,9 +19,8 @@ import dvorak.kosta.com.dothing_mobile.network.GPSNetworkTask;
 import static android.content.Context.LOCATION_SERVICE;
 
 /**
- * Created by YTK on 2017-07-23.
- */
-
+ * GPS에 관한 메소드들을 가지고 있는 메소드.
+ * */
 public class GPSInfo implements LocationListener {
 
     private final Context mContext;
@@ -52,6 +51,10 @@ public class GPSInfo implements LocationListener {
         getLocation();
     }
 
+    /**
+     * Location정보를 가져오는 메소드.
+     * @return 위치정보를 가지고있는 location 객체 리턴.
+     * */
     public Location getLocation() {
         try {
             locationManager = (LocationManager) mContext
@@ -119,7 +122,7 @@ public class GPSInfo implements LocationListener {
     }
 
     /**
-     * GPS 종료
+     * GPS 종료하는 메소드
      */
     public void stopUsingGPS() {
         if (locationManager != null) {
@@ -128,7 +131,8 @@ public class GPSInfo implements LocationListener {
     }
 
     /**
-     * 위도값을 가져옵니다.
+     * 위도값을 리턴하는 메소드
+     * @return 위도값을 리턴.
      */
     public double getLatitude() {
         if (location != null) {
@@ -138,7 +142,8 @@ public class GPSInfo implements LocationListener {
     }
 
     /**
-     * 경도값을 가져옵니다.
+     * 경도값을 리턴하는 메소드
+     * @return 경도값을 리턴.
      */
     public double getLongitude() {
         if (location != null) {
@@ -149,12 +154,17 @@ public class GPSInfo implements LocationListener {
 
     /**
      * GPS 나 wife 정보가 켜져있는지 확인합니다.
+     * @return true - 켜져있음, false - 꺼져있음
      */
     public boolean isGetLocation() {
         return this.isGetLocation;
     }
 
 
+    /**
+     * GPS가 변할때마다 실행되는 메소드
+     * @param location 사용자의 위치정보를 가지고있는 객체
+     * */
     public void onLocationChanged(Location location) {
         GPSNetworkTask gpsNetworkTask = new GPSNetworkTask("updateLocation");
         Map<String, String> params = new HashMap<>();

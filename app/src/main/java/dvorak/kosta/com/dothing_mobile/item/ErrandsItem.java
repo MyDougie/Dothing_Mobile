@@ -2,6 +2,7 @@ package dvorak.kosta.com.dothing_mobile.item;
 
 /**
  * Created by YTK on 2017-07-12.
+ * 심부름에 필요한 데이터를 저장 및 전달하는 Class
  */
 
 public class ErrandsItem {

@@ -10,11 +10,11 @@ import android.widget.Toast;
 
 import java.util.Map;
 
-import dvorak.kosta.com.dothing_mobile.HttpClient;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
 /**
  * Created by Administrator on 2017-07-22.
+ * User의 Email 인증을 위한 NetWorkTask Class
  */
 
 public class AuthNetworkTask  extends AsyncTask<Map<String,String>,Integer,String>{
@@ -28,6 +28,11 @@ public class AuthNetworkTask  extends AsyncTask<Map<String,String>,Integer,Strin
         this.authText = authText;
     }
 
+    /**
+     * 네트워크 기능을 background 스레드로 처리하는 메소드
+     * @param maps 웹으로 보내는 params
+     * @return String
+     */
     @Override
     protected String doInBackground(Map<String, String>... maps) {
         HttpClient.Builder http = new HttpClient.Builder("POST", ConstantUtil.ipAddr + "androidMember/sendEmail");
@@ -44,11 +49,20 @@ public class AuthNetworkTask  extends AsyncTask<Map<String,String>,Integer,Strin
         return body;
     }
 
+
+    /**
+     * background을 실행하기 전 준비 단계 메소드
+     * */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
     }
 
+    /**
+     * UI 스레드 상에서 실행되며, doInBackground() 종료 후 호출됨. \n
+     * s로 인증번호를 받아서 입력한 인증번호와 비교하여 성공 여부를 보여준다.
+     * @param s doInBackground()에서 return한 parameter
+     * */
     @Override
     protected void onPostExecute(String s) {
         if(!s.trim().equals("")){

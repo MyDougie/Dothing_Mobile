@@ -21,6 +21,9 @@ import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.network.UploadDataNetworkTask;
 import dvorak.kosta.com.dothing_mobile.util.ConstantUtil;
 
+/**
+ * 안전 심부름꾼 등록 엑티비티
+ */
 public class SafetyActivity extends Activity {
     Button safeBtn, safeSubmitBtn;
     ImageView safeImg;
@@ -30,7 +33,7 @@ public class SafetyActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_safety);
-safeSubmitBtn = (Button)findViewById(R.id.safeSubmitBtn);
+        safeSubmitBtn = (Button)findViewById(R.id.safeSubmitBtn);
         safeBtn = (Button) findViewById(R.id.safeBtn);
         safeImg = (ImageView) findViewById(R.id.safeImg);
         safeBtn.setOnClickListener(new Button.OnClickListener() {
@@ -58,6 +61,9 @@ safeSubmitBtn = (Button)findViewById(R.id.safeSubmitBtn);
         });
     }
 
+    /**
+     * 엘범에서 이미지 가져오는 메소드
+     */
     public void doTakeAlbumAction() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
@@ -65,6 +71,11 @@ safeSubmitBtn = (Button)findViewById(R.id.safeSubmitBtn);
         startActivityForResult(intent, 1);
     }
 
+    /**
+     * 이미지 실제 경로 구하는 메소드
+     * @param : uriPath
+     * @return : 이미지 경로
+     */
     public String getRealImagePath(Uri uriPath) {
         String[] proj = {MediaStore.Images.Media.DATA};
 
@@ -76,6 +87,12 @@ safeSubmitBtn = (Button)findViewById(R.id.safeSubmitBtn);
         return cursor.getString(column_index);
     }
 
+    /**
+     * 콜백함수, 실제 이미지 경로 구해서 저장
+     * @param : requestCode
+     * @param : resultCode
+     * @param : intent
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);

@@ -13,9 +13,8 @@ import android.webkit.WebViewClient;
 import dvorak.kosta.com.dothing_mobile.R;
 
 /**
- * Created by YTK on 2017-07-14.
+ * 웹뷰 보여주는 엑티비티
  */
-
 public class RegisterWebviewActivity extends AppCompatActivity {
     private WebView browser;
 

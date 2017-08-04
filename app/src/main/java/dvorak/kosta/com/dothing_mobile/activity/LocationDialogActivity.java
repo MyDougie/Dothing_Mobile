@@ -15,9 +15,8 @@ import net.daum.mf.map.api.MapView;
 import dvorak.kosta.com.dothing_mobile.R;
 
 /**
- * Created by YTK on 2017-07-24.
+ * 상대방 위치를 보여주는 엑티비티
  */
-
 public class LocationDialogActivity extends Activity implements MapView.MapViewEventListener, MapReverseGeoCoder.ReverseGeoCodingResultListener{
     TextView chatMapText;
     MapView mapView;
@@ -35,6 +34,9 @@ public class LocationDialogActivity extends Activity implements MapView.MapViewE
 
     }
 
+    /**
+     * 엑티비티 재시작시 맵뷰 생성
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -46,12 +48,19 @@ public class LocationDialogActivity extends Activity implements MapView.MapViewE
         mapViewContainer.addView(mapView);
     }
 
+    /**
+     * 엑티비티 중지시 맵뷰 제거
+     */
     @Override
     protected void onPause() {
         super.onPause();
         mapViewContainer.removeView(mapView);
     }
 
+    /**
+     * 맵뷰 시작시 상대방 위치 표시
+     * @param : mapView
+     */
     @Override
     public void onMapViewInitialized(MapView mapView) {
         if(latitude.equals("0")) {

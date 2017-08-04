@@ -13,8 +13,8 @@ import dvorak.kosta.com.dothing_mobile.activity.ErrandRegisterActivity;
 
 /**
  * Created by YTK on 2017-07-15.
+ * 심부름 등록할 때 심부름 위치 이벤트를 받는 Class
  */
-
 public class RegisterErrandListener implements MapView.MapViewEventListener {
     Context context;
     EditText registerAddr;
@@ -26,6 +26,12 @@ public class RegisterErrandListener implements MapView.MapViewEventListener {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
+    /**
+     * MapView가 사용 가능한 상태가 되었음을 알려준다.\n
+     * onMapViewInitialized()가 호출된 이후에 MapView 객체가 제공하는 지도 조작 API들을 사용할 수 있다.
+     * @param mapView MapView 객체
+     * */
     @Override
     public void onMapViewInitialized(MapView mapView) {
 
@@ -55,6 +61,11 @@ public class RegisterErrandListener implements MapView.MapViewEventListener {
 
     }
 
+    /**
+     * 사용자가 지도 위를 터치한 경우 호출된다.
+     * @param mapView MapView 객체
+     * @param mapPoint Map에서 좌표를 나태내는 변수
+     * */
     @Override
     public void onMapViewSingleTapped(MapView mapView, MapPoint mapPoint) {
         Log.e("errandListen", "clickled");

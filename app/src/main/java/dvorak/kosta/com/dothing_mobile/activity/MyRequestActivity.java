@@ -16,6 +16,9 @@ import dvorak.kosta.com.dothing_mobile.info.MemberInfo;
 import dvorak.kosta.com.dothing_mobile.item.ErrandsItem;
 import dvorak.kosta.com.dothing_mobile.network.MyErrandNetworkTask;
 
+/**
+ * 심부름 요청 엑티비티, 심부름 클릭시 심부름 번호, 사용자 ID 서버로 전송
+ */
 public class MyRequestActivity extends AppCompatActivity {
     MyListViewAdapter myListViewAdapter = new MyListViewAdapter();
     ListView listView;

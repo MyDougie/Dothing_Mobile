@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="dvorak.kosta.com.dothing_mobile.JoinActivity3">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="86dp"
+        android:layout_height="19dp"
+        android:layout_marginLeft="145dp"
+        android:layout_marginStart="145dp"
+        android:layout_marginTop="33dp"
+        android:layout_weight="0.05"
+        android:text="개인 정보 수정"
+        android:textColor="@android:color/black"
+        android:textSize="17sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="368dp"
+        android:layout_height="499dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="68dp"
+        android:layout_weight="0.67"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="2.41">
+
+                <LinearLayout
+                    android:layout_width="213dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/border"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <EditText
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp" />
+
+                    <TextView
+                        android:id="@+id/editText4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:text="비밀번호수정" />
+
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:layout_marginBottom="20dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <ImageView
+                        android:id="@+id/myProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:layout_weight="1.19"
+                        android:background="@drawable/border"
+                        android:elevation="1dp" />
+
+                    <Button
+                        android:id="@+id/myImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@color/colorPrimary"
+                        android:text="사진 선택" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <EditText
+                        android:id="@+id/addr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.92"
+                        android:focusableInTouchMode="false"
+                        android:hint="주소를 검색해주세요."
+                        android:maxLines="1" />
+
+                </LinearLayout>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <EditText
+                android:id="@+id/detailAddr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="상세 주소를 입력해주세요."
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/updateBtn"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="3.06"
+                android:text="수정완료"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

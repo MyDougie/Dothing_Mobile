@@ -1,4 +1,4 @@
-package dvorak.kosta.com.dothing_mobile;
+package dvorak.kosta.com.dothing_mobile.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,15 +18,17 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import dvorak.kosta.com.dothing_mobile.dto.LoginResultDTO;
+import dvorak.kosta.com.dothing_mobile.R;
 import dvorak.kosta.com.dothing_mobile.network.AuthNetworkTask;
 
+/**
+ * @brief : 회원가입 엑티비티, email,password 입력받고 다음 회원가입 엑티비티로 데이터 전달
+ */
 public class JoinActivity1 extends AppCompatActivity {
 
     EditText email,password,confirmPassword,et;
     Button authBtn;
     TextView authText;
-    LoginResultDTO dto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,12 @@ public class JoinActivity1 extends AppCompatActivity {
         authBtn = (Button)findViewById(R.id.authBtn);
         authText = (TextView)findViewById(R.id.idCheck);
 
+        /**
+         * @brief : 비밀번호 확인 editText에 text입력이 감지되면 동작
+         *           입력한 비밀번호와 일치,불일치시 색상변화
+         */
         confirmPassword.addTextChangedListener(new TextWatcher() {
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -65,8 +72,10 @@ public class JoinActivity1 extends AppCompatActivity {
 
             }
         });
-
-            authBtn.setOnClickListener(new View.OnClickListener() {
+        /**
+         * @brief : 이메일 인증 버튼 클릭시 인증번호 전송
+         */
+        authBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
@@ -107,7 +116,12 @@ public class JoinActivity1 extends AppCompatActivity {
             }
         });
     }
-    //비밀번호 조합 검사
+
+    /**
+     * @brief : 비밀번호 유효성 검사, 숫자,영문,특수문자 조합 8자리
+     * @param : password
+     * @return : 유효성 검사 통과시 true, 아니면 false
+     */
     public boolean passwordValidate(String password){
         String regex = "([a-zA-Z0-9].*[!,@,#,$,%,^,&,*,?,_,~])|([!,@,#,$,%,^,&,*,?,_,~].*[a-zA-Z0-9])";
         Pattern pattern = Pattern.compile(regex);
@@ -115,7 +129,13 @@ public class JoinActivity1 extends AppCompatActivity {
 
         return matcher.matches();
     }
-    //유효성 검사
+
+    /**
+     * @brief : email,password, confirmPassword 유효성 검사,
+     *           email 형식 확인, password 조합확인, 비밀번호 일치 확인
+     * @param : email, password, 비밀번호 확인
+     * @return : 모든 조건 통과시 true, 아니면 false
+     */
     public boolean validCheck(String emailStr, String passwordStr, String confirmPasswordStr){
 
         if(!Patterns.EMAIL_ADDRESS.matcher(emailStr).matches()){
