@@ -125,8 +125,11 @@ public class MyPageActivity extends AppCompatActivity{
                     finish();
                     break;
                 case R.id.myinfoupdate:
-                    Intent pwIntent = new Intent(MyPageActivity.this, PwConfirmActivity.class);
-                    startActivity(pwIntent);
+                    Toast.makeText(MyPageActivity.this, "구현중)",Toast.LENGTH_SHORT).show();
+                    break;
+
+                case R.id.pointcharge:
+                    Toast.makeText(MyPageActivity.this, "구현중)",Toast.LENGTH_SHORT).show();
                     break;
 
                 case R.id.safetyBtn:
